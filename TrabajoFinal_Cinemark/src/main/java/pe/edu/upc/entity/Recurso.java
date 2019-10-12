@@ -33,15 +33,18 @@ public class Recurso implements Serializable{
 	@NotEmpty(message = "Ingresa el precio del recurso")
 	@Column(name = "precioRecurso", nullable = false, length = 10)
 	private String precioRecurso;
+	
+	private String foto;
 
 	public Recurso(int idRecurso, @NotEmpty(message = "Ingresa el nombre del recurso") String nombreRecurso,
 			@NotEmpty(message = "Ingresa el tipo de unidades") String tipoUnidadRecurso,
-			@NotEmpty(message = "Ingresa el precio del recurso") String precioRecurso) {
+			@NotEmpty(message = "Ingresa el precio del recurso") String precioRecurso, String foto) {
 		super();
 		this.idRecurso = idRecurso;
 		this.nombreRecurso = nombreRecurso;
 		this.tipoUnidadRecurso = tipoUnidadRecurso;
 		this.precioRecurso = precioRecurso;
+		this.foto=foto;
 	}
 
 	public Recurso() {
@@ -79,6 +82,14 @@ public class Recurso implements Serializable{
 
 	public void setPrecioRecurso(String precioRecurso) {
 		this.precioRecurso = precioRecurso;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 	
 	
