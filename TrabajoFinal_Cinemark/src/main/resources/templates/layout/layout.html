@@ -3,7 +3,7 @@
 
 <head th:fragment="head">
 <meta charset="UTF-8"></meta>
-<title>Precor.SA</title>
+<title>Cinemark</title>
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css"></link>
@@ -36,7 +36,7 @@
 					class="row no-gutters d-flex align-items-center align-items-stretch">
 					<div class="col-md-4 d-flex align-items-center py-4">
 						<a class="navbar-brand" href="bienvenido.html"><span
-							class="flaticon-engineer-1 mr-1"></span>Precor.</a>
+							class="flaticon-engineer-1 mr-1"></span>Cinemark</a>
 					</div>
 					<div class="col-lg-8 d-block">
 						<div class="row d-flex">
@@ -47,7 +47,7 @@
 									<span class="icon-paper-plane"></span>
 								</div>
 								<div class="text d-flex align-items-center">
-									<span>meli33638@gmail.com</span>
+									<span>u201716058@upc.edu.pe</span>
 								</div>
 							</div>
 							<div
@@ -92,17 +92,19 @@
 						<li class="nav-item"><a class="nav-link" href="#about"
 							th:href="@{bienvenido}">Bienvenido</a></li>
 						<li class="nav-item"><a class="nav-link" href="#about"
-							th:href="@{/trabajadores/listar}">Trabajadores</a></li>
+							th:href="@{/contadores/listar}">Contadores</a></li>
 						<li class="nav-item"><a class="nav-link" href="#about"
-							th:href="@{/proveedores/listar}">Proveedores</a></li>
+							th:href="@{/empleados/listar}">Empleados</a></li>
 						<li class="nav-item"><a class="nav-link" href="#about"
 							th:href="@{/recursos/listar}">Recursos</a></li>
 						<li class="nav-item"><a class="nav-link" href="#about"
-							th:href="@{/caracteristicas/listar}">Caracteristicas</a></li>
+							th:href="@{/facturas/listar}">Facturas</a></li>
 						<li class="nav-item"><a class="nav-link" href="#about"
-							th:href="@{/ordenes/listar}">Ordenes de compra</a></li>
+							th:href="@{/proveedores/listar}">Proveedores</a></li>
 						<li class="nav-item"><a class="nav-link" href="#about"
-							th:href="@{/detalles/listar}">Detalle de Ordenes de compra</a></li>
+							th:href="@{/listas/listar}">Lista de compra</a></li>
+						<li class="nav-item"><a class="nav-link" href="#about"
+							th:href="@{/detalles/listar}">Detalle de Lista de compra</a></li>
 					</ul>
 				</div>
 			</div>
@@ -122,12 +124,12 @@
 				<div class="col-md">
 					<div class="ftco-footer-widget mb-5">
 						<h2 class="ftco-heading-2 logo">
-							<span class="flaticon-engineer-1"></span>Precor.
+							<span class="flaticon-engineer-1"></span>Cinemark.
 						</h2>
-						<p>Somos una empresa de capitales peruanos, fundada en 1982
-							con el compromiso de desarrollar y suministrar el Sistema de
-							Construcción en Acero PRECOR a la medida de las necesidades de
-							nuestros clientes.</p>
+						<p>Cinemark Holdings,Inc.es una cadena de cines con
+							operaciones en Estados Unidos, Argentina, Brasil, Bolivia, Chile,
+							Peru y El Salvador. Su sede corporativa esta localizada en Plano,
+							Texas, Estados Unidos.</p>
 						<ul
 							class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
 							<li class="ftco-animate"><a href="#"><span
@@ -145,20 +147,18 @@
 						<h2 class="ftco-heading-2">Servicios</h2>
 						<ul class="list-unstyled">
 							<li><a href="#"><span
-									class="ion-ios-arrow-round-forward mr-2"></span>Distribuidores</a></li>
+									class="ion-ios-arrow-round-forward mr-2"></span>Eventos Especiales</a></li>
 							<li><a href="#"><span
-									class="ion-ios-arrow-round-forward mr-2"></span>Ayuda Técnica</a></li>
+									class="ion-ios-arrow-round-forward mr-2"></span>Corporativo</a></li>
 							<li><a href="#"><span
-									class="ion-ios-arrow-round-forward mr-2"></span>Post-Venta</a></li>
-							<li><a href="#"><span
-									class="ion-ios-arrow-round-forward mr-2"></span>Preguntas
-									Frecuentes</a></li>
+									class="ion-ios-arrow-round-forward mr-2"></span>Publicidad</a></li>
+							
 						</ul>
 					</div>
 				</div>
 				<div class="col-md-5">
 					<div class="ftco-footer-widget mb-5">
-						<h2 class="ftco-heading-2">Soluciones</h2>
+						<h2 class="ftco-heading-2">Formatos y Salas</h2>
 						<div class="block-21 mb-4 d-flex">
 							<a class="blog-img mr-4"
 								style="background-image: url(/imagenes/image_1.jpg);"></a>
@@ -183,7 +183,7 @@
 				</div>
 				<div class="col-md">
 					<div class="ftco-footer-widget mb-5">
-						<h2 class="ftco-heading-2">Contacto</h2>
+						<h2 class="ftco-heading-2">Conócenos</h2>
 						<form action="#" class="subscribe-form">
 							<div class="form-group">
 								<input type="text" class="form-control mb-2 text-center"
@@ -203,7 +203,7 @@
 							document.write(new Date().getFullYear());
 						</script>
 						All rights reserved | <a href="https://www.precor.pe/"
-							target="_blank">Precor.SA</a>
+							target="_blank">Cinemark</a>
 					</p>
 				</div>
 			</div>
