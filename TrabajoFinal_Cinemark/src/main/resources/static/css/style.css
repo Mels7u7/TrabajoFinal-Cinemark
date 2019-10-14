@@ -8012,7 +8012,7 @@ h1, h2, h3, h4, h5,
   color: #fda729 !important; }
 
 .bg-top {
-  background: #022d5d; }
+  background: #b5121c; }
 
 .topper {
   font-size: 15px;
@@ -8081,7 +8081,7 @@ h1, h2, h3, h4, h5,
 
 .ftco-navbar-light {
   background: transparent !important;
-  background: #1683fb !important;
+  background: #dccea5 !important;
   z-index: 3;
   padding: 0; }
   @media (max-width: 991.98px) {
@@ -8107,7 +8107,7 @@ h1, h2, h3, h4, h5,
     padding-left: 20px;
     padding-right: 20px;
     font-weight: 400;
-    color: #fff;
+    color: #101010;
     opacity: 1 !important; }
     .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover {
       color: #000000; }
