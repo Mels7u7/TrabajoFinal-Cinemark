@@ -59,6 +59,10 @@ public class Empleado implements Serializable{
 	@NotEmpty(message = "Ingresar celular de contacto")
 	@Column(name = "celularEmpleado", nullable = false, length = 10)
 	private String celularEmpleado;
+	
+	@NotEmpty(message = "Ingresar el puesto del empleado")
+	@Column(name = "puestoEmpleado", nullable = false, length = 20)
+	private String puestoEmpleado;
 
 	public Empleado(int idEmpleado, @NotEmpty(message = "Ingresa el nombre del empleado") String nombreEmpleado,
 			@NotEmpty(message = "Ingresa el apellido del empleado") String apellidoEmpleado,
@@ -67,7 +71,8 @@ public class Empleado implements Serializable{
 			@Size(min = 8, max = 8) @NotEmpty(message = "Ingresar DNI") String dniEmpleado,
 			@NotEmpty(message = "Ingresa el titulo del empleado") String tituloEmpleado,
 			@Email @NotEmpty(message = "Ingresa el correo") String correoEmpleado,
-			@Size(min = 9, max = 9) @NotEmpty(message = "Ingresar celular de contacto") String celularEmpleado) {
+			@Size(min = 9, max = 9) @NotEmpty(message = "Ingresar celular de contacto") String celularEmpleado,
+			String puestoEmpleado) {
 		super();
 		this.idEmpleado = idEmpleado;
 		this.nombreEmpleado = nombreEmpleado;
@@ -78,6 +83,7 @@ public class Empleado implements Serializable{
 		this.tituloEmpleado = tituloEmpleado;
 		this.correoEmpleado = correoEmpleado;
 		this.celularEmpleado = celularEmpleado;
+		this.puestoEmpleado = puestoEmpleado;
 	}
 
 	public Empleado() {
@@ -155,6 +161,14 @@ public class Empleado implements Serializable{
 
 	public void setCelularEmpleado(String celularEmpleado) {
 		this.celularEmpleado = celularEmpleado;
+	}
+
+	public String getPuestoEmpleado() {
+		return puestoEmpleado;
+	}
+
+	public void setPuestoEmpleado(String puestoEmpleado) {
+		this.puestoEmpleado = puestoEmpleado;
 	}
 	
 	

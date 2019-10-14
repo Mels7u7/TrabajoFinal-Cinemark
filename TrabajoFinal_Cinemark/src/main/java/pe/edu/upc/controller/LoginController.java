@@ -19,7 +19,7 @@ public class LoginController {
 			RedirectAttributes flash) {
 
 		if (principal != null) {
-			return "redirect:/contadores/bienvenido";
+			return "redirect:/recursos/bienvenido";
 		}
 
 		if (error != null) {
