@@ -56,7 +56,7 @@ public class ContadorCotroller {
 				model.addAttribute("mensaje", "Ya existe el contador con ese DNI");
 				return  "/contador/contador";
 			} else {
-				model.addAttribute("mensaje", "Se guardó correctamente");
+				model.addAttribute("mensaje", "Se ha registrado correctamente");
 				status.setComplete();
 			}
 		}

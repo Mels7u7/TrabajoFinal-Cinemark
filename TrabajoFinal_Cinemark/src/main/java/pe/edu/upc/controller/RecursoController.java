@@ -97,7 +97,7 @@ public class RecursoController {
 				model.addAttribute("mensaje", "Ya existe");
 				return  "/recurso/recurso";
 			} else {
-				model.addAttribute("mensaje", "Se guardó correctamente");
+				model.addAttribute("mensaje", "Se ha registrado correctamente");
 				status.setComplete();
 			}
 			

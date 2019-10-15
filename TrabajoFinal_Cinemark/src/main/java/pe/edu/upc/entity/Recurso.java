@@ -26,7 +26,7 @@ public class Recurso implements Serializable{
 	@Column(name = "nombreRecurso", nullable = false, length = 30)
 	private String nombreRecurso;
 	
-	@NotEmpty(message = "Ingresa el tipo de unidades")
+	@NotEmpty(message = "Ingresa el tipo de unidad")
 	@Column(name = "tipoUnidadRecurso", nullable = false, length = 30)
 	private String tipoUnidadRecurso;
 	
