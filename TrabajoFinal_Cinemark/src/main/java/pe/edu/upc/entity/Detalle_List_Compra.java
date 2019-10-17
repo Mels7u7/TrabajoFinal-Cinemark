@@ -15,7 +15,7 @@ import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "detalle")
-public class Detalle_List_Compra implements Serializable{
+public class Detalle_List_Compra implements Serializable {
 
 	/**
 	 * 
@@ -24,27 +24,27 @@ public class Detalle_List_Compra implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idDetalle;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idRecurso")
 	private Recurso recursoDetalle;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idLista")
 	private Lista_Compra listaDetalle;
-	
+
 	@Min(2)
 	@Max(10000)
 	@Column(name = "precioDetalle", nullable = false)
 	private int precioDetalle;
-	
+
 	@Min(2)
 	@Max(1000)
 	@Column(name = "unidadesDetalle", nullable = false)
 	private int unidadesDetalle;
 
-	public Detalle_List_Compra(int idDetalle, Recurso recursoDetalle, Lista_Compra listaDetalle,
-			@Min(2) @Max(10000) int precioDetalle, @Min(2) @Max(1000) int unidadesDetalle) {
+	public Detalle_List_Compra(int idDetalle, Recurso recursoDetalle, Lista_Compra listaDetalle, int precioDetalle,
+			int unidadesDetalle) {
 		super();
 		this.idDetalle = idDetalle;
 		this.recursoDetalle = recursoDetalle;
@@ -97,7 +97,5 @@ public class Detalle_List_Compra implements Serializable{
 	public void setUnidadesDetalle(int unidadesDetalle) {
 		this.unidadesDetalle = unidadesDetalle;
 	}
-	
-	
 
 }

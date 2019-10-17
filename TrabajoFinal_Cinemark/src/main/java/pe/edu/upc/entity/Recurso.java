@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -30,15 +32,15 @@ public class Recurso implements Serializable{
 	@Column(name = "tipoUnidadRecurso", nullable = false, length = 30)
 	private String tipoUnidadRecurso;
 	
-	@NotEmpty(message = "Ingresa el precio del recurso")
-	@Column(name = "precioRecurso", nullable = false, length = 10)
-	private String precioRecurso;
+	@Min(1)
+	@Max(1000)
+	@Column(name = "precioRecurso", nullable = false)
+	private int precioRecurso;
 	
 	private String foto;
 
-	public Recurso(int idRecurso, @NotEmpty(message = "Ingresa el nombre del recurso") String nombreRecurso,
-			@NotEmpty(message = "Ingresa el tipo de unidades") String tipoUnidadRecurso,
-			@NotEmpty(message = "Ingresa el precio del recurso") String precioRecurso, String foto) {
+	public Recurso(int idRecurso, String nombreRecurso,
+			 String tipoUnidadRecurso,int precioRecurso, String foto) {
 		super();
 		this.idRecurso = idRecurso;
 		this.nombreRecurso = nombreRecurso;
@@ -76,11 +78,11 @@ public class Recurso implements Serializable{
 		this.tipoUnidadRecurso = tipoUnidadRecurso;
 	}
 
-	public String getPrecioRecurso() {
+	public int getPrecioRecurso() {
 		return precioRecurso;
 	}
 
-	public void setPrecioRecurso(String precioRecurso) {
+	public void setPrecioRecurso(int precioRecurso) {
 		this.precioRecurso = precioRecurso;
 	}
 

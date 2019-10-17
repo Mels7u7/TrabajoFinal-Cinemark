@@ -8,12 +8,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "contador")
-public class Contador implements Serializable{
+public class Contador implements Serializable {
 
 	/**
 	 * 
@@ -22,29 +24,27 @@ public class Contador implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idContador;
-	
+
 	@NotEmpty(message = "Ingresa el nombre del contador")
 	@Column(name = "nombreContador", nullable = false, length = 30)
 	private String nombreContador;
-	
+
 	@Size(min = 8, max = 8)
 	@NotEmpty(message = "Ingresar DNI")
 	@Column(name = "dniContador", nullable = false, length = 45, unique = true)
 	private String dniContador;
-	
+
 	@NotEmpty(message = "Ingresar institucion")
 	@Column(name = "institucionContador", nullable = false, length = 70)
 	private String institucionContador;
 	
-	@Size(min = 9, max = 9)
-	@NotEmpty(message = "Ingresar numero de contacto")
-	@Column(name = "numeroContactoContador", nullable = false, length = 45)
-	private String numeroContactoContador;
+	@Min(1)
+	@Max(9)
+	@Column(name = "numeroContactoContador", nullable = false)
+	private int numeroContactoContador;
 
-	public Contador(int idContador, @NotEmpty(message = "Ingresa el nombre del contador") String nombreContador,
-			@Size(min = 8, max = 8) @NotEmpty(message = "Ingresar DNI") String dniContador,
-			@NotEmpty(message = "Ingresar institucion") String institucionContador,
-			@Size(min = 9, max = 9) @NotEmpty(message = "Ingresar numero de contacto") String numeroContactoContador) {
+	public Contador(int idContador, String nombreContador, String dniContador, String institucionContador,
+			int numeroContactoContador) {
 		super();
 		this.idContador = idContador;
 		this.nombreContador = nombreContador;
@@ -90,13 +90,12 @@ public class Contador implements Serializable{
 		this.institucionContador = institucionContador;
 	}
 
-	public String getNumeroContactoContador() {
+	public int getNumeroContactoContador() {
 		return numeroContactoContador;
 	}
 
-	public void setNumeroContactoContador(String numeroContactoContador) {
+	public void setNumeroContactoContador(int numeroContactoContador) {
 		this.numeroContactoContador = numeroContactoContador;
 	}
-	
-	
+
 }

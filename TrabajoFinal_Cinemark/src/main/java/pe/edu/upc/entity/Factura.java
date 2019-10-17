@@ -21,7 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "factura")
-public class Factura implements Serializable{
+public class Factura implements Serializable {
 
 	/**
 	 * 
@@ -30,19 +30,19 @@ public class Factura implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idFactura;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idLista")
 	private Lista_Compra listaFactura;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idContador")
 	private Contador contadorFactura;
-	
+
 	@NotEmpty(message = "Ingresa el analisis de la factura")
 	@Column(name = "analisisFactura", nullable = false, length = 60)
 	private String analisisFactura;
-	
+
 	@NotNull(message = "La fecha es obligatoria")
 	@Past(message = "La fecha debe estar en el pasado")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -50,9 +50,8 @@ public class Factura implements Serializable{
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaFactura;
 
-	public Factura(int idFactura, Lista_Compra listaFactura, Contador contadorFactura,
-			@NotEmpty(message = "Ingresa el analisis de la factura") String analisisFactura,
-			@NotNull(message = "La fecha es obligatoria") @Past(message = "La fecha debe estar en el pasado") Date fechaFactura) {
+	public Factura(int idFactura, Lista_Compra listaFactura, Contador contadorFactura, String analisisFactura,
+			Date fechaFactura) {
 		super();
 		this.idFactura = idFactura;
 		this.listaFactura = listaFactura;
@@ -105,7 +104,5 @@ public class Factura implements Serializable{
 	public void setFechaFactura(Date fechaFactura) {
 		this.fechaFactura = fechaFactura;
 	}
-	
-	
 
 }

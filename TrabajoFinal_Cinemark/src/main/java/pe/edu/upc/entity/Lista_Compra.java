@@ -21,7 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "listaCompra")
-public class Lista_Compra implements Serializable{
+public class Lista_Compra implements Serializable {
 
 	/**
 	 * 
@@ -30,22 +30,22 @@ public class Lista_Compra implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idLista;
-	
+
 	@NotEmpty(message = "Ingresa la nota de la lista de compra")
 	@Column(name = "notaLista", nullable = false, length = 70)
 	private String notaLista;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idProveedor")
 	private Proveedor proveedorLista;
-	
+
 	@NotEmpty(message = "Ingresa el estado de la lista de compra")
 	@Column(name = "estadoLista", nullable = false, length = 20)
 	private String estadoLista;
-	
-	@Column(name = "precioLista", nullable = false, length = 10)
-	private boolean precioLista;
-	
+
+	@Column(name = "precioLista", nullable = false)
+	private int precioLista;
+
 	@NotNull(message = "La fecha es obligatoria")
 	@Past(message = "La fecha debe estar en el pasado")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -53,10 +53,8 @@ public class Lista_Compra implements Serializable{
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaLista;
 
-	public Lista_Compra(int idLista, @NotEmpty(message = "Ingresa la nota de la lista de compra") String notaLista,
-			Proveedor proveedorLista, @NotEmpty(message = "Ingresa el estado de la lista de compra") String estadoLista,
-			boolean precioLista,
-			@NotNull(message = "La fecha es obligatoria") @Past(message = "La fecha debe estar en el pasado") Date fechaLista) {
+	public Lista_Compra(int idLista, String notaLista, Proveedor proveedorLista, String estadoLista,
+			int precioLista, Date fechaLista) {
 		super();
 		this.idLista = idLista;
 		this.notaLista = notaLista;
@@ -103,11 +101,11 @@ public class Lista_Compra implements Serializable{
 		this.estadoLista = estadoLista;
 	}
 
-	public boolean isPrecioLista() {
+	public int isPrecioLista() {
 		return precioLista;
 	}
 
-	public void setPrecioLista(boolean precioLista) {
+	public void setPrecioLista(int precioLista) {
 		this.precioLista = precioLista;
 	}
 
@@ -118,7 +116,5 @@ public class Lista_Compra implements Serializable{
 	public void setFechaLista(Date fechaLista) {
 		this.fechaLista = fechaLista;
 	}
-	
-	
 
 }

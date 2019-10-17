@@ -9,12 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "empleado")
-public class Empleado implements Serializable{
+public class Empleado implements Serializable {
 
 	/**
 	 * 
@@ -23,55 +25,49 @@ public class Empleado implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idEmpleado;
-	
+
 	@NotEmpty(message = "Ingresa el nombre del empleado")
 	@Column(name = "nombreEmpleado", nullable = false, length = 30)
 	private String nombreEmpleado;
-	
+
 	@NotEmpty(message = "Ingresa el apellido del empleado")
 	@Column(name = "apellidoEmpleado", nullable = false, length = 30)
 	private String apellidoEmpleado;
-	
-	@Size(min = 1, max = 2)
-	@NotEmpty(message = "Ingresar experiencia")
-	@Column(name = "experienciaEmpleado", nullable = false, length = 3)
-	private String experienciaEmpleado;
+
+	@Min(1)
+	@Max(10)
+	@Column(name = "experienciaEmpleado", nullable = false)
+	private int experienciaEmpleado;
 
 	@NotEmpty(message = "Ingresa la sede")
 	@Column(name = "sedeEmpleado", nullable = false, length = 30)
 	private String sedeEmpleado;
-	
+
 	@Size(min = 8, max = 8)
 	@NotEmpty(message = "Ingresar DNI")
 	@Column(name = "dniEmpleado", nullable = false, length = 10, unique = true)
 	private String dniEmpleado;
-	
+
 	@NotEmpty(message = "Ingresa el titulo del empleado")
 	@Column(name = "tituloEmpleado", nullable = false, length = 30)
 	private String tituloEmpleado;
-	
+
 	@Email
 	@NotEmpty(message = "Ingresa el correo")
 	@Column(name = "correoEmpleado", nullable = false, length = 40)
 	private String correoEmpleado;
-	
-	@Size(min = 9, max = 9)
-	@NotEmpty(message = "Ingresar celular de contacto")
-	@Column(name = "celularEmpleado", nullable = false, length = 10)
-	private String celularEmpleado;
-	
+
+	@Min(9)
+	@Max(9)
+	@Column(name = "celularEmpleado", nullable = false)
+	private int celularEmpleado;
+
 	@NotEmpty(message = "Ingresar el puesto del empleado")
 	@Column(name = "puestoEmpleado", nullable = false, length = 20)
 	private String puestoEmpleado;
 
-	public Empleado(int idEmpleado, @NotEmpty(message = "Ingresa el nombre del empleado") String nombreEmpleado,
-			@NotEmpty(message = "Ingresa el apellido del empleado") String apellidoEmpleado,
-			@Size(min = 1, max = 2) @NotEmpty(message = "Ingresar experiencia") String experienciaEmpleado,
-			@NotEmpty(message = "Ingresa la sede") String sedeEmpleado,
-			@Size(min = 8, max = 8) @NotEmpty(message = "Ingresar DNI") String dniEmpleado,
-			@NotEmpty(message = "Ingresa el titulo del empleado") String tituloEmpleado,
-			@Email @NotEmpty(message = "Ingresa el correo") String correoEmpleado,
-			@Size(min = 9, max = 9) @NotEmpty(message = "Ingresar celular de contacto") String celularEmpleado,
+	public Empleado(int idEmpleado, String nombreEmpleado, String apellidoEmpleado, int experienciaEmpleado,
+			String sedeEmpleado, String dniEmpleado, String tituloEmpleado, String correoEmpleado, int celularEmpleado,
 			String puestoEmpleado) {
 		super();
 		this.idEmpleado = idEmpleado;
@@ -115,11 +111,11 @@ public class Empleado implements Serializable{
 		this.apellidoEmpleado = apellidoEmpleado;
 	}
 
-	public String getExperienciaEmpleado() {
+	public int getExperienciaEmpleado() {
 		return experienciaEmpleado;
 	}
 
-	public void setExperienciaEmpleado(String experienciaEmpleado) {
+	public void setExperienciaEmpleado(int experienciaEmpleado) {
 		this.experienciaEmpleado = experienciaEmpleado;
 	}
 
@@ -155,11 +151,11 @@ public class Empleado implements Serializable{
 		this.correoEmpleado = correoEmpleado;
 	}
 
-	public String getCelularEmpleado() {
+	public int getCelularEmpleado() {
 		return celularEmpleado;
 	}
 
-	public void setCelularEmpleado(String celularEmpleado) {
+	public void setCelularEmpleado(int celularEmpleado) {
 		this.celularEmpleado = celularEmpleado;
 	}
 
@@ -170,6 +166,5 @@ public class Empleado implements Serializable{
 	public void setPuestoEmpleado(String puestoEmpleado) {
 		this.puestoEmpleado = puestoEmpleado;
 	}
-	
-	
+
 }

@@ -8,12 +8,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "proveedor")
-public class Proveedor implements Serializable{
+public class Proveedor implements Serializable {
 
 	/**
 	 * 
@@ -22,34 +24,31 @@ public class Proveedor implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idProveedor;
-	
+
 	@NotEmpty(message = "Ingresa el nombre del proveedor")
 	@Column(name = "nombreProveedor", nullable = false, length = 30)
 	private String nombreProveedor;
-	
+
 	@NotEmpty(message = "Ingresa la direccion del proveedor")
 	@Column(name = "direccionProveedor", nullable = false, length = 50)
 	private String direccionProveedor;
 
 	@Size(min = 11, max = 11)
 	@NotEmpty(message = "Ingresar RUC")
-	@Column(name="rucProveedor",nullable=false,length=45,unique=true)
-	private String rucProveedor ;
-	
+	@Column(name = "rucProveedor", nullable = false, length = 45, unique = true)
+	private String rucProveedor;
+
 	@NotEmpty(message = "Ingresa el nombre de contacto del proveedor")
 	@Column(name = "nombrecontactoProveedor", nullable = false, length = 70)
 	private String nombrecontactoProveedor;
-	
-	@Size(min = 9, max = 9)
-	@NotEmpty(message = "Ingresar numero de contacto")
-	@Column(name = "numerocontactoProveedor", nullable = false, length = 9)
-	private String numerocontactoProveedor;
 
-	public Proveedor(int idProveedor, @NotEmpty(message = "Ingresa el nombre del proveedor") String nombreProveedor,
-			@NotEmpty(message = "Ingresa la direccion del proveedor") String direccionProveedor,
-			@Size(min = 11, max = 11) @NotEmpty(message = "Ingresar RUC") String rucProveedor,
-			@NotEmpty(message = "Ingresa el nombre de contacto del proveedor") String nombrecontactoProveedor,
-			@Size(min = 9, max = 9) @NotEmpty(message = "Ingresar numero de contacto") String numerocontactoProveedor) {
+	@Min(9)
+	@Max(9)
+	@Column(name = "numerocontactoProveedor", nullable = false)
+	private int numerocontactoProveedor;
+
+	public Proveedor(int idProveedor, String nombreProveedor, String direccionProveedor, String rucProveedor,
+			String nombrecontactoProveedor, int numerocontactoProveedor) {
 		super();
 		this.idProveedor = idProveedor;
 		this.nombreProveedor = nombreProveedor;
@@ -104,13 +103,12 @@ public class Proveedor implements Serializable{
 		this.nombrecontactoProveedor = nombrecontactoProveedor;
 	}
 
-	public String getNumerocontactoProveedor() {
+	public int getNumerocontactoProveedor() {
 		return numerocontactoProveedor;
 	}
 
-	public void setNumerocontactoProveedor(String numerocontactoProveedor) {
+	public void setNumerocontactoProveedor(int numerocontactoProveedor) {
 		this.numerocontactoProveedor = numerocontactoProveedor;
 	}
-	
-	
+
 }
