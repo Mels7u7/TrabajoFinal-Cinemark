@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<div align="right">
+			<a th:href="@{/recursos/nuevo}" id="add-row" type="button"
+				class="btn btn-primary">Nuevo Recurso</a>
+		</div>
+		<div>
+			<form th:action="@{/recursos/buscar}" method="post"
+				th:object="${recurso}">
+				<div class="form-group">
+
+					<label for="recurso">Buscar:</label> <input type="text"
+						class="form-control" th:field="*{nombreRecurso}" id="recurso"></input>
+					<div align="right">
+						<button type="submit" class="btn btn-success">Aceptar</button>
+						<a href="/recursos/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+
+			</form>
+
+		</div>
+
+		<div class="card">
+			<div class="card-header text-white bg-dark mb-3">Lista de
+				Recursos</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-white">
+						<thead class="bg-dark mb-3 text-white">
+							<tr>
+								<th>Id</th>
+								<th>Nombres del recurso</th>
+								<th align="center">Operación</th>
+								<th align="center">Operación</th>
+							</tr>
+						</thead>
+						<tbody id="recurso-list">
+							<tr th:each="recurso:${listaRecursos}">
+								<td><a class="btn btn-primary btn-xs"
+									th:href="@{/recursos/ver/} + ${recurso.idRecurso}"
+									th:text="${recurso.idRecurso}"></a></td>
+
+								<td th:text="${recurso.nombreRecurso}"></td>
+
+								<td align="center"><a
+									th:href="@{/recursos/eliminar?id=}+${recurso.idRecurso}"
+									type="button" class="btn btn-default btn-lg">Eliminar</a></td>
+
+								<td align="center"><a
+									th:href="@{'/recursos/detalle/' + ${recurso.idRecurso}}"
+									type="button" class="btn btn-default btn-lg">Editar</a></td>
+								<td align="center"><a
+									th:href="@{/recursos/ver/} + ${recurso.idRecurso}"><span
+										class="glyphicon glyphicon-eye-open"></span></a></td>
+							</tr>
+						</tbody>
+					</table>
+					<div th:if="${mensaje}" class="alert alert-info">
+						<p th:text="${mensaje}"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>

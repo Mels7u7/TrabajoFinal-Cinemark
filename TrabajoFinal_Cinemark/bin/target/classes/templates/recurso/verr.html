@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card">
+			<div class="card-header text-white bg-dark mb-3">Detalles de
+				Recurso</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-white">
+
+						<tbody>
+							<tr>
+								<td>CÓDIGO</td>
+								<td th:text="${recurso.idRecurso}"></td>
+							</tr>
+							<tr>
+								<td>NOMBRE</td>
+								<td th:text="${recurso.nombreRecurso}"></td>
+							</tr>
+							<tr>
+								<td>UNIDADES</td>
+								<td th:text="${recurso.tipoUnidadRecurso}"></td>
+							</tr>
+							<tr>
+								<td>PRECIO</td>
+								<td th:text="${recurso.precioRecurso}"></td>
+							</tr>
+							
+							<tr>
+								<td>Foto</td>
+								<td><img th:if="${#strings.length(recurso.foto)> 0}"
+									class="img-thumbnail rounded float-left"
+									style="max-width: 50%;"
+									th:src="@{'/recursos/uploads/' + ${recurso.foto}}"
+									th:alt="${recurso.foto}" /></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<a th:href="@{/recursos/listar}" type="button"
+						class="btn btn-primary k"> <span
+						class="glyphicon glyphicon-circle-arrow-left"></span> Regresar a
+						la lista de Recursos
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

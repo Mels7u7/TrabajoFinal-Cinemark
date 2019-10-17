@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+<meta charset="UTF-8"></meta>
+</head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+
+		<div class="card bg-danger text-white">
+			<div class="card-header">No posees autorización para realizar
+				esta acción!</div>
+			<div class="card-body">
+				<h5 class="card-title">
+					Lo sentimos <span th:text="${#authentication.username}"></span>,
+					por el momento NO tienes permisos para acceder a este recurso.
+				</h5>
+				<a th:href="@{/empleados/listar}" class="btn btn-outline-light"
+					role="button">Ir al inicio</a>
+
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
