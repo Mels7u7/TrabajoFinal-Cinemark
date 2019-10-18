@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -42,7 +44,9 @@ public class Lista_Compra implements Serializable {
 	@NotEmpty(message = "Ingresa el estado de la lista de compra")
 	@Column(name = "estadoLista", nullable = false, length = 20)
 	private String estadoLista;
-
+	
+	@Min(50)
+	@Max(4000)
 	@Column(name = "precioLista", nullable = false)
 	private int precioLista;
 

@@ -8,9 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -38,13 +37,13 @@ public class Contador implements Serializable {
 	@Column(name = "institucionContador", nullable = false, length = 70)
 	private String institucionContador;
 	
-	@Min(1)
-	@Max(9)
-	@Column(name = "numeroContactoContador", nullable = false)
-	private int numeroContactoContador;
+	@Pattern(regexp="[\\d]{9}")
+	@NotEmpty(message = "Ingresar número del contador")
+	@Column(name = "numeroContactoContador", nullable = false,length=10)
+	private String numeroContactoContador;
 
 	public Contador(int idContador, String nombreContador, String dniContador, String institucionContador,
-			int numeroContactoContador) {
+			String numeroContactoContador) {
 		super();
 		this.idContador = idContador;
 		this.nombreContador = nombreContador;
@@ -90,11 +89,11 @@ public class Contador implements Serializable {
 		this.institucionContador = institucionContador;
 	}
 
-	public int getNumeroContactoContador() {
+	public String getNumeroContactoContador() {
 		return numeroContactoContador;
 	}
 
-	public void setNumeroContactoContador(int numeroContactoContador) {
+	public void setNumeroContactoContador(String numeroContactoContador) {
 		this.numeroContactoContador = numeroContactoContador;
 	}
 

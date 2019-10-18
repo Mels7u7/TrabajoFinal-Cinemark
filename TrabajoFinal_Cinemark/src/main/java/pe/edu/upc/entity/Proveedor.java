@@ -8,10 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "proveedor")
@@ -33,7 +31,7 @@ public class Proveedor implements Serializable {
 	@Column(name = "direccionProveedor", nullable = false, length = 50)
 	private String direccionProveedor;
 
-	@Size(min = 11, max = 11)
+	@Pattern(regexp="[\\d]{11}")
 	@NotEmpty(message = "Ingresar RUC")
 	@Column(name = "rucProveedor", nullable = false, length = 45, unique = true)
 	private String rucProveedor;
@@ -42,13 +40,13 @@ public class Proveedor implements Serializable {
 	@Column(name = "nombrecontactoProveedor", nullable = false, length = 70)
 	private String nombrecontactoProveedor;
 
-	@Min(9)
-	@Max(9)
-	@Column(name = "numerocontactoProveedor", nullable = false)
-	private int numerocontactoProveedor;
+	@Pattern(regexp="[\\d]{9}")
+	@NotEmpty(message = "Ingresa el número de contacto del proveedor")
+	@Column(name = "numerocontactoProveedor", nullable = false,length=10)
+	private String numerocontactoProveedor;
 
 	public Proveedor(int idProveedor, String nombreProveedor, String direccionProveedor, String rucProveedor,
-			String nombrecontactoProveedor, int numerocontactoProveedor) {
+			String nombrecontactoProveedor, String numerocontactoProveedor) {
 		super();
 		this.idProveedor = idProveedor;
 		this.nombreProveedor = nombreProveedor;
@@ -103,11 +101,11 @@ public class Proveedor implements Serializable {
 		this.nombrecontactoProveedor = nombrecontactoProveedor;
 	}
 
-	public int getNumerocontactoProveedor() {
+	public String getNumerocontactoProveedor() {
 		return numerocontactoProveedor;
 	}
 
-	public void setNumerocontactoProveedor(int numerocontactoProveedor) {
+	public void setNumerocontactoProveedor(String numerocontactoProveedor) {
 		this.numerocontactoProveedor = numerocontactoProveedor;
 	}
 

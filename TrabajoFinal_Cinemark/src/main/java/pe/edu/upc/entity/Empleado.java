@@ -12,6 +12,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -35,7 +36,7 @@ public class Empleado implements Serializable {
 	private String apellidoEmpleado;
 
 	@Min(1)
-	@Max(10)
+	@Max(25)
 	@Column(name = "experienciaEmpleado", nullable = false)
 	private int experienciaEmpleado;
 
@@ -57,17 +58,17 @@ public class Empleado implements Serializable {
 	@Column(name = "correoEmpleado", nullable = false, length = 40)
 	private String correoEmpleado;
 
-	@Min(9)
-	@Max(9)
-	@Column(name = "celularEmpleado", nullable = false)
-	private int celularEmpleado;
+	@Pattern(regexp="[\\d]{9}")
+	@NotEmpty(message = "Ingresa el celular del empleado")
+	@Column(name = "celularEmpleado", nullable = false, length=10)
+	private String celularEmpleado;
 
 	@NotEmpty(message = "Ingresar el puesto del empleado")
 	@Column(name = "puestoEmpleado", nullable = false, length = 20)
 	private String puestoEmpleado;
 
 	public Empleado(int idEmpleado, String nombreEmpleado, String apellidoEmpleado, int experienciaEmpleado,
-			String sedeEmpleado, String dniEmpleado, String tituloEmpleado, String correoEmpleado, int celularEmpleado,
+			String sedeEmpleado, String dniEmpleado, String tituloEmpleado, String correoEmpleado, String celularEmpleado,
 			String puestoEmpleado) {
 		super();
 		this.idEmpleado = idEmpleado;
@@ -151,11 +152,11 @@ public class Empleado implements Serializable {
 		this.correoEmpleado = correoEmpleado;
 	}
 
-	public int getCelularEmpleado() {
+	public String getCelularEmpleado() {
 		return celularEmpleado;
 	}
 
-	public void setCelularEmpleado(int celularEmpleado) {
+	public void setCelularEmpleado(String celularEmpleado) {
 		this.celularEmpleado = celularEmpleado;
 	}
 
