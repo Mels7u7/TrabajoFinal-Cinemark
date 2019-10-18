@@ -29,7 +29,7 @@ public class Recurso implements Serializable{
 	private String nombreRecurso;
 	
 	@NotEmpty(message = "Ingresa el tipo de unidad")
-	@Column(name = "tipoUnidadRecurso", nullable = false, length = 30)
+	@Column(name = "tipoUnidadRecurso", nullable = false, length = 20)
 	private String tipoUnidadRecurso;
 	
 	@Min(1)

@@ -30,11 +30,11 @@ public class Contador implements Serializable {
 
 	@Size(min = 8, max = 8)
 	@NotEmpty(message = "Ingresar DNI")
-	@Column(name = "dniContador", nullable = false, length = 45, unique = true)
+	@Column(name = "dniContador", nullable = false, length = 9, unique = true)
 	private String dniContador;
 
 	@NotEmpty(message = "Ingresar institucion")
-	@Column(name = "institucionContador", nullable = false, length = 70)
+	@Column(name = "institucionContador", nullable = false, length = 30)
 	private String institucionContador;
 	
 	@Pattern(regexp="[\\d]{9}")
