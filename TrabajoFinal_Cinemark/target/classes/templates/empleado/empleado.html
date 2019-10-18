@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header text-black bg-blue">Registro de
+				Empleados</div>
+			<form th:action="@{/empleados/guardar}" th:object="${empleado}"
+				method="post">
+
+				<div class="form-group row">
+					<label for="idContador" class="col-sm-2 col-form-label">Id</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{idEmpleado}" class="form-control" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="nombreEmpleado" class="col-sm-2 col-form-label">Nombres
+						del Empleado</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{nombreEmpleado}"
+							class="form-control" th:errorclass="'form-control alert-info'" />
+						<small th:if="${#fields.hasErrors('nombreEmpleado')}"
+							th:errors="*{nombreEmpleado}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="apellidoEmpleado" class="col-sm-2 col-form-label">Apellidos
+						del Empleado</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{apellidoEmpleado}"
+							class="form-control" th:errorclass="'form-control alert-info'" />
+						<small th:if="${#fields.hasErrors('apellidoEmpleado')}"
+							th:errors="*{apellidoEmpleado}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="experienciaEmpleado" class="col-sm-2 col-form-label">Experiencia
+						del Empleado (años)</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{experienciaEmpleado}"
+							class="form-control" th:errorclass="'form-control alert-info'" />
+						<small th:if="${#fields.hasErrors('experienciaEmpleado')}"
+							th:errors="*{experienciaEmpleado}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="sedeEmpleado" class="col-sm-2 col-form-label">Sede
+						del Empleado</label>
+					<div class="col-sm-6">
+						<select class="custom-select custom-select-sm"
+							th:field="*{sedeEmpleado}">
+							<option value="Seleccionar" selected>Seleccionar</option>
+							<option value="San Miguel">San Miguel</option>
+							<option value="Jockey Plaza">Jockey Plaza</option>
+							<option value="Bellavista">Bellavista</option>
+							<option value="Mega Plaza">Mega Plaza</option>
+							<option value="Plaza Lima Sur">Plaza Lima Sur</option>
+							<option value="Angamos">Angamos</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="dniEmpleado" class="col-sm-2 col-form-label">DNI</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{dniEmpleado}" class="form-control"
+							th:errorclass="'form-control alert-danger'" /> <small
+							th:if="${#fields.hasErrors('dniEmpleado')}"
+							th:errors="*{dniEmpleado}"></small>
+					</div>
+				</div>
+
+
+				<div class="form-group row">
+					<label for="tituloEmpleado" class="col-sm-2 col-form-label">Titulo
+						del Empleado</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="tituloEmpleado" class="form-control"
+							th:errorclass="'form-control alert-info'" /> <small
+							th:if="${#fields.hasErrors('tituloEmpleado')}"
+							th:errors="*{tituloEmpleado}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="correoEmpleado" class="col-sm-2 col-form-label">Correo
+						Electrónico</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{correoEmpleado}"
+							class="form-control" th:errorclass="'form-control alert-info'" />
+						<small th:if="${#fields.hasErrors('correoEmpleado')}"
+							th:errors="*{correoEmpleado}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="celularEmpleado" class="col-sm-2 col-form-label">Celular
+						del Empleado</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{celularEmpleado}"
+							class="form-control" th:errorclass="'form-control alert-info'" />
+						<small th:if="${#fields.hasErrors('celularEmpleado')}"
+							th:errors="*{celularEmpleado}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="puestoEmpleado" class="col-sm-2 col-form-label">Puesto
+						Laboral</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{puestoEmpleado}"
+							class="form-control" th:errorclass="'form-control alert-info'" />
+						<small th:if="${#fields.hasErrors('puestoEmpleado')}"
+							th:errors="*{puestoEmpleado}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-sm-6" align="center">
+						<input type="submit" value="Registrar" class="btn btn-primary" />
+
+						<a href="/empleados/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div th:if="${mensaje}" class="form-text text-danger">
+		<p th:text="${mensaje}"></p>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

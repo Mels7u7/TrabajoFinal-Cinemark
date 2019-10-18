@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card">
+			<div class="card-header text-white bg-dark mb-3">Detalles de
+				Empleado</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-white">
+
+						<tbody>
+							<tr>
+								<td>CÓDIGO</td>
+								<td th:text="${empleado.idempleado}"></td>
+							</tr>
+							<tr>
+								<td>NOMBRES</td>
+								<td th:text="${empleado.nombreEmpleado}"></td>
+							</tr>
+							<tr>
+								<td>APELLIDOS</td>
+								<td th:text="${empleado.apellidoEmpleado}"></td>
+							</tr>
+							<tr>
+								<td>EXPERIENCIA EN AÑOS</td>
+								<td th:text="${empleado.experienciaEmpleado}"></td>
+							</tr>
+							<tr>
+								<td>SEDE</td>
+								<td th:text="${empleado.sedeEmpleado}"></td>
+							</tr>
+							<tr>
+								<td>DNI</td>
+								<td th:text="${empleado.dniEmpleado}"></td>
+							</tr>
+							<tr>
+								<td>TITULO</td>
+								<td th:text="${empleado.tituloEmpleado}"></td>
+							</tr>
+							<tr>
+								<td>CORREO ELECTRÓNICO</td>
+								<td th:text="${empleado.correoEmpleado}"></td>
+							</tr>
+							<tr>
+								<td>CELULAR</td>
+								<td th:text="${empleado.celularEmpleado}"></td>
+							</tr>
+							<tr>
+								<td>PUESTO LABORAL</td>
+								<td th:text="${empleado.puestoEmpleado}"></td>
+							</tr>
+
+						</tbody>
+					</table>
+
+					<a th:href="@{/empleados/listar}" type="button"
+						class="btn btn-primary k"> <span
+						class="glyphicon glyphicon-circle-arrow-left"></span> Regresar a
+						la lista de Empleados
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

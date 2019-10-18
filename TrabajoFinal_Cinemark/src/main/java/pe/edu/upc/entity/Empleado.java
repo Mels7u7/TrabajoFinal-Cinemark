@@ -70,7 +70,6 @@ public class Empleado implements Serializable {
 	public Empleado(int idEmpleado, String nombreEmpleado, String apellidoEmpleado, int experienciaEmpleado,
 			String sedeEmpleado, String dniEmpleado, String tituloEmpleado, String correoEmpleado, String celularEmpleado,
 			String puestoEmpleado) {
-		super();
 		this.idEmpleado = idEmpleado;
 		this.nombreEmpleado = nombreEmpleado;
 		this.apellidoEmpleado = apellidoEmpleado;
@@ -85,7 +84,6 @@ public class Empleado implements Serializable {
 
 	public Empleado() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getIdEmpleado() {
