@@ -3,7 +3,7 @@ package pe.edu.upc.serviceimpl;
 import java.util.List;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +41,7 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly=true)
 	public Optional<Empleado> listarId(int idEmpleado) {
 		return eR.findById(idEmpleado);
 	}
