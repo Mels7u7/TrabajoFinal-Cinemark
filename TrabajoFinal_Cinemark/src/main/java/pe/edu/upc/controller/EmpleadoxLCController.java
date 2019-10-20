@@ -1,6 +1,8 @@
 package pe.edu.upc.controller;
 
 
+import java.text.ParseException;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -115,8 +118,40 @@ public class EmpleadoxLCController {
 	}
 	
 
+
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
+	@RequestMapping("/buscarLC")
+	public String buscarLC(Map<String, Object> model, @ModelAttribute EmpleadoxLC empleadoxLC) throws ParseException {
+
+		List<EmpleadoxLC> listaEmpleadoxLC;
+
+		empleadoxLC.setListaEmpleadoLC(empleadoxLC.getListaEmpleadoLC());
+		listaEmpleadoxLC = eService.buscarListaCompra(empleadoxLC.getListaEmpleadoLC());
+		
+		if (listaEmpleadoxLC.isEmpty()) {
+			model.put("mensaje", "No se encontró al contador con el nombre especificado");
+		}
+		model.put("listaEmpleadoxLC", listaEmpleadoxLC);
+		return "empleadoxLC/listaEmpleadoxLCr";
+	}
 	
 	
+
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
+	@RequestMapping("/buscarEmpleado")
+	public String buscarEmpleado(Map<String, Object> model, @ModelAttribute EmpleadoxLC empleadoxLC) throws ParseException {
+
+		List<EmpleadoxLC> listaEmpleadoxLC;
+
+		empleadoxLC.setEmpleadoEmpleadoLC(empleadoxLC.getEmpleadoEmpleadoLC());
+		listaEmpleadoxLC = eService.buscarEmpleado(empleadoxLC.getEmpleadoEmpleadoLC());
+		
+		if (listaEmpleadoxLC.isEmpty()) {
+			model.put("mensaje", "No se encontró al contador con el nombre especificado");
+		}
+		model.put("listaEmpleadoxLC", listaEmpleadoxLC);
+		return "empleadoxLC/listaEmpleadoxLCr";
+	}
 	
 	
 	

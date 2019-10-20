@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<div align="right">
+			<a th:href="@{/contadores/nuevo}" id="add-row" type="button"
+				class="btn btn-primary">Nueva Factura</a>
+		</div>
+		<div>
+			<form th:action="@{/facturas/buscar}" method="post"
+				th:object="${factura}">
+				<div class="form-group">
+
+					<label for="contador">Buscar:</label> <input type="text"
+						class="form-control" th:field="*{fechaFactura}" id="factura"></input>
+					<div align="right">
+						<button type="submit" class="btn btn-success">Aceptar</button>
+						<a href="/facturas/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+
+			</form>
+
+		</div>
+
+		<div class="card">
+			<div class="card-header text-white bg-dark mb-3">Lista de
+				Facturas</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-white">
+						<thead class="bg-dark mb-3 text-white">
+							<tr>
+								<th>Id</th>
+								<th>Nombre del contador</th>
+								<th>Factura</th>
+								
+								
+								<th align="center">Operación</th>
+								<th align="center">Operación</th>
+							</tr>
+						</thead>
+						<tbody id="contador-list">
+							<tr th:each="factura:${listaFacturas}">
+								<td><a class="btn btn-primary btn-xs"
+									th:href="@{/facturas/ver/} + ${factura.idFactura}"
+									th:text="${contador.idFactura}"></a></td>
+
+								<td th:text="${factura.contadorFactura}"></td>
+
+								<td th:text="${factura.listaFactura}"></td>
+
+								<td align="center"><a
+									th:href="@{/facturas/eliminar?id=}+${factura.idFactura}"
+									type="button" class="btn btn-default btn-lg">Eliminar</a></td>
+								<td align="center"><a
+									th:href="@{'/facturas/detalle/' + ${factura.idFactura}}"
+									type="button" class="btn btn-default btn-lg">Editar</a></td>
+							</tr>
+						</tbody>
+					</table>
+					<div th:if="${mensaje}" class="alert alert-info">
+						<p th:text="${mensaje}"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

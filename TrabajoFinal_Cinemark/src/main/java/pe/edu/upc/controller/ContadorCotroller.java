@@ -107,6 +107,10 @@ public class ContadorCotroller {
 		}
 		return "/contador/contador";
 	}
+	
+	
+	
+	
 	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@RequestMapping("/buscar")
 	public String buscar(Map<String, Object> model, @ModelAttribute Contador contador) throws ParseException {
@@ -121,6 +125,11 @@ public class ContadorCotroller {
 		model.put("listaContadores", listaContadores);
 		return "contador/listaContador";
 	}
+	
+	
+	
+	
+	
 	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash) {

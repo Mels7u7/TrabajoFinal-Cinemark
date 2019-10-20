@@ -1,9 +1,12 @@
 package pe.edu.upc.service;
 
 import java.util.List;
+
 import java.util.Optional;
 
+import pe.edu.upc.entity.Empleado;
 import pe.edu.upc.entity.EmpleadoxLC;
+import pe.edu.upc.entity.Lista_Compra;
 
 public interface IEmpleadoxLCService {
 
@@ -12,8 +15,8 @@ public interface IEmpleadoxLCService {
 	public void eliminar(int idEmpleadoXLC);
 	Optional<EmpleadoxLC> listarId(int idEmpleadoXLC);
 	List<EmpleadoxLC> listar();
-	List<EmpleadoxLC> buscarListaCompra (EmpleadoxLC listaEmpleadoLC);
-	List<EmpleadoxLC> buscarEmpleado (EmpleadoxLC empleadoEmpleadoLC);
+	List<EmpleadoxLC> buscarListaCompra (Lista_Compra lista_Compra);
+	List<EmpleadoxLC> buscarEmpleado (Empleado empleadoEmpleadoLC);
 	
 	
 	

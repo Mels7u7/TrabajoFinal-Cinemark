@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header text-black bg-blue">Registro de
+				facturas</div>
+			<form th:action="@{/facturas/guardar}" th:object="${factura}"
+				method="post">
+
+				<div class="form-group row">
+					<label for="idFacturar" class="col-sm-2 col-form-label">Id</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{idFactura}" class="form-control" />
+					</div>
+				</div>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<div class="form-group row">
+							<label for="color" class="col-sm-2 col-form-label">Contador</label>
+							<div class="col-sm-6">
+								<select class="custom-select custom-select-sm"
+									th:field="*{contador}">
+									<option th:each="contador : ${listContadores}"
+										th:value="${contador.id}" th:utext="${contador.nombreContador}" />
+								</select>
+							</div>
+						</div>
+				
+				
+				
+				<div class="form-group row">
+							<label for="color" class="col-sm-2 col-form-label">Lista_Compra</label>
+							<div class="col-sm-6">
+								<select class="custom-select custom-select-sm"
+									th:field="*{lista_Compra}">
+									<option th:each="category : ${listLista_Compras}"
+										th:value="${lista_Compra.id}" th:utext="${lista_Compra.idContador}" />
+								</select>
+							</div>
+						</div>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+
+				<div class="form-group row">
+					<label for="analisisFactura" class="col-sm-2 col-form-label">Analisis</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{analisisFactura}"
+							class="form-control" th:errorclass="'form-control alert-info'" />
+						<small th:if="${#fields.hasErrors('analisisFactura')}"
+							th:errors="*{analisisFactura}"></small>
+					</div>
+				</div>
+				
+				<div class="form-group row">
+							<label for="fechaFactura" class="col-sm-6 col-form-label">Fecha
+								de Facturación: </label>
+							<div class="col-sm-12">
+								<input type="date" th:field="*{fechaFactura}" class="form-control"
+									th:errorclass="'form-control alert-danger'" /> <small
+									class="form-text text-danger"
+									th:if="${#fields.hasErrors('fechaFactura')}" th:errors="*{fechaFactura}"></small>
+							</div>
+						</div>
+
+				
+
+
+				
+				
+
+
+				<div class="form-group row">
+					<div class="col-sm-6" align="center">
+						<input type="submit" value="Registrar" class="btn btn-primary" />
+
+						<a href="/facturas/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div th:if="${mensaje}" class="form-text text-danger">
+		<p th:text="${mensaje}"></p>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

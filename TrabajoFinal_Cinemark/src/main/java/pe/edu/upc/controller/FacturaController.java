@@ -2,6 +2,7 @@ package pe.edu.upc.controller;
 
 
 import java.util.Map;
+
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -23,7 +24,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import pe.edu.upc.entity.Factura;
+import pe.edu.upc.service.IContadorService;
 import pe.edu.upc.service.IFacturaService;
+import pe.edu.upc.service.ILista_CompraService;
 
 @Controller
 @SessionAttributes("factura")
@@ -32,6 +35,12 @@ public class FacturaController {
 
 	@Autowired
 	private IFacturaService fService;
+	
+	@Autowired
+	private IContadorService cService;
+	
+	@Autowired
+	private ILista_CompraService icService;
 	
 	
 	@RequestMapping("/bienvenido")
@@ -43,6 +52,8 @@ public class FacturaController {
 	@GetMapping("/nuevo")
 	public String nuevoFactura(Model model) {
 		model.addAttribute("factura", new Factura());
+		model.addAttribute("listContadores", cService.listar());
+		model.addAttribute("listLista_Compras", icService.listar());
 		return "factura/factura";
 	}
 	
@@ -52,18 +63,21 @@ public class FacturaController {
 	public String guardarFactura(@Valid Factura factura, BindingResult result, Model model,
 			SessionStatus status) throws Exception {
 		if (result.hasErrors()) {
+			model.addAttribute("listContadores", cService.listar());
 			return "factura/factura";
 		} else {
 			int rpta = fService.insertar(factura);
 			if (rpta > 0) {
 				model.addAttribute("mensaje", "Ya existe el contador con ese DNI");
+				model.addAttribute("listContadores", cService.listar());
+				model.addAttribute("listLista_Compras", icService.listar());
 				return  "/contador/contador";
 			} else {
 				model.addAttribute("mensaje", "Se ha registrado correctamente");
 				status.setComplete();
 			}
 		}
-		model.addAttribute("listaContadores", fService.listar());
+		model.addAttribute("listaFacturas", fService.listar());
 		return "/factura/listaFactura";
 	}
 	
@@ -92,7 +106,7 @@ public class FacturaController {
 			System.out.println(e.getMessage());
 			model.put("mensaje", "No se puede anular el contrato con el contador seleccionado");
 		}
-		model.put("listaContadores", fService.listar());
+		model.put("listaFacturas", fService.listar());
 
 		return "redirect:/facturas/listar";
 	}
@@ -130,6 +144,8 @@ public class FacturaController {
 
 		return "factura/verf";
 	}
+	
+	
 	
 	
 	
