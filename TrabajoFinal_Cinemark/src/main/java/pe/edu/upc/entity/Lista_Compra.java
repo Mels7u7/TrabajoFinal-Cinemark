@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,7 +23,7 @@ import javax.validation.constraints.Past;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "listaCompra")
+@Table(name = "lista_Compra")
 public class Lista_Compra implements Serializable {
 
 	/**
@@ -44,8 +45,8 @@ public class Lista_Compra implements Serializable {
 	@NotEmpty(message = "Ingresa el estado de la lista de compra")
 	@Column(name = "estadoLista", nullable = false, length = 20)
 	private String estadoLista;
-	
-	@Min(50)
+
+	@Min(0)
 	@Max(4000)
 	@Column(name = "precioLista", nullable = false)
 	private int precioLista;
@@ -57,8 +58,8 @@ public class Lista_Compra implements Serializable {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaLista;
 
-	public Lista_Compra(int idLista, String notaLista, Proveedor proveedorLista, String estadoLista,
-			int precioLista, Date fechaLista) {
+	public Lista_Compra(int idLista, String notaLista, Proveedor proveedorLista, String estadoLista, int precioLista,
+			Date fechaLista) {
 		super();
 		this.idLista = idLista;
 		this.notaLista = notaLista;
@@ -71,6 +72,11 @@ public class Lista_Compra implements Serializable {
 	public Lista_Compra() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	@PrePersist
+	public void prePersist() {
+		precioLista = 0;
 	}
 
 	public int getIdLista() {

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header text-black bg-blue">Registro de nueva
+				Lista de compra</div>
+			<form th:action="@{/listaCompras/guardar}"
+				th:object="${lista_Compra}" method="post"
+				enctype="multipart/form-data">
+
+				<!-- Campo ID de la nueva lista de compra-->
+				<div class="form-group row">
+					<label for="idLista" class="col-sm-2 col-form-label">Id: </label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{idLista}" class="form-control" />
+					</div>
+				</div>
+
+				<!-- Campo Observación de la nueva lista de compra-->
+				<div class="form-group row">
+					<label for="notaLista" class="col-sm-2 col-form-label">Observación
+						adjunta de la Lista de compra: </label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{notaLista}" class="form-control"
+							th:errorclass="'form-control alert-info'" /> <small
+							th:if="${#fields.hasErrors('notaLista')}"
+							th:errors="*{notaLista}"></small>
+					</div>
+				</div>
+
+				<!-- Campo Estado de la nueva lista de compra-->
+				<div class="form-group row">
+					<label for="estadoLista" class="col-sm-2 col-form-label">Estado
+						actual de la Lista de compra:</label>
+					<div class="col-sm-6">
+						<select class="form-control" th:field="*{estadoLista}">
+							<option th:value="Pendiente" th:text="Pendiente"></option>
+							<option th:value="Facturado" th:text="Facturado"></option>
+							<option th:value="Retrasado" th:text="Retrasado"></option>
+						</select> <small th:if="${#fields.hasErrors('estadoLista')}"
+							th:errors="*{estadoLista}"></small>
+					</div>
+				</div>
+
+				<!-- Campo Proveedor de la nueva lista de compra-->
+				<div class="form-group row">
+					<label for="proveedorLista" class="col-sm-2 col-form-label">Proveedor:</label>
+					<div class="col-sm-6">
+						<select class="form-control"
+							th:field="*{proveedorLista.idProveedor}">
+							<option th:each="l: ${listaProveedores}"
+								th:value="${l.idProveedor}" th:text="${l.nombreProveedor}"
+								th:selected="(${l.idProveedor} == *{proveedorLista.idProveedor})"></option>
+						</select>
+					</div>
+				</div>
+
+				<!-- Campo Fecha de la nueva lista de compra-->
+				<div class="form-group row">
+					<label for="fechaLista" class="col-sm-2 col-form-label">Fecha
+						de creacion de la Lista de compra</label>
+					<div class="col-sm-6">
+						<input type="date" th:field="*{fechaLista}" class="form-control"
+							th:errorclass="'form-control alert-danger'" /> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('fechaLista')}"
+							th:errors="*{fechaLista}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-sm-6" align="center">
+						<input type="submit" value="Registrar" class="btn btn-primary" />
+
+						<a href="/listaCompras/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+
+	<div th:if="${mensaje}" class="form-text text-danger">
+		<p th:text="${mensaje}"></p>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
