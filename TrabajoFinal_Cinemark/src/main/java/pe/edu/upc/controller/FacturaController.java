@@ -3,12 +3,13 @@ package pe.edu.upc.controller;
 
 import java.util.Map;
 
+
+
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -48,40 +49,42 @@ public class FacturaController {
 		return "bienvenido";
 	}
 	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+	
 	@GetMapping("/nuevo")
 	public String nuevoFactura(Model model) {
 		model.addAttribute("factura", new Factura());
-		model.addAttribute("listContadores", cService.listar());
-		model.addAttribute("listLista_Compras", icService.listar());
-		return "factura/factura";
+		model.addAttribute("listaContadores", cService.listar());
+		model.addAttribute("listaLista_Compras", icService.listar());
+		return "/factura/factura";
 	}
 	
 	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+	
 	@PostMapping("/guardar")
 	public String guardarFactura(@Valid Factura factura, BindingResult result, Model model,
 			SessionStatus status) throws Exception {
 		if (result.hasErrors()) {
-			model.addAttribute("listContadores", cService.listar());
-			return "factura/factura";
+			model.addAttribute("listaContadores", cService.listar());
+			return "/factura/factura";
 		} else {
 			int rpta = fService.insertar(factura);
 			if (rpta > 0) {
-				model.addAttribute("mensaje", "Ya existe el contador con ese DNI");
-				model.addAttribute("listContadores", cService.listar());
-				model.addAttribute("listLista_Compras", icService.listar());
-				return  "/contador/contador";
+				model.addAttribute("mensaje", "Ya existe esa Factura");
+				model.addAttribute("listaContadores", cService.listar());
+				model.addAttribute("listaLista_Compras", icService.listar());
+				return  "/factura/factura";
 			} else {
 				model.addAttribute("mensaje", "Se ha registrado correctamente");
 				status.setComplete();
+				
 			}
 		}
 		model.addAttribute("listaFacturas", fService.listar());
 		return "/factura/listaFactura";
+		
 	}
 	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+	
 	@GetMapping("/listar")
 	public String listarFacturas(Model model) {
 		try {
@@ -94,17 +97,17 @@ public class FacturaController {
 	}
 	
 	
-	@Secured("ROLE_ADMIN")
+	
 	@RequestMapping("/eliminar")
 	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
 		try {
 			if (id != null && id > 0) {
 				fService.eliminar(id);
-				model.put("mensaje", "Se canceló el contrato con el contador");
+				model.put("mensaje", "Se canceló la factura");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("mensaje", "No se puede anular el contrato con el contador seleccionado");
+			model.put("mensaje", "No se puede anular la factura");
 		}
 		model.put("listaFacturas", fService.listar());
 
@@ -112,7 +115,7 @@ public class FacturaController {
 	}
 	
 	
-	@Secured("ROLE_ADMIN")
+	
 	@GetMapping("/detalle/{id}")//modificar
 	public String detailsFactura(@PathVariable(value = "id") int id, Model model) {
 		try {
@@ -131,7 +134,7 @@ public class FacturaController {
 	}
 	
 
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+	
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash) {
 

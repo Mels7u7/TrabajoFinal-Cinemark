@@ -14,7 +14,7 @@
 				method="post">
 
 				<div class="form-group row">
-					<label for="idContador" class="col-sm-2 col-form-label">Id</label>
+					<label for="idEmpleado" class="col-sm-2 col-form-label">Id</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{idEmpleado}" class="form-control" />
 					</div>
@@ -57,8 +57,7 @@
 					<label for="sedeEmpleado" class="col-sm-2 col-form-label">Sede
 						del Empleado</label>
 					<div class="col-sm-6">
-						<select class="custom-select custom-select-sm"
-							th:field="*{sedeEmpleado}">
+						<select class="form-control" th:field="*{sedeEmpleado}">
 							<option value="Seleccionar" selected>Seleccionar</option>
 							<option value="San Miguel">San Miguel</option>
 							<option value="Jockey Plaza">Jockey Plaza</option>
@@ -66,7 +65,8 @@
 							<option value="Mega Plaza">Mega Plaza</option>
 							<option value="Plaza Lima Sur">Plaza Lima Sur</option>
 							<option value="Angamos">Angamos</option>
-						</select>
+						</select> <small th:if="${#fields.hasErrors('sedeEmpleado')}"
+							th:errors="*{sedeEmpleado}"></small>
 					</div>
 				</div>
 

@@ -22,7 +22,7 @@
 
 				<div class="form-group row">
 					<label for="nombreProveedor" class="col-sm-2 col-form-label">Nombre
-						del Proveedor</label>
+						del Proveedor:</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{nombreProveedor}"
 							class="form-control" th:errorclass="'form-control alert-info'" />
@@ -33,7 +33,7 @@
 				
 				
 				<div class="form-group row">
-					<label for="direccionProveedor" class="col-sm-2 col-form-label">DIRECCION</label>
+					<label for="direccionProveedor" class="col-sm-2 col-form-label">DIRECCIÓN:</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{direccionProveedor}" class="form-control"
 							th:errorclass="'form-control alert-danger'" /> <small
@@ -43,7 +43,7 @@
 					</div>
 
 				<div class="form-group row">
-					<label for="rucProveedor" class="col-sm-2 col-form-label">RUC</label>
+					<label for="rucProveedor" class="col-sm-2 col-form-label">RUC:</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{rucProveedor}" class="form-control"
 							th:errorclass="'form-control alert-danger'" /> <small
@@ -55,9 +55,9 @@
 
 				<div class="form-group row">
 					<label for="nombrecontactoProveedor"
-						class="col-sm-2 col-form-label">Nombre contacto del proveedor</label>
+						class="col-sm-2 col-form-label">Nombre contacto del proveedor:</label>
 					<div class="col-sm-6">
-						<input type="text" th:field="*{institucionContador}"
+						<input type="text" th:field="*{nombrecontactoProveedor}"
 							class="form-control" th:errorclass="'form-control alert-info'" />
 						<small th:if="${#fields.hasErrors('nombrecontactoProveedor')}"
 							th:errors="*{nombrecontactoProveedor}"></small>
@@ -65,14 +65,14 @@
 				</div>
 
 				<div class="form-group row">
-					<label for="numeroContactoProveedor"
-						class="col-sm-2 col-form-label">Numero de contacto del
-						proveedor</label>
+					<label for="numerocontactoProveedor"
+						class="col-sm-2 col-form-label">Número de contacto del
+						proveedor:</label>
 					<div class="col-sm-6">
-						<input type="text" th:field="*{numeroContactoProveedor}"
+						<input type="text" th:field="*{numerocontactoProveedor}"
 							class="form-control" th:errorclass="'form-control alert-info'" />
-						<small th:if="${#fields.hasErrors('numeroContactoProveedor')}"
-							th:errors="*{numeroContactoProveedor}"></small>
+						<small th:if="${#fields.hasErrors('numerocontactoProveedor')}"
+							th:errors="*{numerocontactoProveedor}"></small>
 					</div>
 				</div>
 
@@ -81,7 +81,7 @@
 					<div class="col-sm-6" align="center">
 						<input type="submit" value="Registrar" class="btn btn-primary" />
 
-						<a href="/contadores/listar" class="btn btn-danger">Cancelar</a>
+						<a href="/proveedores/listar" class="btn btn-danger">Cancelar</a>
 					</div>
 				</div>
 			</form>

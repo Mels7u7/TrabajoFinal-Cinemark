@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import pe.edu.upc.entity.Empleado;
 import pe.edu.upc.entity.EmpleadoxLC;
+import pe.edu.upc.entity.Lista_Compra;
 import pe.edu.upc.repository.EmpleadoxLCRepository;
 import pe.edu.upc.service.IEmpleadoxLCService;
 
@@ -55,16 +57,18 @@ public class EmpleadoxLCServiceImpl implements IEmpleadoxLCService{
 		return eR.findAll();
 	}
 
+	
+
 	@Override
-	public List<EmpleadoxLC> buscarListaCompra(EmpleadoxLC listaEmpleadoLC) {
-		
-		return eR.findByListaCompra(listaEmpleadoLC);
+	public List<EmpleadoxLC> buscarListaCompra(Lista_Compra lista_Compra) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public List<EmpleadoxLC> buscarEmpleado(EmpleadoxLC empleadoEmpleadoLC) {
+	public List<EmpleadoxLC> buscarEmpleado(Empleado empleadoEmpleadoLC) {
 		// TODO Auto-generated method stub
-		return eR.findByEmpleado(empleadoEmpleadoLC);
+		return null;
 	}
 
 	

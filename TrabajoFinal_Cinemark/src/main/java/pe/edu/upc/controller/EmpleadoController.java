@@ -83,11 +83,11 @@ public class EmpleadoController {
 		try {
 			if (id != null && id > 0) {
 				eService.eliminar(id);
-				model.put("mensaje", "Se canceló el contrato con el empleado.");
+				model.put("mensaje", "Se ha eliminado correctamente.");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("mensaje", "No se puede anular el contrato con el empleado seleccionado.");
+			model.put("mensaje", "La operación ha sido cancelada.");
 		}
 		model.put("listaEmpleados", eService.listar());
 

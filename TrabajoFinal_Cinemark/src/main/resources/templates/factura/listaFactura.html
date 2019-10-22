@@ -8,19 +8,19 @@
 
 	<div class="container">
 		<div align="right">
-			<a th:href="@{/recursos/nuevo}" id="add-row" type="button"
-				class="btn btn-primary">Nuevo Recurso</a>
+			<a th:href="@{/facturas/nuevo}" id="add-row" type="button"
+				class="btn btn-primary">Nueva Factura</a>
 		</div>
 		<div>
-			<form th:action="@{/recursos/buscar}" method="post"
-				th:object="${recurso}">
+			<form th:action="@{/facturas/buscar}" method="post"
+				th:object="${factura}">
 				<div class="form-group">
 
-					<label for="recurso">Buscar:</label> <input type="text"
-						class="form-control" th:field="*{nombreRecurso}" id="recurso"></input>
+					<label for="contador">Buscar:</label> <input type="text"
+						class="form-control" th:field="*{fechaFactura}" id="factura"></input>
 					<div align="right">
 						<button type="submit" class="btn btn-success">Aceptar</button>
-						<a href="/recursos/listar" class="btn btn-danger">Cancelar</a>
+						<a href="/facturas/listar" class="btn btn-danger">Cancelar</a>
 					</div>
 				</div>
 
@@ -30,7 +30,7 @@
 
 		<div class="card">
 			<div class="card-header text-white bg-dark mb-3">Lista de
-				Recursos</div>
+				Facturas</div>
 			<div class="card-body">
 
 				<div class="table-responsive">
@@ -38,29 +38,31 @@
 						<thead class="bg-dark mb-3 text-white">
 							<tr>
 								<th>Id</th>
-								<th>Nombres del recurso</th>
+								<th>Nombre del contador</th>
+								<th>Factura</th>
+								
+								
 								<th align="center">Operación</th>
 								<th align="center">Operación</th>
 							</tr>
 						</thead>
-						<tbody id="recurso-list">
-							<tr th:each="recurso:${listaRecursos}">
+						<tbody id="contador-list">
+							<tr th:each="factura:${listaFacturas}">
 								<td><a class="btn btn-primary btn-xs"
-									th:href="@{/recursos/ver/} + ${recurso.idRecurso}"
-									th:text="${recurso.idRecurso}"></a></td>
+									th:href="@{/facturas/ver/} + ${factura.idFactura}"
+									th:text="${factura.idFactura}"></a></td>
+									
 
-								<td th:text="${recurso.nombreRecurso}"></td>
+								<td th:text="${factura.contadorFactura.nombreContador}"></td>
+
+								<td th:text="${factura.listaFactura}"></td>
 
 								<td align="center"><a
-									th:href="@{/recursos/eliminar?id=}+${recurso.idRecurso}"
+									th:href="@{/facturas/eliminar?id=}+${factura.idFactura}"
 									type="button" class="btn btn-default btn-lg">Eliminar</a></td>
-
 								<td align="center"><a
-									th:href="@{'/recursos/detalle/' + ${recurso.idRecurso}}"
+									th:href="@{'/facturas/detalle/' + ${factura.idFactura}}"
 									type="button" class="btn btn-default btn-lg">Editar</a></td>
-								<td align="center"><a
-									th:href="@{/recursos/ver/} + ${recurso.idRecurso}"><span
-										class="glyphicon glyphicon-eye-open"></span></a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -74,3 +76,4 @@
 
 	<footer th:replace="layout/layout :: footer"></footer>
 </body>
+</html>

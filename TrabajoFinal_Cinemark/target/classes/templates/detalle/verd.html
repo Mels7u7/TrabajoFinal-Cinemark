@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="card">
 			<div class="card-header text-white bg-dark mb-3">Detalles de
-				Contador</div>
+				Lista Compra</div>
 			<div class="card-body">
 
 				<div class="table-responsive">
@@ -17,32 +17,33 @@
 						<tbody>
 							<tr>
 								<td>CÓDIGO</td>
-								<td th:text="${contador.idContador}"></td>
+								<td th:text="${detalle.idDetalle}"></td>
+							</tr>
+														<tr>
+								<td>RECURSO</td>
+								<td th:text="${detalle.recursoDetalle.nombreRecurso}"></td>
 							</tr>
 							<tr>
-								<td>NOMBRE</td>
-								<td th:text="${contador.nombreContador}"></td>
+								<td>LISTA DE COMPRA</td>
+								<td th:text="${detalle.listaDetalle.notaLista}"></td>
 							</tr>
 							<tr>
-								<td>DNI</td>
-								<td th:text="${contador.dniContador}"></td>
+								<td>PRECIO</td>
+								<td th:text="${detalle.precioDetalle}"></td>
 							</tr>
 							<tr>
-								<td>INSTITUCIÓN</td>
-								<td th:text="${contador.institucionContador}"></td>
+								<td>CANTIDAD DE UNIDADES</td>
+								<td th:text="${detalle.unidadesDetalle}"></td>
 							</tr>
-							<tr>
-								<td>NÚMERO CONTACTO</td>
-								<td th:text="${contador.numeroContactoContador}"></td>
-							</tr>
+
 
 						</tbody>
 					</table>
 
-					<a th:href="@{/contadores/listar}" type="button"
+					<a th:href="@{/detalles/listar}" type="button"
 						class="btn btn-primary k"> <span
 						class="glyphicon glyphicon-circle-arrow-left"></span> Regresar a
-						la lista de contadores
+						la lista de Detalles de Compra
 					</a>
 				</div>
 			</div>
