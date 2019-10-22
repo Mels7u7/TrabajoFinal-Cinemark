@@ -41,7 +41,7 @@ public class ProveedorController {
 	@Secured({ "ROLE ADMIN", "ROLE_USER" })
 	@GetMapping("/nuevo")
 	public String nuevoProveedor(Model model) {
-		model.addAttribute("proveedpr", new Proveedor());
+		model.addAttribute("proveedor", new Proveedor());
 		return "proveedor/proveedor";
 	}
 
@@ -74,7 +74,7 @@ public class ProveedorController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/proveedor/listaProvedor";
+		return "/proveedor/listaProveedor";
 	}
 
 	@Secured("ROLE_ADMIN")
@@ -83,7 +83,7 @@ public class ProveedorController {
 		try {
 			if(id!=null&& id>0) {
 				pService.eliminar(id);
-				model.put("mensaje", "se cancelo el contrato con el proveedor seleccionado");	
+				model.put("mensaje", "se canceló el contrato con el proveedor seleccionado");	
 			}
 			
 		}catch(Exception e) {
