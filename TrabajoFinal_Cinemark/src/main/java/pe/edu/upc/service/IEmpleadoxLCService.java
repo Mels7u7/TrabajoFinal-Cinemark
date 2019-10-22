@@ -11,13 +11,17 @@ import pe.edu.upc.entity.Lista_Compra;
 public interface IEmpleadoxLCService {
 
 	public Integer insertar(EmpleadoxLC empleadoxLC);
+
 	public void modificar(EmpleadoxLC empleadoxLC);
+
 	public void eliminar(int idEmpleadoXLC);
+
 	Optional<EmpleadoxLC> listarId(int idEmpleadoXLC);
+
 	List<EmpleadoxLC> listar();
-	List<EmpleadoxLC> buscarListaCompra (Lista_Compra lista_Compra);
-	List<EmpleadoxLC> buscarEmpleado (Empleado empleadoEmpleadoLC);
-	
-	
-	
+
+	List<EmpleadoxLC> buscarListaCompra(Lista_Compra lista_Compra);
+
+	List<EmpleadoxLC> buscarEmpleado(Empleado empleadoEmpleadoLC);
+
 }
