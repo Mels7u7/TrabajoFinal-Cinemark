@@ -2,10 +2,9 @@ package pe.edu.upc.controller;
 
 
 import java.text.ParseException;
+
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,15 +22,24 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import pe.edu.upc.entity.Contador;
 import pe.edu.upc.entity.EmpleadoxLC;
+import pe.edu.upc.service.IEmpleadoService;
 import pe.edu.upc.service.IEmpleadoxLCService;
+import pe.edu.upc.service.ILista_CompraService;
 
 @Controller
 @SessionAttributes("empleadoxLC")
-@RequestMapping("/empleadosxLC")
+@RequestMapping("/empleadoxLCs")
 public class EmpleadoxLCController {
 
 	@Autowired
-	private IEmpleadoxLCService eService;
+	private IEmpleadoxLCService elService;
+	
+	@Autowired
+	private ILista_CompraService lService;
+	
+	@Autowired
+	private IEmpleadoService eService;
+	
 	
 	@RequestMapping("/bienvenido")
 	public String irBienvenido() {
@@ -45,6 +52,9 @@ public class EmpleadoxLCController {
 	@GetMapping("/nuevo")
 	public String nuevoEmpleadoxLC(Model model) {
 		model.addAttribute("empleadoxLC", new EmpleadoxLC());
+		model.addAttribute("listaEmpleados", eService.listar());
+		model.addAttribute("listaLista_Compras", lService.listar());
+		
 		return "empleadoxLC/empleadoxLC";
 	}
 	
@@ -56,29 +66,31 @@ public class EmpleadoxLCController {
 		if (result.hasErrors()) {
 			return "/empleadoxLC/empleadoxLC";
 		} else {
-			int rpta = eService.insertar(empleadoxLC);
+			int rpta = elService.insertar(empleadoxLC);
 			if (rpta > 0) {
-				model.addAttribute("mensaje", "Ya existe el contador con ese DNI");
+				model.addAttribute("mensaje", "Ya existe un empleado con ese nombre");
+				model.addAttribute("listaEmpleados", eService.listar());
+				model.addAttribute("listaLista_Compras", lService.listar());
 				return  "/empleadoxLC/empleadoxLC";
 			} else {
 				model.addAttribute("mensaje", "Se ha registrado correctamente");
 				status.setComplete();
 			}
 		}
-		model.addAttribute("listaEmpleadosxLC", eService.listar());
-		return "/empleadoxLC/listaEpleadoxLC";
+		model.addAttribute("listaEmpleadosxLCs", elService.listar());
+		return "/empleadoxLC/listaEmpleadoxLC";
 	}
 	
 	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/listar")
-	public String listarContadores(Model model) {
+	public String listarEmpleadoxLC(Model model) {
 		try {
-			model.addAttribute("contador", new Contador());
-			model.addAttribute("listaContadores", eService.listar());
+			model.addAttribute("empleadoxLC", new Contador());
+			model.addAttribute("listaEmpleadoxLCs", elService.listar());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/contador/listaContador";
+		return "/empleadoxLC/listaEmpleadoxLC";
 	}
 	
 	@Secured("ROLE_ADMIN")
@@ -86,37 +98,18 @@ public class EmpleadoxLCController {
 	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
 		try {
 			if (id != null && id > 0) {
-				eService.eliminar(id);
-				model.put("mensaje", "Se canceló el contrato con el contador");
+				elService.eliminar(id);
+				model.put("mensaje", "Se canceló la relación empleado por orden de compra");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("mensaje", "No se puede anular el contrato con el contador seleccionado");
+			model.put("mensaje", "No se puede anular la realción empleado por orden de compra seleccionada");
 		}
-		model.put("listaEmpleadosxLC", eService.listar());
+		model.put("listaEmpleadoxLCs", eService.listar());
 
-		return "redirect:/empleadosxLC/listar";
+		return "redirect:/empleadoxLCs/listar";
 	}
-	
-
-	@Secured("ROLE_ADMIN")
-	@GetMapping("/detalle/{id}")//modificar
-	public String detailsEmpleadoxLC(@PathVariable(value = "id") int id, Model model) {
-		try {
-			Optional<EmpleadoxLC> empleadoxLC = eService.listarId(id);
-			if (!empleadoxLC.isPresent()) {
-				model.addAttribute("info", "contador no existe");
-				return "redirect:/empeladosxLC/listar";
-			} else {
-				model.addAttribute("empleadoxLC", empleadoxLC.get());
-			}
-
-		} catch (Exception e) {
-			model.addAttribute("error", e.getMessage());
-		}
-		return "/empleadoxLC/empleadoxLC";
-	}
-	
+		
 
 
 	@Secured({"ROLE_ADMIN","ROLE_USER"})
@@ -126,10 +119,10 @@ public class EmpleadoxLCController {
 		List<EmpleadoxLC> listaEmpleadoxLC;
 
 		empleadoxLC.setListaEmpleadoLC(empleadoxLC.getListaEmpleadoLC());
-		listaEmpleadoxLC = eService.buscarListaCompra(empleadoxLC.getListaEmpleadoLC());
+		listaEmpleadoxLC = elService.buscarListaCompra(empleadoxLC.getListaEmpleadoLC());
 		
 		if (listaEmpleadoxLC.isEmpty()) {
-			model.put("mensaje", "No se encontró al contador con el nombre especificado");
+			model.put("mensaje", "No se encontró la lista de compra");
 		}
 		model.put("listaEmpleadoxLC", listaEmpleadoxLC);
 		return "empleadoxLC/listaEmpleadoxLCr";
@@ -144,10 +137,10 @@ public class EmpleadoxLCController {
 		List<EmpleadoxLC> listaEmpleadoxLC;
 
 		empleadoxLC.setEmpleadoEmpleadoLC(empleadoxLC.getEmpleadoEmpleadoLC());
-		listaEmpleadoxLC = eService.buscarEmpleado(empleadoxLC.getEmpleadoEmpleadoLC());
+		listaEmpleadoxLC = elService.buscarEmpleado(empleadoxLC.getEmpleadoEmpleadoLC());
 		
 		if (listaEmpleadoxLC.isEmpty()) {
-			model.put("mensaje", "No se encontró al contador con el nombre especificado");
+			model.put("mensaje", "No se encontró al empleado con el nombre especificado");
 		}
 		model.put("listaEmpleadoxLC", listaEmpleadoxLC);
 		return "empleadoxLC/listaEmpleadoxLCr";

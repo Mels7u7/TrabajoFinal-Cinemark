@@ -16,6 +16,8 @@ import pe.edu.upc.service.IEmpleadoxLCService;
 @Service
 public class EmpleadoxLCServiceImpl implements IEmpleadoxLCService{
 
+	
+
 	@Autowired
 	private EmpleadoxLCRepository eR;
 	
@@ -55,15 +57,7 @@ public class EmpleadoxLCServiceImpl implements IEmpleadoxLCService{
 		return eR.findAll();
 	}
 
-	public List<EmpleadoxLC> buscarListaCompra(EmpleadoxLC listaEmpleadoLC) {
-		
-		return eR.findByListaCompra(listaEmpleadoLC);
-	}
-
-	public List<EmpleadoxLC> buscarEmpleado(EmpleadoxLC empleadoEmpleadoLC) {
-		// TODO Auto-generated method stub
-		return eR.findByEmpleado(empleadoEmpleadoLC);
-	}
+	
 
 	@Override
 	public List<EmpleadoxLC> buscarListaCompra(Lista_Compra lista_Compra) {

@@ -28,29 +28,32 @@
 				
 				
 				
-				<div class="form-group row">
-							<label for="color" class="col-sm-2 col-form-label">Contador</label>
-							<div class="col-sm-6">
-								<select class="custom-select custom-select-sm"
-									th:field="*{contador}">
-									<option th:each="contador : ${listContadores}"
-										th:value="${contador.id}" th:utext="${contador.nombreContador}" />
-								</select>
-							</div>
-						</div>
+					<div class="form-group row">
+					<label for="contadorFactura" class="col-sm-2 col-form-label">Contador:</label>
+					<div class="col-sm-6">
+						<select class="form-control"
+							th:field="*{contadorFactura.idContador}">
+							<option th:each="l: ${listaContadores}"
+								th:value="${l.idContador}" th:text="${l.nombreContador}"
+								th:selected="(${l.idContador} == *{contadorFactura.idContador})"></option>
+						</select>
+					</div>
+				</div>
 				
 				
 				
-				<div class="form-group row">
-							<label for="color" class="col-sm-2 col-form-label">Lista_Compra</label>
-							<div class="col-sm-6">
-								<select class="custom-select custom-select-sm"
-									th:field="*{lista_Compra}">
-									<option th:each="category : ${listLista_Compras}"
-										th:value="${lista_Compra.id}" th:utext="${lista_Compra.idContador}" />
-								</select>
-							</div>
-						</div>
+					<div class="form-group row">
+					<label for="listaFactura" class="col-sm-2 col-form-label">Lista de compra:</label>
+					<div class="col-sm-6">
+						<select class="form-control"
+							th:field="*{listaFactura.idLista}">
+							<option th:each="l: ${listaLista_Compras}"
+								th:value="${l.idLista}" th:text="${l.idLista}"
+								th:selected="(${l.idLista} == *{listaFactura.idLista})"></option>
+						</select>
+					</div>
+				</div>
+				
 				
 				
 				
