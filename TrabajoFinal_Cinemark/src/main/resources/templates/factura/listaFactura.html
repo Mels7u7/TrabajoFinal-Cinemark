@@ -16,7 +16,7 @@
 				th:object="${factura}">
 				<div class="form-group">
 
-					<label for="contador">Buscar:</label> <input type="text"
+					<label for="factura">Buscar:</label> <input type="text"
 						class="form-control" th:field="*{fechaFactura}" id="factura"></input>
 					<div align="right">
 						<button type="submit" class="btn btn-success">Aceptar</button>
@@ -38,8 +38,8 @@
 						<thead class="bg-dark mb-3 text-white">
 							<tr>
 								<th>Id</th>
-								<th>Nombre del contador</th>
-								<th>Factura</th>
+								<th>Nombre del Contador</th>
+								<th>Id lista de Compra</th>
 								
 								
 								<th align="center">Operación</th>
@@ -50,12 +50,9 @@
 							<tr th:each="factura:${listaFacturas}">
 								<td><a class="btn btn-primary btn-xs"
 									th:href="@{/facturas/ver/} + ${factura.idFactura}"
-									
 									th:text="${factura.idFactura}"></a></td>
 									
-
 								<td th:text="${factura.contadorFactura.nombreContador}"></td>
-
 								<td th:text="${factura.listaFactura.idLista}"></td>
 
                                 <td align="center"><a
