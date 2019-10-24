@@ -47,7 +47,7 @@ public class Lista_CompraController {
 			return "/listaCompra/listaCompra";
 		} else {
 			lService.insertar(lista_Compra);
-			model.addAttribute("mensaje", "Se guardÃ³ correctamente la La lista de compra");
+			model.addAttribute("mensaje", "Se guardó correctamente la La lista de compra");
 			status.setComplete();
 			return "redirect:/listaCompras/listar";
 		}
@@ -69,7 +69,7 @@ public class Lista_CompraController {
 		try {
 			if (id != null && id > 0) {
 				lService.eliminar(id);
-				model.put("mensaje", "Se elimino correctamente la lista de compra");
+				model.put("mensaje", "Se eliminó correctamente la lista de compra");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

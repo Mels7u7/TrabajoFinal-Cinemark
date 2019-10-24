@@ -19,7 +19,7 @@ public class ProveedorServiceImpl implements IProveedorService {
 	private ProveedorRepository pR;
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional
 	public Integer insertar(Proveedor proveedor) {
 		int rpta= pR.buscarRUCProveedor(proveedor.getRucProveedor());
 		if(rpta==0) {
@@ -44,6 +44,7 @@ public class ProveedorServiceImpl implements IProveedorService {
 		return pR.findById(idProveedor);
 	}
 	
+	@Override
 	public List<Proveedor> listar() {
 		return pR.findAll(Sort.by(Sort.Direction.DESC, "nombreProveedor"));
 	}

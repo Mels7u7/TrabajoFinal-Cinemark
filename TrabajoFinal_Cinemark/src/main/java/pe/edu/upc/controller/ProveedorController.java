@@ -38,14 +38,14 @@ public class ProveedorController {
 		return "bienvenido";
 	}
 
-	@Secured({ "ROLE ADMIN", "ROLE_USER" })
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping("/nuevo")
 	public String nuevoProveedor(Model model) {
 		model.addAttribute("proveedor", new Proveedor());
 		return "proveedor/proveedor";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@PostMapping("/guardar")
 	public String guardarProveedor(@Valid Proveedor proveedor, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
@@ -83,7 +83,7 @@ public class ProveedorController {
 		try {
 			if(id!=null&& id>0) {
 				pService.eliminar(id);
-				model.put("mensaje", "se cancelÃ³ el contrato con el proveedor seleccionado");	
+				model.put("mensaje", "se canceló el contrato con el proveedor seleccionado");	
 			}
 			
 		}catch(Exception e) {
@@ -118,10 +118,10 @@ public class ProveedorController {
 		proveedor.setNombreProveedor(proveedor.getNombreProveedor());
 		listaProveedores = pService.buscarNombre(proveedor.getNombreProveedor());
 		if (listaProveedores.isEmpty()) {
-			model.put("mensaje", "No se encontrÃ³ al proveedor con el nombre especificado");
+			model.put("mensaje", "No se encontró al proveedor con el nombre especificado");
 		}
 		model.put("listaProvedores", listaProveedores);
-		return "proveedor/listaContador";
+		return "proveedor/listaProveedor";
 	}
 	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping(value = "/ver/{id}")

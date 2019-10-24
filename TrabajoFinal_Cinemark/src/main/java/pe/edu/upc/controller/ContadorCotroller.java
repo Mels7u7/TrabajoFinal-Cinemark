@@ -80,7 +80,7 @@ public class ContadorCotroller {
 		try {
 			if (id != null && id > 0) {
 				cService.eliminar(id);
-				model.put("mensaje", "Se cancelÃ³ el contrato con el contador");
+				model.put("mensaje", "Se canceló el contrato con el contador");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

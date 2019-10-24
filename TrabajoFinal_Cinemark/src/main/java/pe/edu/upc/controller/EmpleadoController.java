@@ -87,7 +87,7 @@ public class EmpleadoController {
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("mensaje", "La operaciÃ³n ha sido cancelada.");
+			model.put("mensaje", "La operación ha sido cancelada.");
 		}
 		model.put("listaEmpleados", eService.listar());
 
@@ -121,7 +121,7 @@ public class EmpleadoController {
 		empleado.setPuestoEmpleado(empleado.getPuestoEmpleado());
 		listaEmpleados = eService.BuscarPorPuesto(empleado.getPuestoEmpleado());
 		if (listaEmpleados.isEmpty()) {
-			model.put("mensaje", "No se encontrÃ³ al empleado con el puesto laboral especificado");
+			model.put("mensaje", "No se encontró al empleado con el puesto laboral especificado");
 		}
 		model.put("listaEmpleados", listaEmpleados);
 		return "empleado/listaEmpleado";

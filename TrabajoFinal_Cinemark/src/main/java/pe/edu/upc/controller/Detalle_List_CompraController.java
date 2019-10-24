@@ -131,7 +131,7 @@ public class Detalle_List_CompraController {
 		listaDetalles = dService.buscarCantidadRecurso(detalle.getUnidadesDetalle());
 		
 		if(listaDetalles.isEmpty()) {
-			model.put("mensaje", "No se encontró recursos con la cantidad de unidades especificado.");
+			model.put("mensaje", "No se encontraron recursos con la cantidad de unidades especificado.");
 			
 		}
 		model.put("listaDetalles", listaDetalles);

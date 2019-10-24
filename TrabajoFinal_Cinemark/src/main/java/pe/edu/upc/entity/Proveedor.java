@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "proveedor")
@@ -31,7 +32,7 @@ public class Proveedor implements Serializable {
 	@Column(name = "direccionProveedor", nullable = false, length = 50)
 	private String direccionProveedor;
 
-	@Pattern(regexp="[\\d]{11}")
+	@Size(min = 11, max = 11)
 	@NotEmpty(message = "Ingresar RUC")
 	@Column(name = "rucProveedor", nullable = false, length = 45, unique = true)
 	private String rucProveedor;
@@ -41,7 +42,7 @@ public class Proveedor implements Serializable {
 	private String nombrecontactoProveedor;
 
 	@Pattern(regexp="[\\d]{9}")
-	@NotEmpty(message = "Ingresa el nÃºmero de contacto del proveedor")
+	@NotEmpty(message = "Ingresa el número de contacto del proveedor")
 	@Column(name = "numerocontactoProveedor", nullable = false,length=10)
 	private String numerocontactoProveedor;
 

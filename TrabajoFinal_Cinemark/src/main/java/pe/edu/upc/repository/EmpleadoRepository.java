@@ -12,7 +12,7 @@ import pe.edu.upc.entity.Empleado;
 @Repository
 public interface EmpleadoRepository extends JpaRepository<Empleado, Integer>{
 	@Query("from Empleado e where e.puestoEmpleado like %:puestoEmpleado%")
-	List <Empleado> findByPuesto(String puestoEmpleado);
+	List <Empleado> findByPuesto(@Param("puestoEmpleado")String puestoEmpleado);
 
 	@Query("select count(e.dniEmpleado) from Empleado e where e.dniEmpleado =:dniEmpleado")
 	public int buscarDNIEmpleado(@Param("dniEmpleado") String dniEmpleado);

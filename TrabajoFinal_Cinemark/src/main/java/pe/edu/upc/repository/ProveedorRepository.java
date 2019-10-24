@@ -12,8 +12,9 @@ import pe.edu.upc.entity.Proveedor;
 @Repository
 public interface ProveedorRepository extends JpaRepository<Proveedor, Integer> {
 	@Query("from Proveedor p where p.nombreProveedor like %:nombreProveedor%")
-	List<Proveedor> findByNombreProveedor(String nombreProveedor);
+	List<Proveedor> findByNombreProveedor(@Param("nombreProveedor") String nombreProveedor);
+
 	@Query("select count(p.rucProveedor)from Proveedor p where p.rucProveedor=:rucProveedor")
-	public int buscarRUCProveedor(@Param("rucProveedor")String rucProveedor);
-	
+	public int buscarRUCProveedor(@Param("rucProveedor") String rucProveedor);
+
 }
