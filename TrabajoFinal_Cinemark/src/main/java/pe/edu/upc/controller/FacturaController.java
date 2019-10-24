@@ -125,6 +125,8 @@ public class FacturaController {
 				return "redirect:/facturas/listar";
 			} else {
 				model.addAttribute("factura", factura.get());
+				model.addAttribute("listaContadores", cService.listar());
+				model.addAttribute("listaLista_Compras", icService.listar());
 			}
 
 		} catch (Exception e) {
@@ -144,7 +146,6 @@ public class FacturaController {
 			return "redirect:/facturas/listar";
 		}
 		model.put("factura", factura.get());
-
 		return "factura/verf";
 	}
 	
