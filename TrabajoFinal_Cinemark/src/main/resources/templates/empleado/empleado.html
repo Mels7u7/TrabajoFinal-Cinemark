@@ -47,7 +47,7 @@
 						del Empleado (años)</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{experienciaEmpleado}"
-							class="form-control" th:errorclass="'form-control alert-info'" />
+							class="form-control" th:errorclass="'form-control alert-info'" maxlength="2"/>
 						<small th:if="${#fields.hasErrors('experienciaEmpleado')}"
 							th:errors="*{experienciaEmpleado}"></small>
 					</div>
@@ -74,7 +74,7 @@
 					<label for="dniEmpleado" class="col-sm-2 col-form-label">DNI</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{dniEmpleado}" class="form-control"
-							th:errorclass="'form-control alert-danger'" /> <small
+							th:errorclass="'form-control alert-danger'" maxlength="8" /> <small
 							th:if="${#fields.hasErrors('dniEmpleado')}"
 							th:errors="*{dniEmpleado}"></small>
 					</div>
@@ -108,7 +108,7 @@
 						del Empleado</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{celularEmpleado}"
-							class="form-control" th:errorclass="'form-control alert-info'" />
+							class="form-control" th:errorclass="'form-control alert-info'" maxlength="9" />
 						<small th:if="${#fields.hasErrors('celularEmpleado')}"
 							th:errors="*{celularEmpleado}"></small>
 					</div>
