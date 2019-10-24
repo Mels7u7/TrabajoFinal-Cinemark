@@ -11,7 +11,7 @@
 			<div class="card-header text-black bg-blue">Registro de
 				Empleados</div>
 			<form th:action="@{/empleados/guardar}" th:object="${empleado}"
-				method="post">
+				method="post" enctype="multipart/form-data">
 
 				<div class="form-group row">
 					<label for="idEmpleado" class="col-sm-2 col-form-label">Id</label>
@@ -85,7 +85,7 @@
 					<label for="tituloEmpleado" class="col-sm-2 col-form-label">Titulo
 						del Empleado</label>
 					<div class="col-sm-6">
-						<input type="text" th:field="tituloEmpleado" class="form-control"
+						<input type="text" th:field="*{tituloEmpleado}" class="form-control"
 							th:errorclass="'form-control alert-info'" /> <small
 							th:if="${#fields.hasErrors('tituloEmpleado')}"
 							th:errors="*{tituloEmpleado}"></small>
