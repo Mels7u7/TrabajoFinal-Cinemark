@@ -20,7 +20,7 @@ public class Detalle_List_CompraServiceImpl implements IDetalle_List_CompraServi
 	@Override
 	@Transactional
 	public Integer insertar(Detalle_List_Compra detalle) {
-		int rpta = dR.buscarIdDetalle(detalle.getIdDetalle());
+		int rpta = 0;
 		if( rpta == 0)
 		{
 			dR.save(detalle);

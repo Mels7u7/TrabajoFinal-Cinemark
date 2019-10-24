@@ -11,9 +11,6 @@ import pe.edu.upc.entity.Detalle_List_Compra;
 
 @Repository
 public interface Detalle_List_CompraRepository extends JpaRepository<Detalle_List_Compra, Integer>{
-	@Query("from Detalle d where d.unidadesDetalle like %:unidadesDetalle%")
+	@Query("select d from Detalle d where d.unidadesDetalle = ?1")
 	List<Detalle_List_Compra> findByUnidadesDetalle (int unidadesDetalle);
-
-	@Query("select count(d.idDetalle) from Detalle d where d.idDetalle =:idDetalle")
-	public int buscarIdDetalle(@Param("idDetalle") int idDetalle);
 }
