@@ -10,6 +10,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -49,7 +50,7 @@ public class FacturaController {
 		return "bienvenido";
 	}
 	
-	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/nuevo")
 	public String nuevoFactura(Model model) {
 		model.addAttribute("factura", new Factura());
@@ -59,7 +60,7 @@ public class FacturaController {
 	}
 	
 	
-	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@PostMapping("/guardar")
 	public String guardarFactura(@Valid Factura factura, BindingResult result, Model model,
 			SessionStatus status) throws Exception {
@@ -84,7 +85,7 @@ public class FacturaController {
 		
 	}
 	
-	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/listar")
 	public String listarFacturas(Model model) {
 		try {
@@ -97,7 +98,7 @@ public class FacturaController {
 	}
 	
 	
-	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@RequestMapping("/eliminar")
 	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
 		try {
@@ -115,7 +116,7 @@ public class FacturaController {
 	}
 	
 	
-	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/detalle/{id}")//modificar
 	public String detailsFactura(@PathVariable(value = "id") int id, Model model) {
 		try {
@@ -136,7 +137,7 @@ public class FacturaController {
 	}
 	
 
-	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash) {
 
