@@ -46,7 +46,7 @@
 								<th align="center">Operación</th>
 							</tr>
 						</thead>
-						<tbody id="contador-list">
+						<tbody id="factura-list">
 							<tr th:each="factura:${listaFacturas}">
 								<td><a class="btn btn-primary btn-xs"
 									th:href="@{/facturas/ver/} + ${factura.idFactura}"

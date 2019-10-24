@@ -3,8 +3,11 @@ package pe.edu.upc.controller;
 
 import java.text.ParseException;
 
+
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -77,7 +81,7 @@ public class EmpleadoxLCController {
 				status.setComplete();
 			}
 		}
-		model.addAttribute("listaEmpleadosxLCs", elService.listar());
+		model.addAttribute("listaEmpleadoxLCs", elService.listar());
 		return "/empleadoxLC/listaEmpleadoxLC";
 	}
 	
@@ -92,6 +96,28 @@ public class EmpleadoxLCController {
 		}
 		return "/empleadoxLC/listaEmpleadoxLC";
 	}
+	
+	@GetMapping("/detalle/{id}")//modificar
+	public String detailsEmpleadoxLC(@PathVariable(value = "id") int id, Model model) {
+		try {
+			Optional<EmpleadoxLC> empleadoxLC = elService.listarId(id);
+			if (!empleadoxLC.isPresent()) {
+				model.addAttribute("info", "facturar no existe");
+				return "redirect:/empleadoxLCs/listar";
+			} else {
+				model.addAttribute("empleadoxLC", empleadoxLC.get());
+				model.addAttribute("listaEmpleados", eService.listar());
+				model.addAttribute("listaLista_Compras", lService.listar());
+			}
+
+		} catch (Exception e) {
+			model.addAttribute("error", e.getMessage());
+		}
+		return "/empleadoxLC/empleadoxLC";
+	}
+	
+	
+	
 	
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("/eliminar")

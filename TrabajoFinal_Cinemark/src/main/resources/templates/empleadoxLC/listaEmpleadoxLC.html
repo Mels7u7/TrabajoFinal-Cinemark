@@ -37,22 +37,22 @@
 								<th align="center">Operación</th>
 							</tr>
 						</thead>
-						<tbody id="contador-list">
+						<tbody id="empleadoxLC-list">
 							<tr th:each="empleadoxLC:${listaEmpleadoxLCs}">
 								
-								
+								<td><a  th:text="${empleadoxLC.idEmpleadoXLC}"></a></td>
 
 								<td th:text="${empleadoxLC.empleadoEmpleadoLC.nombreEmpleado}"></td>
 
-								<td th:text="${empleadoxLC.listaEmpleadoLC}"></td>
+								<td th:text="${empleadoxLC.listaEmpleadoLC.idLista}"></td>
 								
-
-								<td align="center"><a
-									th:href="@{/empleadoxLC/eliminar?id=}+${empleadoxLC.idFactura}"
-									type="button" class="btn btn-default btn-lg">Eliminar</a></td>
-								<td align="center"><a
-									th:href="@{'/empleadoxLC/detalle/' + ${empleadoxLC.idFactura}}"
+                                <td align="center"><a
+									th:href="@{'/empleadoxLCs/detalle/' + ${empleadoxLC.idEmpleadoXLC}}"
 									type="button" class="btn btn-default btn-lg">Editar</a></td>
+								<td align="center"><a
+									th:href="@{/empleadoxLCs/eliminar?id=}+${empleadoxLC.idEmpleadoXLC}"
+									type="button" class="btn btn-default btn-lg">Eliminar</a></td>
+								
 							</tr>
 						</tbody>
 					</table>
