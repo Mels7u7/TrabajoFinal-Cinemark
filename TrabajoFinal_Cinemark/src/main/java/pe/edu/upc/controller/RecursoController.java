@@ -126,7 +126,7 @@ public class RecursoController {
 		try {
 			if (id != null && id > 0) {
 				rService.eliminar(id);
-				model.put("mensaje", "Se elimino el recurso");
+				model.put("mensaje", "Se eliminó el recurso");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -168,7 +168,7 @@ public class RecursoController {
 		}
 
 		if (listaRecursos.isEmpty()) {
-			model.put("mensaje", "No se encontrÃ³");
+			model.put("mensaje", "No se encontró");
 		}
 		model.put("listaRecursos", listaRecursos);
 		return "recurso/listaRecurso";

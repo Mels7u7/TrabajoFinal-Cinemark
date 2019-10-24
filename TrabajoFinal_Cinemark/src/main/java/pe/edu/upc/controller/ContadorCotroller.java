@@ -117,10 +117,10 @@ public class ContadorCotroller {
 
 		List<Contador> listaContadores;
 
-		contador.setNombreContador(contador.getNombreContador());
+		//contador.setNombreContador(contador.getNombreContador());
 		listaContadores = cService.buscarNombre(contador.getNombreContador());
 		if (listaContadores.isEmpty()) {
-			model.put("mensaje", "No se encontrÃ³ al contador con el nombre especificado");
+			model.put("mensaje", "No se encontró al contador con el nombre especificado");
 		}
 		model.put("listaContadores", listaContadores);
 		return "contador/listaContador";

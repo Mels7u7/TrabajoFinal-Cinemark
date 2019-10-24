@@ -12,7 +12,7 @@ import pe.edu.upc.entity.Contador;
 @Repository
 public interface ContadorRepository extends JpaRepository<Contador, Integer>{
 	@Query("from Contador c where c.nombreContador like %:nombreContador%")
-	List<Contador> findByNombreContador(String nombreContador);
+	List<Contador> findByNombreContador(@Param("nombreContador")String nombreContador);
 	
 	@Query("select count(c.dniContador) from Contador c where c.dniContador =:dniContador")
 	public int buscarDNIContador(@Param("dniContador") String dniContador);
