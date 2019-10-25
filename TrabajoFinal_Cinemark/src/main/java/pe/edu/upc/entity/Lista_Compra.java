@@ -49,7 +49,7 @@ public class Lista_Compra implements Serializable {
 	@Min(0)
 	@Max(4000)
 	@Column(name = "precioLista", nullable = false)
-	private int precioLista;
+	private float precioLista;
 
 	@NotNull(message = "La fecha es obligatoria")
 	@Past(message = "La fecha debe estar en el pasado")
@@ -58,7 +58,7 @@ public class Lista_Compra implements Serializable {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaLista;
 
-	public Lista_Compra(int idLista, String notaLista, Proveedor proveedorLista, String estadoLista, int precioLista,
+	public Lista_Compra(int idLista, String notaLista, Proveedor proveedorLista, String estadoLista, float precioLista,
 			Date fechaLista) {
 		super();
 		this.idLista = idLista;
@@ -111,11 +111,11 @@ public class Lista_Compra implements Serializable {
 		this.estadoLista = estadoLista;
 	}
 
-	public int isPrecioLista() {
+	public float getPrecioLista() {
 		return precioLista;
 	}
 
-	public void setPrecioLista(int precioLista) {
+	public void setPrecioLista(float precioLista) {
 		this.precioLista = precioLista;
 	}
 

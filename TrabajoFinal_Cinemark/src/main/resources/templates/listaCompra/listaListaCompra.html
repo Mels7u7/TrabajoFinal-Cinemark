@@ -24,6 +24,8 @@
 							<tr>
 								<th>Id</th>
 								<th>Proveedor</th>
+								<th>Precio</th>
+								<th>Estado</th>
 								<th align="center">Operación</th>
 								
 							</tr>
@@ -36,6 +38,10 @@
 									th:text="${lista_Compra.idLista}"></a></td>
 
 								<td th:text="${lista_Compra.proveedorLista.nombreProveedor}"></td>
+								
+								<td th:text="${lista_Compra.precioLista}"></td>
+								
+								<td th:text="${lista_Compra.estadoLista}"></td>
 
 								<td align="center"><a
 									th:href="@{/listaCompras/eliminar?id=}+${lista_Compra.idLista}"
