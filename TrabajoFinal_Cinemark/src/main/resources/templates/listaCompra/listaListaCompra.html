@@ -12,6 +12,19 @@
 				class="btn btn-primary">Nuevo Lista de compra</a>
 		</div>
 
+		<div>
+			<form th:action="@{/listaCompras/buscarestado}" method="post"
+				th:object="${lista_Compra}">
+				<div class="form-group">
+					<label for="p">Buscar:</label> <input type="text"
+						class="form-control" th:field="*{estadoLista}" id="p"></input>
+					<div align="right">
+						<button type="submit" class="btn btn-info">Aceptar</button>
+						<a href="/listaCompras/listar" class="btn btn-dark">Cancelar</a>
+					</div>
+				</div>
+			</form>
+		</div>
 
 		<div class="card">
 			<div class="card-header text-white bg-dark mb-3">Lista de
@@ -27,7 +40,7 @@
 								<th>Precio</th>
 								<th>Estado</th>
 								<th align="center">Operación</th>
-								
+
 							</tr>
 						</thead>
 
@@ -38,9 +51,9 @@
 									th:text="${lista_Compra.idLista}"></a></td>
 
 								<td th:text="${lista_Compra.proveedorLista.nombreProveedor}"></td>
-								
+
 								<td th:text="${lista_Compra.precioLista}"></td>
-								
+
 								<td th:text="${lista_Compra.estadoLista}"></td>
 
 								<td align="center"><a
