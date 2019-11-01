@@ -13,12 +13,6 @@
 			<form th:action="@{/empleados/guardar}" th:object="${empleado}"
 				method="post" enctype="multipart/form-data">
 
-				<div class="form-group row">
-					<label for="idEmpleado" class="col-sm-2 col-form-label">Id</label>
-					<div class="col-sm-6">
-						<input type="text" th:field="*{idEmpleado}" class="form-control" />
-					</div>
-				</div>
 
 				<div class="form-group row">
 					<label for="nombreEmpleado" class="col-sm-2 col-form-label">Nombres

@@ -13,12 +13,6 @@
 			<form th:action="@{/proveedores/guardar}" th:object="${proveedor}"
 				method="post">
 
-				<div class="form-group row">
-					<label for="idProveedor" class="col-sm-2 col-form-label">Id</label>
-					<div class="col-sm-6">
-						<input type="text" th:field="*{idProveedor}" class="form-control" />
-					</div>
-				</div>
 
 				<div class="form-group row">
 					<label for="nombreProveedor" class="col-sm-2 col-form-label">Nombre

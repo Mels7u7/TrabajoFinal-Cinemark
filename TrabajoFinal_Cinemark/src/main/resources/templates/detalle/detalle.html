@@ -13,12 +13,6 @@
 			<form th:action="@{/detalles/guardar}" th:object="${detalle}"
 				method="post" enctype="multipart/form-data">
 
-				<div class="form-group row">
-					<label for="idDetalle" class="col-sm-2 col-form-label">Id</label>
-					<div class="col-sm-6">
-						<input type="text" th:field="*{idDetalle}" class="form-control" />
-					</div>
-				</div>
 
 				<div class="form-group row">
 					<label for="recursoDetalle" class="col-sm-2 col-form-label">Recurso</label>
