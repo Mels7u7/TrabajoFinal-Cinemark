@@ -33,7 +33,7 @@ public class Contador implements Serializable {
 	@Column(name = "dniContador", nullable = false, length = 9, unique = true)
 	private String dniContador;
 
-	@NotEmpty(message = "Ingresar institucion")
+	@NotEmpty(message = "Ingresar institución")
 	@Column(name = "institucionContador", nullable = false, length = 30)
 	private String institucionContador;
 	
