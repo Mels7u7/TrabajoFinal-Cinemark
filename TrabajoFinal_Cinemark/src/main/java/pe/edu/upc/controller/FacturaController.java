@@ -128,11 +128,13 @@ public class FacturaController {
 				model.addAttribute("factura", factura.get());
 				model.addAttribute("listaContadores", cService.listar());
 				model.addAttribute("listaLista_Compras", icService.listar());
+				
 			}
 
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
+		
 		return "/factura/factura";
 	}
 	

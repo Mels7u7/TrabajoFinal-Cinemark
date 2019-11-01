@@ -16,8 +16,8 @@
 				th:object="${detalle}">
 				<div class="form-group">
 
-					<label for="detalle">Buscar por Cantidad de Unidades:</label> <input
-						type="text" class="form-control" th:field="*{unidadesDetalle}"
+					<label for="detalle">Buscar por Cantidad de Unidades:</label> 
+					<input	type="text" class="form-control" th:field="*{unidadesDetalle}"
 						id="detalle"></input>
 					<div align="right">
 						<button type="submit" class="btn btn-success">Aceptar</button>
@@ -57,7 +57,7 @@
 								<td th:text="${detalle.precioDetalle}"></td>
 
 								<td th:text="${detalle.unidadesDetalle}"></td>
-								
+
 								<td align="center"><a
 									th:href="@{/detalles/eliminar?id=}+${detalle.idDetalle}"
 									type="button" class="btn btn-default btn-lg">Eliminar</a></td>
