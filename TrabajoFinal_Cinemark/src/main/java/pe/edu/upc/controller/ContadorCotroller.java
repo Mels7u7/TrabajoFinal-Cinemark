@@ -41,6 +41,7 @@ public class ContadorCotroller {
 	@GetMapping("/nuevo")
 	public String nuevoContador(Model model) {
 		model.addAttribute("contador", new Contador());
+		model.addAttribute("valorBoton", "Registrar");
 		return "contador/contador";
 	}
 
@@ -65,10 +66,12 @@ public class ContadorCotroller {
 				cService.modificar(contador);
 				rpta = 1;
 				status.setComplete();
+				model.addAttribute("mensaje", "Se modificó correctamente");
 			}
 
 		}
 		model.addAttribute("listaContadores", cService.listar());
+		
 		return "/contador/listaContador";
 	}
 
@@ -111,8 +114,9 @@ public class ContadorCotroller {
 				return "redirect:/contadores/listar";
 			} else {
 				model.addAttribute("contador", contador.get());
+				
 			}
-
+			
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}

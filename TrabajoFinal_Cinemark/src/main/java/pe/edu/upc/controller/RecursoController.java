@@ -49,6 +49,7 @@ public class RecursoController {
 	@GetMapping("/nuevo")
 	public String nuevoRecurso(Model model) {
 		model.addAttribute("recurso", new Recurso());
+		model.addAttribute("valorBoton", "Registrar");
 		return "recurso/recurso";
 	}
 	@GetMapping(value = "/uploads/{filename:.+}")
@@ -106,7 +107,7 @@ public class RecursoController {
 				status.setComplete();
 		}
 		model.addAttribute("listaRecursos", rService.listar());
-
+		model.addAttribute("mensaje", "Se modificó correctamente");
 		return "/recurso/listaRecurso";
 	
 	}

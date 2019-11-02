@@ -42,6 +42,7 @@ public class EmpleadoController {
 	@GetMapping("/nuevo")
 	public String nuevoEmpleado(Model model) {
 		model.addAttribute("empleado", new Empleado());
+		model.addAttribute("valorBoton", "Registrar");
 		return "empleado/empleado";
 	}
 	
@@ -70,6 +71,7 @@ public class EmpleadoController {
 
 		}
 		model.addAttribute("listaEmpleados", eService.listar());
+		model.addAttribute("mensaje", "Se modificó correctamente");
 		return "/empleado/listaEmpleado";
 	
 	}

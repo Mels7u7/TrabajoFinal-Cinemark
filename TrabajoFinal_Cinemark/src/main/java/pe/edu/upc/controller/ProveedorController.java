@@ -42,6 +42,7 @@ public class ProveedorController {
 	@GetMapping("/nuevo")
 	public String nuevoProveedor(Model model) {
 		model.addAttribute("proveedor", new Proveedor());
+		model.addAttribute("valorBoton", "Registrar");
 		return "proveedor/proveedor";
 	}
 
@@ -66,6 +67,7 @@ public class ProveedorController {
 				status.setComplete();
 		}
 		model.addAttribute("listaProveedores", pService.listar());
+		model.addAttribute("mensaje", "Se modificó correctamente");
 		return "/proveedor/listaProveedor";
 	}
 

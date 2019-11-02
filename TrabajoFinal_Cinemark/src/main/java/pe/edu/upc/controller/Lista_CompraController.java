@@ -56,7 +56,7 @@ public class Lista_CompraController {
 			return "/listaCompra/listaCompra";
 		} else {
 			lService.insertar(lista_Compra);
-			model.addAttribute("mensaje", "Se guardï¿½ correctamente la La lista de compra");
+			model.addAttribute("mensaje", "Se guardó correctamente la La lista de compra");
 			status.setComplete();
 			return "redirect:/listaCompras/listar";
 		}

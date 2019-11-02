@@ -56,6 +56,7 @@ public class FacturaController {
 		model.addAttribute("factura", new Factura());
 		model.addAttribute("listaContadores", cService.listar());
 		model.addAttribute("listaLista_Compras", icService.listar());
+		model.addAttribute("valorBoton", "Registrar");
 		return "/factura/factura";
 	}
 	
@@ -82,6 +83,7 @@ public class FacturaController {
 				status.setComplete();
 		}
 		model.addAttribute("listaFacturas", fService.listar());
+		model.addAttribute("mensaje", "Se modificó correctamente");
 		return "/factura/listaFactura";
 		
 	}

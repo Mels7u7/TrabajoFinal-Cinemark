@@ -79,6 +79,7 @@ public class Detalle_List_CompraController {
 				status.setComplete();
 		}
 		model.addAttribute("listaDetalles", dService.listar());
+		model.addAttribute("mensaje", "Se modificó correctamente");
 		return "/detalle/listaDetalle";
 	}
 
