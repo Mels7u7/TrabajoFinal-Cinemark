@@ -68,17 +68,18 @@ public class FacturaController {
 			model.addAttribute("listaContadores", cService.listar());
 			return "/factura/factura";
 		} else {
-			int rpta = fService.insertar(factura);
-			if (rpta > 0) {
-				model.addAttribute("mensaje", "Ya existe esa Factura");
-				model.addAttribute("listaContadores", cService.listar());
-				model.addAttribute("listaLista_Compras", icService.listar());
-				return  "/factura/factura";
+			int rpta = -1;
+			if (fService.listarId(factura.getIdFactura()) == null) {
+				rpta = fService.insertar(factura);
+				if (rpta > 0) {
+					model.addAttribute("mensaje", "Se ha registrado correctamente");
+				}
 			} else {
-				model.addAttribute("mensaje", "Se ha registrado correctamente");
-				status.setComplete();
-				
+				fService.modificar(factura);
+				rpta = 1;
 			}
+			if (rpta > 0)
+				status.setComplete();
 		}
 		model.addAttribute("listaFacturas", fService.listar());
 		return "/factura/listaFactura";
@@ -104,7 +105,7 @@ public class FacturaController {
 		try {
 			if (id != null && id > 0) {
 				fService.eliminar(id);
-				model.put("mensaje", "Se canceló la factura");
+				model.put("mensaje", "Se cancelï¿½ la factura");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -134,7 +135,7 @@ public class FacturaController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		
+		model.addAttribute("valorBoton", "Modificar");
 		return "/factura/factura";
 	}
 	

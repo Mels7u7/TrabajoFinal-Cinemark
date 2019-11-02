@@ -12,11 +12,11 @@ import pe.edu.upc.repository.ContadorRepository;
 import pe.edu.upc.service.IContadorService;
 
 @Service
-public class ContadorServiceImpl implements IContadorService{
+public class ContadorServiceImpl implements IContadorService {
 
 	@Autowired
 	private ContadorRepository cR;
-	
+
 	@Override
 	@Transactional
 	public Integer insertar(Contador contador) {
@@ -30,7 +30,8 @@ public class ContadorServiceImpl implements IContadorService{
 	@Override
 	@Transactional
 	public void modificar(Contador contador) {
-		cR.save(contador);
+		cR.actualizar(contador.getNombreContador(), contador.getInstitucionContador(),
+				contador.getNumeroContactoContador(), contador.getIdContador());
 	}
 
 	@Override

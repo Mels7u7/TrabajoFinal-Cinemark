@@ -10,8 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "detalle")
@@ -27,6 +29,7 @@ public class Detalle_List_Compra implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "idRecurso")
+	@NotNull
 	private Recurso recursoDetalle;
 
 	@ManyToOne
@@ -42,6 +45,9 @@ public class Detalle_List_Compra implements Serializable {
 	@Max(1000)
 	@Column(name = "unidadesDetalle", nullable = false)
 	private int unidadesDetalle;
+	
+	@Transient
+	private double importe;
 
 	public Detalle_List_Compra(int idDetalle, Recurso recursoDetalle, Lista_Compra listaDetalle, int precioDetalle,
 			int unidadesDetalle) {
@@ -51,6 +57,17 @@ public class Detalle_List_Compra implements Serializable {
 		this.listaDetalle = listaDetalle;
 		this.precioDetalle = precioDetalle;
 		this.unidadesDetalle = unidadesDetalle;
+		this.importe = precioDetalle * unidadesDetalle;
+	}
+
+	
+
+	public double getImporte() {
+		return importe;
+	}
+
+	public void setImporte(double importe) {
+		this.importe = importe;
 	}
 
 	public Detalle_List_Compra() {

@@ -92,15 +92,18 @@ public class RecursoController {
 	
 				recurso.setFoto(uniqueFilename);
 			}
-			int rpta = rService.insertar(recurso);
-			if (rpta > 0) {
-				model.addAttribute("mensaje", "Ya existe");
-				return  "/recurso/recurso";
+			int rpta = -1;
+			if (rService.listarId(recurso.getIdRecurso()) == null) {
+				rpta = rService.insertar(recurso);
+				if (rpta > 0) {
+					model.addAttribute("mensaje", "Se ha registrado correctamente");
+				}
 			} else {
-				model.addAttribute("mensaje", "Se ha registrado correctamente");
-				status.setComplete();
+				rService.modificar(recurso);
+				rpta = 1;
 			}
-			
+			if (rpta > 0)
+				status.setComplete();
 		}
 		model.addAttribute("listaRecursos", rService.listar());
 
@@ -126,7 +129,7 @@ public class RecursoController {
 		try {
 			if (id != null && id > 0) {
 				rService.eliminar(id);
-				model.put("mensaje", "Se eliminó el recurso");
+				model.put("mensaje", "Se eliminï¿½ el recurso");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -152,6 +155,7 @@ public class RecursoController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
+		model.addAttribute("valorBoton", "Modificar");
 		return "/recurso/recurso";
 	}
 	@Secured({"ROLE_ADMIN","ROLE_USER"})
@@ -168,7 +172,7 @@ public class RecursoController {
 		}
 
 		if (listaRecursos.isEmpty()) {
-			model.put("mensaje", "No se encontró");
+			model.put("mensaje", "No se encontrï¿½");
 		}
 		model.put("listaRecursos", listaRecursos);
 		return "recurso/listaRecurso";

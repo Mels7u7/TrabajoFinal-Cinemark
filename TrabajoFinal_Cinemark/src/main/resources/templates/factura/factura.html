@@ -12,10 +12,15 @@
 				facturas</div>
 			<form th:action="@{/facturas/guardar}" th:object="${factura}"
 				method="post">
+				<div class="form-group row" style="display: none !important;">
+					<label for="idFactura" class="col-sm-2 col-form-label">Id</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{idFactura}" class="form-control" />
+					</div>
+				</div>
 
-				
-				
-					<div class="form-group row">
+
+				<div class="form-group row">
 					<label for="contadorFactura" class="col-sm-2 col-form-label">Contador:</label>
 					<div class="col-sm-6">
 						<select class="form-control"
@@ -26,33 +31,24 @@
 						</select>
 					</div>
 				</div>
-				
-				
-				
-					<div class="form-group row">
-					<label for="listaFactura" class="col-sm-2 col-form-label">Lista de compra:</label>
+
+
+
+				<div class="form-group row">
+					<label for="listaFactura" class="col-sm-2 col-form-label">Lista
+						de compra:</label>
 					<div class="col-sm-6">
-						<select class="form-control"
-							th:field="*{listaFactura.idLista}">
+						<select class="form-control" th:field="*{listaFactura.idLista}">
 							<option th:each="l: ${listaLista_Compras}"
 								th:value="${l.idLista}" th:text="${l.idLista}"
 								th:selected="(${l.idLista} == *{listaFactura.idLista})"></option>
 						</select>
 					</div>
 				</div>
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+
 
 				<div class="form-group row">
-					<label for="analisisFactura" class="col-sm-2 col-form-label">Analisis</label>
+					<label for="analisisFactura" class="col-sm-2 col-form-label">Análisis</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{analisisFactura}"
 							class="form-control" th:errorclass="'form-control alert-info'" />
@@ -60,28 +56,23 @@
 							th:errors="*{analisisFactura}"></small>
 					</div>
 				</div>
-				
+
 				<div class="form-group row">
-							<label for="fechaFactura" class="col-sm-6 col-form-label">Fecha
-								de Facturación: </label>
-							<div class="col-sm-12">
-								<input type="date" th:field="*{fechaFactura}" class="form-control"
-									th:errorclass="'form-control alert-danger'" /> <small
-									class="form-text text-danger"
-									th:if="${#fields.hasErrors('fechaFactura')}" th:errors="*{fechaFactura}"></small>
-							</div>
-						</div>
-
-				
-
-
-				
-				
+					<label for="fechaFactura" class="col-sm-6 col-form-label">Fecha
+						de Facturación: </label>
+					<div class="col-sm-12">
+						<input type="date" th:field="*{fechaFactura}" class="form-control"
+							th:errorclass="'form-control alert-danger'" /> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('fechaFactura')}"
+							th:errors="*{fechaFactura}"></small>
+					</div>
+				</div>
 
 
 				<div class="form-group row">
 					<div class="col-sm-6" align="center">
-						<input type="submit" value="Registrar" class="btn btn-primary" />
+						<input type="submit" th:value="${valorBoton}" class="btn btn-primary" />
 
 						<a href="/facturas/listar" class="btn btn-danger">Cancelar</a>
 					</div>

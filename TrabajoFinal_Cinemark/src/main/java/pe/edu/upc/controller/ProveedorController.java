@@ -52,14 +52,18 @@ public class ProveedorController {
 		if (result.hasErrors()) {
 			return "/proveedor/proveedor";
 		} else {
-			int rpta = pService.insertar(proveedor);
-			if (rpta > 0) {
-				model.addAttribute("mensaje", "Ya existe el proveedor con ese RUC");
-				return "/proveedor/proveedor";
+			int rpta = -1;
+			if (pService.listarId(proveedor.getIdProveedor()) == null) {
+				rpta = pService.insertar(proveedor);
+				if (rpta > 0) {
+					model.addAttribute("mensaje", "Se ha registrado correctamente");
+				}
 			} else {
-				model.addAttribute("mensaje", "Se ha registrado correctamente");
-				status.setComplete();
+				pService.modificar(proveedor);
+				rpta = 1;
 			}
+			if (rpta > 0)
+				status.setComplete();
 		}
 		model.addAttribute("listaProveedores", pService.listar());
 		return "/proveedor/listaProveedor";
@@ -83,7 +87,7 @@ public class ProveedorController {
 		try {
 			if(id!=null&& id>0) {
 				pService.eliminar(id);
-				model.put("mensaje", "se canceló el contrato con el proveedor seleccionado");	
+				model.put("mensaje", "se cancelï¿½ el contrato con el proveedor seleccionado");	
 			}
 			
 		}catch(Exception e) {
@@ -107,6 +111,7 @@ public class ProveedorController {
 		}catch (Exception e) {
 			model.addAttribute("error",e.getMessage());
 		}
+		model.addAttribute("valorBoton", "Modificar");
 		return  "/proveedor/proveedor";
 	}
 	@Secured({"ROLE_ADMIN","ROLE_USER"})
@@ -118,7 +123,7 @@ public class ProveedorController {
 		proveedor.setNombreProveedor(proveedor.getNombreProveedor());
 		listaProveedores = pService.buscarNombre(proveedor.getNombreProveedor());
 		if (listaProveedores.isEmpty()) {
-			model.put("mensaje", "No se encontró al proveedor con el nombre especificado");
+			model.put("mensaje", "No se encontrï¿½ al proveedor con el nombre especificado");
 		}
 		model.put("listaProvedores", listaProveedores);
 		return "proveedor/listaProveedor";

@@ -14,6 +14,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -49,6 +50,7 @@ public class Lista_Compra implements Serializable {
 	@Min(0)
 	@Max(4000)
 	@Column(name = "precioLista", nullable = false)
+	//@Transient
 	private float precioLista;
 
 	@NotNull(message = "La fecha es obligatoria")

@@ -12,10 +12,15 @@
 				Empleados</div>
 			<form th:action="@{/empleados/guardar}" th:object="${empleado}"
 				method="post" enctype="multipart/form-data">
-
+				<div class="form-group row" style="display: none !important;">
+					<label for="idEmpleado" class="col-sm-2 col-form-label">Id</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{idEmpleado}" class="form-control" />
+					</div>
+				</div>
 
 				<div class="form-group row">
-					<label for="nombreEmpleado" class="col-sm-2 col-form-label">Nombres
+					<label for="nombreEmpleado" class="col-sm-2 col-form-label">Nombre
 						del Empleado</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{nombreEmpleado}"
@@ -41,8 +46,9 @@
 						del Empleado (años)</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{experienciaEmpleado}"
-							class="form-control" th:errorclass="'form-control alert-info'" maxlength="2"/>
-						<small th:if="${#fields.hasErrors('experienciaEmpleado')}"
+							class="form-control" th:errorclass="'form-control alert-info'"
+							maxlength="2" /> <small
+							th:if="${#fields.hasErrors('experienciaEmpleado')}"
 							th:errors="*{experienciaEmpleado}"></small>
 					</div>
 				</div>
@@ -79,9 +85,9 @@
 					<label for="tituloEmpleado" class="col-sm-2 col-form-label">Titulo
 						del Empleado</label>
 					<div class="col-sm-6">
-						<input type="text" th:field="*{tituloEmpleado}" class="form-control"
-							th:errorclass="'form-control alert-info'" /> <small
-							th:if="${#fields.hasErrors('tituloEmpleado')}"
+						<input type="text" th:field="*{tituloEmpleado}"
+							class="form-control" th:errorclass="'form-control alert-info'" />
+						<small th:if="${#fields.hasErrors('tituloEmpleado')}"
 							th:errors="*{tituloEmpleado}"></small>
 					</div>
 				</div>
@@ -102,8 +108,9 @@
 						del Empleado</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{celularEmpleado}"
-							class="form-control" th:errorclass="'form-control alert-info'" maxlength="9" />
-						<small th:if="${#fields.hasErrors('celularEmpleado')}"
+							class="form-control" th:errorclass="'form-control alert-info'"
+							maxlength="9" /> <small
+							th:if="${#fields.hasErrors('celularEmpleado')}"
 							th:errors="*{celularEmpleado}"></small>
 					</div>
 				</div>
@@ -121,7 +128,7 @@
 
 				<div class="form-group row">
 					<div class="col-sm-6" align="center">
-						<input type="submit" value="Registrar" class="btn btn-primary" />
+						<input type="submit" th:value="${valorBoton}" class="btn btn-primary" />
 
 						<a href="/empleados/listar" class="btn btn-danger">Cancelar</a>
 					</div>

@@ -44,53 +44,62 @@ public class Detalle_List_CompraController {
 		return "bienvenido";
 	}
 
-	@Secured({"ROLE_ADMIN", "ROLE_USER"})
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping("/nuevo")
 	public String nuevoDetalle(Model model) {
 		model.addAttribute("detalle", new Detalle_List_Compra());
 		model.addAttribute("listaCompras", lService.listar());
 		model.addAttribute("listaRecursos", rService.listar());
+		model.addAttribute("valorBoton", "Registrar");
 		return "detalle/detalle";
 	}
-	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@PostMapping("/guardar")
-	public String guardarDetalle(@Valid Detalle_List_Compra detalle, BindingResult result,
-			Model model, SessionStatus status) throws Exception {
-		
-		if(result.hasErrors()) {
+	public String guardarDetalle(@Valid Detalle_List_Compra detalle, BindingResult result, Model model,
+			SessionStatus status) throws Exception {
+
+		if (result.hasErrors()) {
 			model.addAttribute("listaCompras", lService.listar());
-			model.addAttribute("listaRecursos",rService.listar());
+			model.addAttribute("listaRecursos", rService.listar());
+
 			return "/detalle/detalle";
 		} else {
-			int rpta = dService.insertar(detalle);
-			if (rpta > 0) {
-				model.addAttribute("mensaje", "Se ha registrado correctamente");
-				status.setComplete();
+			int rpta = -1;
+			if (dService.listarId(detalle.getIdDetalle()) == null) {
+				rpta = dService.insertar(detalle);
+				if (rpta > 0) {
+					model.addAttribute("mensaje", "Se ha registrado correctamente");
+				}
+			} else {
+				dService.modificar(detalle);
+				rpta = 1;
 			}
+			if (rpta > 0)
+				status.setComplete();
 		}
 		model.addAttribute("listaDetalles", dService.listar());
 		return "/detalle/listaDetalle";
 	}
-	
-	@Secured({"ROLE_ADMIN", "ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping("/listar")
-	public String listarDetalles (Model model) {
+	public String listarDetalles(Model model) {
 		try {
 			model.addAttribute("detalle", new Detalle_List_Compra());
 			model.addAttribute("listaDetalles", dService.listar());
 		} catch (Exception e) {
-			model.addAttribute("error",e.getMessage());
+			model.addAttribute("error", e.getMessage());
 		}
 		return "/detalle/listaDetalle";
 	}
-	
+
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("/eliminar")
 	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
-		
+
 		try {
-			if(id != null && id > 0) {
+			if (id != null && id > 0) {
 				dService.eliminar(id);
 				model.put("mensaje", "Se ha eliminado el detalle de compra correctamente.");
 			}
@@ -99,58 +108,61 @@ public class Detalle_List_CompraController {
 			model.put("mensaje", "No se puede eliminar el detalle de compra seleccionado.");
 		}
 		model.put("listaDetalles", dService.listar());
-		
+
 		return "redirect:/detalles/listar";
 	}
-	
+
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/detalle/{id}")
-	public String detailsDetalle (@PathVariable(value = "id") int id, Model model) {
+	public String detailsDetalle(@PathVariable(value = "id") int id, Model model) {
 		try {
-			Optional <Detalle_List_Compra> detalle = dService.listarId(id);
-			if(!detalle.isPresent()) {
+			Optional<Detalle_List_Compra> detalle = dService.listarId(id);
+			if (!detalle.isPresent()) {
 				model.addAttribute("info", "Detalle no existe");
 				return "redirect:/detalles/listar";
 			} else {
+				model.addAttribute("listaCompras", lService.listar());
+				model.addAttribute("listaRecursos", rService.listar());
 				model.addAttribute("detalle", detalle.get());
 			}
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		
+
+		model.addAttribute("valorBoton", "Modificar");
+
 		return "/detalle/detalle";
 	}
-	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@RequestMapping("/buscar")
-	public String buscar(Map<String,Object> model, @ModelAttribute Detalle_List_Compra detalle) throws ParseException {
-		
+	public String buscar(Map<String, Object> model, @ModelAttribute Detalle_List_Compra detalle) throws ParseException {
+
 		List<Detalle_List_Compra> listaDetalles;
-		
+
 		detalle.setUnidadesDetalle(detalle.getUnidadesDetalle());
 		listaDetalles = dService.buscarCantidadRecurso(detalle.getUnidadesDetalle());
-		
-		if(listaDetalles.isEmpty()) {
+
+		if (listaDetalles.isEmpty()) {
 			model.put("mensaje", "No se encontraron recursos con la cantidad de unidades especificado.");
-			
+
 		}
 		model.put("listaDetalles", listaDetalles);
 		return "detalle/listaDetalle";
 	}
-	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping(value = "/ver/{id}")
-	public String ver(@PathVariable(value ="id") Integer id, Map<String, Object> model, RedirectAttributes flash) {
-		
+	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash) {
+
 		Optional<Detalle_List_Compra> detalle = dService.listarId(id);
-		if(detalle == null) {
+		if (detalle == null) {
 			flash.addFlashAttribute("error", "El detalle de lista de compra no existe en la base de datos.");
 			return "redirect:/detalles/listar";
 		}
 		model.put("detalle", detalle.get());
-		
+
 		return "detalle/verd";
 	}
-
 
 }

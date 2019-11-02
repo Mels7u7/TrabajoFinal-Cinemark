@@ -13,6 +13,12 @@
 			<form th:action="@{/detalles/guardar}" th:object="${detalle}"
 				method="post" enctype="multipart/form-data">
 
+				<div class="form-group row" style="display: none !important;">
+					<label for="idDetalle" class="col-sm-2 col-form-label">Id</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{idDetalle}" class="form-control" />
+					</div>
+				</div>
 
 				<div class="form-group row">
 					<label for="recursoDetalle" class="col-sm-2 col-form-label">Recurso</label>
@@ -65,9 +71,9 @@
 
 				<div class="form-group row">
 					<div class="col-sm-6" align="center">
-						<input type="submit" value="Registrar" class="btn btn-primary" />
-
-						<a href="/detalles/listar" class="btn btn-danger">Cancelar</a>
+						<input type="submit" th:value="${valorBoton}"
+							class="btn btn-primary" /> <a href="/detalles/listar"
+							class="btn btn-danger">Cancelar</a>
 					</div>
 				</div>
 			</form>

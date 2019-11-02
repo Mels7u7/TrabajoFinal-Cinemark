@@ -16,13 +16,12 @@ public class Detalle_List_CompraServiceImpl implements IDetalle_List_CompraServi
 
 	@Autowired
 	private Detalle_List_CompraRepository dR;
-	
+
 	@Override
 	@Transactional
 	public Integer insertar(Detalle_List_Compra detalle) {
 		int rpta = 0;
-		if( rpta == 0)
-		{
+		if (rpta == 0) {
 			dR.save(detalle);
 		}
 		return rpta;
@@ -31,7 +30,7 @@ public class Detalle_List_CompraServiceImpl implements IDetalle_List_CompraServi
 	@Override
 	@Transactional
 	public void modificar(Detalle_List_Compra detalle) {
-		dR.save(detalle);	
+		dR.save(detalle);
 	}
 
 	@Override
@@ -48,7 +47,13 @@ public class Detalle_List_CompraServiceImpl implements IDetalle_List_CompraServi
 
 	@Override
 	public List<Detalle_List_Compra> listar() {
-		return dR.findAll();
+		List<Detalle_List_Compra> lista = dR.findAll();
+
+		for (Detalle_List_Compra d : lista) {
+			d.setImporte(d.getPrecioDetalle() * d.getUnidadesDetalle());
+		}
+
+		return lista;
 	}
 
 	@Override

@@ -36,7 +36,9 @@ public class Lista_CompraServiceImpl implements ILista_CompraService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Lista_Compra> listar() {
-		return lR.findAll(Sort.by(Sort.Direction.DESC, "notaLista"));
+		List<Lista_Compra> list = lR.findAll(Sort.by(Sort.Direction.DESC, "notaLista"));
+
+		return list;
 	}
 
 	@Override

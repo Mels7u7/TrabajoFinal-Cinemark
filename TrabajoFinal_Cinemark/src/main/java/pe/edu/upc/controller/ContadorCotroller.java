@@ -36,34 +36,43 @@ public class ContadorCotroller {
 	public String irBienvenido() {
 		return "bienvenido";
 	}
-	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping("/nuevo")
 	public String nuevoContador(Model model) {
 		model.addAttribute("contador", new Contador());
 		return "contador/contador";
 	}
-	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@PostMapping("/guardar")
-	public String guardarContador(@Valid Contador contador, BindingResult result, Model model,
-			SessionStatus status) throws Exception {
+	public String guardarContador(@Valid Contador contador, BindingResult result, Model model, SessionStatus status)
+			throws Exception {
 		if (result.hasErrors()) {
 			return "/contador/contador";
 		} else {
-			int rpta = cService.insertar(contador);
-			if (rpta > 0) {
-				model.addAttribute("mensaje", "Ya existe el contador con ese DNI");
-				return  "/contador/contador";
+			int rpta = -1;
+			Optional<Contador> contadorEncontrado = cService.listarId(contador.getIdContador());
+			if (!contadorEncontrado.isPresent()) {
+				rpta = cService.insertar(contador);
+				if (rpta > 0) {
+					model.addAttribute("mensaje", "Ya existe el contador con ese DNI");
+					status.setComplete();
+					return "/contador/contador";
+				}
+
 			} else {
-				model.addAttribute("mensaje", "Se ha registrado correctamente");
+				cService.modificar(contador);
+				rpta = 1;
 				status.setComplete();
 			}
+
 		}
 		model.addAttribute("listaContadores", cService.listar());
 		return "/contador/listaContador";
 	}
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping("/listar")
 	public String listarContadores(Model model) {
 		try {
@@ -74,13 +83,14 @@ public class ContadorCotroller {
 		}
 		return "/contador/listaContador";
 	}
+
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("/eliminar")
 	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
 		try {
 			if (id != null && id > 0) {
 				cService.eliminar(id);
-				model.put("mensaje", "Se canceló el contrato con el contador");
+				model.put("mensaje", "Se cancelï¿½ el contrato con el contador");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -90,13 +100,14 @@ public class ContadorCotroller {
 
 		return "redirect:/contadores/listar";
 	}
+
 	@Secured("ROLE_ADMIN")
-	@GetMapping("/detalle/{id}")//modificar
+	@GetMapping("/detalle/{id}") // modificar
 	public String detailsContador(@PathVariable(value = "id") int id, Model model) {
 		try {
 			Optional<Contador> contador = cService.listarId(id);
 			if (!contador.isPresent()) {
-				model.addAttribute("info", "contador no existe");
+				model.addAttribute("info", "Contador no existe");
 				return "redirect:/contadores/listar";
 			} else {
 				model.addAttribute("contador", contador.get());
@@ -105,13 +116,11 @@ public class ContadorCotroller {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
+		model.addAttribute("valorBoton", "Modificar");
 		return "/contador/contador";
 	}
-	
-	
-	
-	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@RequestMapping("/buscar")
 	public String buscar(Map<String, Object> model, @ModelAttribute Contador contador) throws ParseException {
 
@@ -120,17 +129,13 @@ public class ContadorCotroller {
 		contador.setNombreContador(contador.getNombreContador());
 		listaContadores = cService.buscarNombre(contador.getNombreContador());
 		if (listaContadores.isEmpty()) {
-			model.put("mensaje", "No se encontró al contador con el nombre especificado");
+			model.put("mensaje", "No se encontrï¿½ al contador con el nombre especificado");
 		}
 		model.put("listaContadores", listaContadores);
 		return "contador/listaContador";
 	}
-	
-	
-	
-	
-	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash) {
 

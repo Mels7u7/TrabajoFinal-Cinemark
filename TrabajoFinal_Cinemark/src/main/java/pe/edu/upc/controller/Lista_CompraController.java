@@ -3,6 +3,7 @@ package pe.edu.upc.controller;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
+import pe.edu.upc.entity.Detalle_List_Compra;
 import pe.edu.upc.entity.Lista_Compra;
+import pe.edu.upc.service.IDetalle_List_CompraService;
 import pe.edu.upc.service.ILista_CompraService;
 import pe.edu.upc.service.IProveedorService;
 
@@ -29,6 +32,9 @@ public class Lista_CompraController {
 	private ILista_CompraService lService;
 	@Autowired
 	private IProveedorService pService;
+
+	@Autowired
+	private IDetalle_List_CompraService serviceDetalle;
 
 	@GetMapping("/bienvenido")
 	public String bienvenido(Model model) {
@@ -60,7 +66,23 @@ public class Lista_CompraController {
 	public String listarLista_Compras(Model model) {
 		try {
 			model.addAttribute("lista_Compra", new Lista_Compra());
-			model.addAttribute("listaLista_Compras", lService.listar());
+
+			List<Lista_Compra> list = lService.listar();
+			List<Detalle_List_Compra> detalleLista = serviceDetalle.listar();
+
+			for (Lista_Compra l : list) {
+				float precioLista = 0;
+
+				for (Detalle_List_Compra e : detalleLista.stream()
+						.filter(c -> c.getListaDetalle().getIdLista() == l.getIdLista()).collect(Collectors.toList()))
+					precioLista += e.getPrecioDetalle() * e.getUnidadesDetalle();
+
+				l.setPrecioLista(precioLista);
+
+			}
+
+			model.addAttribute("listaLista_Compras", list);
+
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
@@ -83,7 +105,8 @@ public class Lista_CompraController {
 	}
 
 	@RequestMapping("/buscarestado")
-	public String buscarEstado(Map<String, Object> model, @ModelAttribute Lista_Compra lista_compra) throws ParseException {
+	public String buscarEstado(Map<String, Object> model, @ModelAttribute Lista_Compra lista_compra)
+			throws ParseException {
 		List<Lista_Compra> listaCompras;
 		lista_compra.setEstadoLista(lista_compra.getEstadoLista());
 		listaCompras = lService.buscarEstadoLista(lista_compra.getEstadoLista());
