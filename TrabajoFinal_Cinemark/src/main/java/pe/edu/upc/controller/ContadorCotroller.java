@@ -50,14 +50,17 @@ public class ContadorCotroller {
 	public String guardarContador(@Valid Contador contador, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {
+			model.addAttribute("valorBoton", "Registrar");
 			return "/contador/contador";
 		} else {
 			int rpta = -1;
 			Optional<Contador> contadorEncontrado = cService.listarId(contador.getIdContador());
 			if (!contadorEncontrado.isPresent()) {
 				rpta = cService.insertar(contador);
+				model.addAttribute("mensaje", "Se registró correctamente");
 				if (rpta > 0) {
 					model.addAttribute("mensaje", "Ya existe el contador con ese DNI");
+					model.addAttribute("valorBoton", "Registrar");
 					status.setComplete();
 					return "/contador/contador";
 				}
@@ -68,7 +71,7 @@ public class ContadorCotroller {
 				status.setComplete();
 				model.addAttribute("mensaje", "Se modificó correctamente");
 			}
-
+			
 		}
 		model.addAttribute("listaContadores", cService.listar());
 		

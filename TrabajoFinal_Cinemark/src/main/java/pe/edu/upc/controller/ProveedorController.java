@@ -51,23 +51,28 @@ public class ProveedorController {
 	public String guardarProveedor(@Valid Proveedor proveedor, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {
+			model.addAttribute("valorBoton", "Registrar");
 			return "/proveedor/proveedor";
 		} else {
 			int rpta = -1;
-			if (pService.listarId(proveedor.getIdProveedor()) == null) {
+			Optional<Proveedor> proveedorEncontrado = pService.listarId(proveedor.getIdProveedor());
+			if (!proveedorEncontrado.isPresent()) {
 				rpta = pService.insertar(proveedor);
+				model.addAttribute("mensaje", "Se registró correctamente");
 				if (rpta > 0) {
-					model.addAttribute("mensaje", "Se ha registrado correctamente");
+					model.addAttribute("mensaje", "Ya existe un proveedor con el mismo RUC");
+					model.addAttribute("valorBoton", "Registrar");
+					status.setComplete();
+					return "/proveedor/proveedor";
 				}
 			} else {
 				pService.modificar(proveedor);
 				rpta = 1;
+				model.addAttribute("mensaje", "Se modificó correctamente");
 			}
-			if (rpta > 0)
-				status.setComplete();
 		}
 		model.addAttribute("listaProveedores", pService.listar());
-		model.addAttribute("mensaje", "Se modificó correctamente");
+
 		return "/proveedor/listaProveedor";
 	}
 
@@ -121,13 +126,12 @@ public class ProveedorController {
 	public String buscar(Map<String, Object> model, @ModelAttribute Proveedor proveedor) throws ParseException {
 
 		List<Proveedor> listaProveedores;
-
 		proveedor.setNombreProveedor(proveedor.getNombreProveedor());
 		listaProveedores = pService.buscarNombre(proveedor.getNombreProveedor());
 		if (listaProveedores.isEmpty()) {
 			model.put("mensaje", "No se encontró al proveedor con el nombre especificado");
 		}
-		model.put("listaProvedores", listaProveedores);
+		model.put("listaProveedores", listaProveedores);
 		return "proveedor/listaProveedor";
 	}
 	@Secured({"ROLE_ADMIN","ROLE_USER"})

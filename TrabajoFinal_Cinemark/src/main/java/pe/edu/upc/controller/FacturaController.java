@@ -1,10 +1,6 @@
 package pe.edu.upc.controller;
 
-
 import java.util.Map;
-
-
-
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -23,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 
 import pe.edu.upc.entity.Factura;
 import pe.edu.upc.service.IContadorService;
@@ -67,23 +62,28 @@ public class FacturaController {
 			SessionStatus status) throws Exception {
 		if (result.hasErrors()) {
 			model.addAttribute("listaContadores", cService.listar());
+			model.addAttribute("valorBoton", "Registrar");
 			return "/factura/factura";
 		} else {
 			int rpta = -1;
-			if (fService.listarId(factura.getIdFactura()) == null) {
+			Optional<Factura> facturaEncontrado = fService.listarId(factura.getIdFactura());
+			if (!facturaEncontrado.isPresent()) {
 				rpta = fService.insertar(factura);
+				model.addAttribute("mensaje", "Se registró correctamente");
 				if (rpta > 0) {
-					model.addAttribute("mensaje", "Se ha registrado correctamente");
+					model.addAttribute("valorBoton", "Registrar");
+					status.setComplete();
+					return "/factura/factura";
 				}
 			} else {
 				fService.modificar(factura);
 				rpta = 1;
+				model.addAttribute("mensaje", "Se modificó correctamente");
 			}
-			if (rpta > 0)
-				status.setComplete();
+			
 		}
 		model.addAttribute("listaFacturas", fService.listar());
-		model.addAttribute("mensaje", "Se modificó correctamente");
+		
 		return "/factura/listaFactura";
 		
 	}

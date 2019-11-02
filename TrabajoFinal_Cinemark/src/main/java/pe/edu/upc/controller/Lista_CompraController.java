@@ -3,16 +3,19 @@ package pe.edu.upc.controller;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -119,4 +122,25 @@ public class Lista_CompraController {
 		model.put("listaCompras", listaCompras);
 		return "orden/listaOrden";
 	}
+	@Secured("ROLE_ADMIN")
+	@GetMapping("/detalle/{id}")
+	public String detailsLista(@PathVariable(value = "id") int id, Model model) {
+		try {
+			Optional<Lista_Compra> detalle = lService.listarId(id);
+			if (!detalle.isPresent()) {
+				model.addAttribute("info", "Lista de Compra no existe");
+				return "redirect:/detalles/listar";
+			} else {
+				model.addAttribute("listaProveedores", pService.listar());
+				model.addAttribute("lista_Compra", detalle.get());
+			}
+		} catch (Exception e) {
+			model.addAttribute("error", e.getMessage());
+		}
+
+		model.addAttribute("valorBoton", "Modificar");
+
+		return "/listaCompra/listaCompra";
+	}
+	
 }

@@ -1,6 +1,7 @@
 package pe.edu.upc.serviceimpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -45,6 +46,11 @@ public class Lista_CompraServiceImpl implements ILista_CompraService {
 	@Transactional(readOnly = true)
 	public List<Lista_Compra> buscarEstadoLista(String estadoLista) {
 		return lR.findByEstadoLista(estadoLista);
+	}
+
+	@Override
+	public Optional<Lista_Compra> listarId(int idLista) {
+		return lR.findById(idLista);
 	}
 
 }

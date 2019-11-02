@@ -51,14 +51,17 @@ public class EmpleadoController {
 	public String guardarEmpleado(@Valid Empleado empleado, BindingResult result, Model model,
 			SessionStatus status) throws Exception {
 		if (result.hasErrors()) {
+			model.addAttribute("valorBoton", "Registrar");
 			return "/empleado/empleado";
 		} else {
 			int rpta = -1;
 			Optional<Empleado> empleadoEncontrado = eService.listarId(empleado.getIdEmpleado());
 			if (!empleadoEncontrado.isPresent()) {
 				rpta = eService.insertar(empleado);
+				model.addAttribute("mensaje", "Se registró correctamente");
 				if (rpta > 0) {
 					model.addAttribute("mensaje", "Ya existe el empleado con ese DNI");
+					model.addAttribute("valorBoton", "Registrar");
 					status.setComplete();
 					return "/empleado/empleado";
 				}
@@ -67,11 +70,11 @@ public class EmpleadoController {
 				eService.modificar(empleado);
 				rpta = 1;
 				status.setComplete();
+				model.addAttribute("mensaje", "Se modificó correctamente");
 			}
 
 		}
 		model.addAttribute("listaEmpleados", eService.listar());
-		model.addAttribute("mensaje", "Se modificó correctamente");
 		return "/empleado/listaEmpleado";
 	
 	}
