@@ -89,7 +89,7 @@ public class ProveedorController {
 		try {
 			if(id!=null&& id>0) {
 				pService.eliminar(id);
-				model.put("mensaje", "se cancelï¿½ el contrato con el proveedor seleccionado");	
+				model.put("mensaje", "se canceló el contrato con el proveedor seleccionado");	
 			}
 			
 		}catch(Exception e) {
@@ -125,7 +125,7 @@ public class ProveedorController {
 		proveedor.setNombreProveedor(proveedor.getNombreProveedor());
 		listaProveedores = pService.buscarNombre(proveedor.getNombreProveedor());
 		if (listaProveedores.isEmpty()) {
-			model.put("mensaje", "No se encontrï¿½ al proveedor con el nombre especificado");
+			model.put("mensaje", "No se encontró al proveedor con el nombre especificado");
 		}
 		model.put("listaProvedores", listaProveedores);
 		return "proveedor/listaProveedor";

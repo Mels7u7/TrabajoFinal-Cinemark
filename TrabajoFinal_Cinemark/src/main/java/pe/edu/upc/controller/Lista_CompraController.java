@@ -94,7 +94,7 @@ public class Lista_CompraController {
 		try {
 			if (id != null && id > 0) {
 				lService.eliminar(id);
-				model.put("mensaje", "Se eliminï¿½ correctamente la lista de compra");
+				model.put("mensaje", "Se eliminó correctamente la lista de compra");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -114,7 +114,7 @@ public class Lista_CompraController {
 			listaCompras = lService.buscarEstadoLista(lista_compra.getEstadoLista());
 		}
 		if (listaCompras.isEmpty()) {
-			model.put("mensaje", "No se encontro ningun resultado");
+			model.put("mensaje", "No se encontró ningun resultado");
 		}
 		model.put("listaCompras", listaCompras);
 		return "orden/listaOrden";

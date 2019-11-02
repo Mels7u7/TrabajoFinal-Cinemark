@@ -37,8 +37,8 @@ public class Contador implements Serializable {
 	@Column(name = "institucionContador", nullable = false, length = 30)
 	private String institucionContador;
 	
-	@Pattern(regexp="[\\d]{9}", message="El nÃºmero de celular tiene que ser de 9 digitos y no se puede ingresar letras")
-	@NotEmpty(message = "Ingresar nÃºmero del contador")
+	@Pattern(regexp="[\\d]{9}", message="El número de celular tiene que ser de 9 digitos y no se puede ingresar letras")
+	@NotEmpty(message = "Ingresar número del contador")
 	@Column(name = "numeroContactoContador", nullable = false,length=10)
 	private String numeroContactoContador;
 

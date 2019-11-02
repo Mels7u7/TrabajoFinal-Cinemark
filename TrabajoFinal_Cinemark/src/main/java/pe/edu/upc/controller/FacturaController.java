@@ -107,7 +107,7 @@ public class FacturaController {
 		try {
 			if (id != null && id > 0) {
 				fService.eliminar(id);
-				model.put("mensaje", "Se cancelï¿½ la factura");
+				model.put("mensaje", "Se canceló la factura");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

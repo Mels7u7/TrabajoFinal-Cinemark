@@ -93,7 +93,7 @@ public class ContadorCotroller {
 		try {
 			if (id != null && id > 0) {
 				cService.eliminar(id);
-				model.put("mensaje", "Se cancelï¿½ el contrato con el contador");
+				model.put("mensaje", "Se canceló el contrato con el contador");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -133,7 +133,7 @@ public class ContadorCotroller {
 		contador.setNombreContador(contador.getNombreContador());
 		listaContadores = cService.buscarNombre(contador.getNombreContador());
 		if (listaContadores.isEmpty()) {
-			model.put("mensaje", "No se encontrï¿½ al contador con el nombre especificado");
+			model.put("mensaje", "No se encontró al contador con el nombre especificado");
 		}
 		model.put("listaContadores", listaContadores);
 		return "contador/listaContador";

@@ -39,7 +39,7 @@ public class Factura implements Serializable {
 	@JoinColumn(name = "idContador")
 	private Contador contadorFactura;
 
-	@NotEmpty(message = "Ingresa el an√°lisis de la factura")
+	@NotEmpty(message = "Ingresa el an·lisis de la factura")
 	@Column(name = "analisisFactura", nullable = false, length = 60)
 	private String analisisFactura;
 

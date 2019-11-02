@@ -58,7 +58,7 @@ public class Empleado implements Serializable {
 	@Column(name = "correoEmpleado", nullable = false, length = 40)
 	private String correoEmpleado;
 
-	@Pattern(regexp="[\\d]{9}",message="El nÃºmero de celular tiene que ser de 9 digitos y no puede ingresar letras")
+	@Pattern(regexp="[\\d]{9}",message="El número de celular tiene que ser de 9 digitos y no puede ingresar letras")
 	@NotEmpty(message = "Ingresa el celular del empleado")
 	@Column(name = "celularEmpleado", nullable = false, length=10)
 	private String celularEmpleado;

@@ -41,8 +41,8 @@ public class Proveedor implements Serializable {
 	@Column(name = "nombrecontactoProveedor", nullable = false, length = 70)
 	private String nombrecontactoProveedor;
 
-	@Pattern(regexp="[\\d]{9}",message="El nÃºmero de celular tiene que ser de 9 digitos y no puede ingresar letras")
-	@NotEmpty(message = "Ingresa el nï¿½mero de contacto del proveedor")
+	@Pattern(regexp="[\\d]{9}",message="El número de celular tiene que ser de 9 digitos y no puede ingresar letras")
+	@NotEmpty(message = "Ingresa el número de contacto del proveedor")
 	@Column(name = "numerocontactoProveedor", nullable = false,length=10)
 	private String numerocontactoProveedor;
 

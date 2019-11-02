@@ -42,7 +42,16 @@ public class Detalle_List_CompraServiceImpl implements IDetalle_List_CompraServi
 	@Override
 	@Transactional(readOnly = true)
 	public Optional<Detalle_List_Compra> listarId(int idDetalle) {
-		return dR.findById(idDetalle);
+		
+		Optional<Detalle_List_Compra> lista = dR.findById(idDetalle);
+		if(lista.isPresent()) {
+			Detalle_List_Compra obj = new Detalle_List_Compra();
+			obj = lista.get();
+			obj.setImporte(obj.getPrecioDetalle() * obj.getUnidadesDetalle());
+			return Optional.of(obj);
+			
+		}
+		return lista;
 	}
 
 	@Override
