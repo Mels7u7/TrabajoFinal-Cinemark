@@ -53,4 +53,10 @@ public class Lista_CompraServiceImpl implements ILista_CompraService {
 		return lR.findById(idLista);
 	}
 
+	@Override
+	public void modificar(Lista_Compra lista_Compra) {
+		lR.save(lista_Compra);
+		
+	}
+
 }

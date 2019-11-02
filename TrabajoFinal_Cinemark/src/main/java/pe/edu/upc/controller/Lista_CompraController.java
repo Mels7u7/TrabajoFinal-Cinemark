@@ -48,6 +48,7 @@ public class Lista_CompraController {
 	public String nuevaLista_Compra(Model model) {
 		model.addAttribute("lista_Compra", new Lista_Compra());
 		model.addAttribute("listaProveedores", pService.listar());
+		model.addAttribute("valorBoton", "Registrar");
 		return "/listaCompra/listaCompra";
 	}
 
@@ -56,13 +57,31 @@ public class Lista_CompraController {
 			SessionStatus status) throws Exception {
 		if (result.hasErrors()) {
 			model.addAttribute("listaProveedor", pService.listar());
+			model.addAttribute("valorBoton", "Registrar");
 			return "/listaCompra/listaCompra";
 		} else {
-			lService.insertar(lista_Compra);
-			model.addAttribute("mensaje", "Se guardó correctamente la La lista de compra");
-			status.setComplete();
-			return "redirect:/listaCompras/listar";
+			int rpta = -1;
+			Optional<Lista_Compra> listaEncontrado = lService.listarId(lista_Compra.getIdLista());
+			if (!listaEncontrado.isPresent()) {
+				rpta = lService.insertar(lista_Compra);
+				model.addAttribute("mensaje", "Se registró correctamente");
+				if (rpta > 0) {
+					model.addAttribute("valorBoton", "Registrar");
+					status.setComplete();
+					return "/listaCompra/listaCompra";
+				}
+
+			} else {
+				lService.modificar(lista_Compra);
+				rpta = 1;
+				status.setComplete();
+				model.addAttribute("mensaje", "Se modificó correctamente");
+			}
+			
 		}
+		model.addAttribute("listaLista_Compras", lService.listar());
+		
+		return "/listaCompra/listaListaCompra";
 	}
 
 	@GetMapping("/listar")

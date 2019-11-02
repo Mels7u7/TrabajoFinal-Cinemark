@@ -66,20 +66,26 @@ public class Detalle_List_CompraController {
 			return "/detalle/detalle";
 		} else {
 			int rpta = -1;
-			if (dService.listarId(detalle.getIdDetalle()) == null) {
+			Optional<Detalle_List_Compra> detalleEncontrado = dService.listarId(detalle.getIdDetalle());
+			if (!detalleEncontrado.isPresent()) {
 				rpta = dService.insertar(detalle);
+				model.addAttribute("mensaje", "Se registró correctamente");
 				if (rpta > 0) {
-					model.addAttribute("mensaje", "Se ha registrado correctamente");
+					model.addAttribute("valorBoton", "Registrar");
+					status.setComplete();
+					return "/detalle/detalle";
 				}
+
 			} else {
 				dService.modificar(detalle);
 				rpta = 1;
-			}
-			if (rpta > 0)
 				status.setComplete();
+				model.addAttribute("mensaje", "Se modificó correctamente");
+			}
+			
 		}
 		model.addAttribute("listaDetalles", dService.listar());
-		model.addAttribute("mensaje", "Se modificó correctamente");
+		
 		return "/detalle/listaDetalle";
 	}
 
