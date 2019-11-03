@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -94,20 +95,26 @@ public class RecursoController {
 				recurso.setFoto(uniqueFilename);
 			}
 			int rpta = -1;
-			if (rService.listarId(recurso.getIdRecurso()) == null) {
+			Optional<Recurso> recursoEncontrado = rService.listarId(recurso.getIdRecurso());
+			if (!recursoEncontrado.isPresent()) {
 				rpta = rService.insertar(recurso);
+				model.addAttribute("mensaje", "Se registró correctamente");
 				if (rpta > 0) {
-					model.addAttribute("mensaje", "Se ha registrado correctamente");
+					model.addAttribute("valorBoton", "Registrar");
+					status.setComplete();
+					return "/recurso/recurso";
 				}
+
 			} else {
 				rService.modificar(recurso);
 				rpta = 1;
-			}
-			if (rpta > 0)
 				status.setComplete();
+				model.addAttribute("mensaje", "Se modificó correctamente");
+			}
+			
 		}
 		model.addAttribute("listaRecursos", rService.listar());
-		model.addAttribute("mensaje", "Se modificó correctamente");
+		
 		return "/recurso/listaRecurso";
 	
 	}
@@ -145,7 +152,7 @@ public class RecursoController {
 	@GetMapping("/detalle/{id}") // modificar
 	public String detailsRecursos(@PathVariable(value = "id") int id, Model model) {
 		try {
-			Recurso recurso = rService.listarId(id);
+			Optional<Recurso> recurso = rService.listarId(id);
 			if (recurso == null) {
 				model.addAttribute("info", "Recurso no existe");
 				return "redirect:/recursos/listar";
@@ -182,7 +189,7 @@ public class RecursoController {
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash) {
 
-		Recurso recurso = rService.listarId(id);
+		Optional<Recurso> recurso = rService.listarId(id);
 		if (recurso == null) {
 			flash.addFlashAttribute("error", "El recurso no existe en la base de datos");
 			return "redirect:/recursos/listar";

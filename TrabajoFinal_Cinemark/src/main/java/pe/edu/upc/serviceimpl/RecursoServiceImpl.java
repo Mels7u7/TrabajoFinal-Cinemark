@@ -42,9 +42,8 @@ public class RecursoServiceImpl implements IRecursoService{
 
 	@Override
 	@Transactional(readOnly = true)
-	public Recurso listarId(int idRecurso) {
-		Optional<Recurso> op=rR.findById(idRecurso);
-		return op.isPresent()?op.get():new Recurso();
+	public Optional<Recurso> listarId(int idRecurso) {
+		return rR.findById(idRecurso);
 	}
 
 	@Override
