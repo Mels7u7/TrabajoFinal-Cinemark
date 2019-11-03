@@ -48,7 +48,8 @@
 							<tr th:each="lista_Compra:${listaLista_Compras}">
 
 								<td><a class="btn btn-primary btn-xs"
-									th:text="${lista_Compra.idLista}"></a></td>
+									th:href="@{/listaCompras/ver/} + ${lista_Compra.idLista}"
+									th:text="${lista_Compra.idLista}" ></a></td>
 
 								<td th:text="${lista_Compra.proveedorLista.nombreProveedor}"></td>
 

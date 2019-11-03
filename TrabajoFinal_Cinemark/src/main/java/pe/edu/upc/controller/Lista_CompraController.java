@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.entity.Detalle_List_Compra;
 import pe.edu.upc.entity.Lista_Compra;
@@ -77,13 +78,11 @@ public class Lista_CompraController {
 				status.setComplete();
 				model.addAttribute("mensaje", "Se modificó correctamente");
 			}
-			
 		}
 		model.addAttribute("listaLista_Compras", lService.listar());
 		
 		return "/listaCompra/listaListaCompra";
 	}
-
 	@GetMapping("/listar")
 	public String listarLista_Compras(Model model) {
 		try {
@@ -112,20 +111,20 @@ public class Lista_CompraController {
 	}
 
 	@RequestMapping("/eliminar")
-	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
+	public String eliminar(Model model, @RequestParam(value = "id") Integer id) {
 		try {
 			if (id != null && id > 0) {
 				lService.eliminar(id);
-				model.put("mensaje", "Se eliminó correctamente la lista de compra");
+				model.addAttribute("mensaje", "Se eliminó correctamente la lista de compra");
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			model.put("mensaje", "No se puede eliminar la lista de compra");
+			model.addAttribute("mensaje", "No se puede eliminar la lista de compra");
 		}
-		model.put("listaLista_Compras", lService.listar());
+		model.addAttribute("listaLista_Compras", lService.listar());
 		return "redirect:/listaCompras/listar";
+		
+		
 	}
-
 	@RequestMapping("/buscarestado")
 	public String buscarEstado(Map<String, Object> model, @ModelAttribute Lista_Compra lista_compra)
 			throws ParseException {
@@ -160,6 +159,19 @@ public class Lista_CompraController {
 		model.addAttribute("valorBoton", "Modificar");
 
 		return "/listaCompra/listaCompra";
+	}
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@GetMapping(value = "/ver/{id}")
+	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash) {
+
+		Optional<Lista_Compra> lista_Compra = lService.listarId(id);
+		if (lista_Compra == null) {
+			flash.addFlashAttribute("error", "La lista de compra no existe en la base de datos.");
+			return "redirect:/listaCompras/listar";
+		}
+		model.put("lista_Compra", lista_Compra.get());
+
+		return "listaCompra/verlc";
 	}
 	
 }

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card">
+			<div class="card-header text-white bg-dark mb-3">Detalles de la
+				Lista de Compra</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-white">
+
+						<tbody>
+							<tr>
+								<td>CÓDIGO</td>
+								<td th:text="${lista_Compra.idLista}"></td>
+							</tr>
+							<tr>
+								<td>OBSERVACIÓN</td>
+								<td th:text="${lista_Compra.notaLista}"></td>
+							</tr>
+							<tr>
+								<td>NOMBRE PROVEEDOR</td>
+								<td th:text="${lista_Compra.proveedorLista.nombreProveedor}"></td>
+							</tr>
+							<tr>
+								<td>ESTADO</td>
+								<td th:text="${lista_Compra.estadoLista}"></td>
+							</tr>
+							<tr>
+								<td>PRECIO</td>
+								<td th:text="${lista_Compra.precioLista}"></td>
+							</tr>
+
+							<tr>
+								<td>FECHA</td>
+								<td th:text="${lista_Compra.fechaLista}"></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<a th:href="@{/listaCompras/listar}" type="button"
+						class="btn btn-primary k"> <span
+						class="glyphicon glyphicon-circle-arrow-left"></span> Regresar a
+						la lista de compra
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
