@@ -1,5 +1,7 @@
 package pe.edu.upc.controller;
 
+import java.text.ParseException;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -11,7 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import pe.edu.upc.entity.Contador;
 import pe.edu.upc.entity.Factura;
 import pe.edu.upc.service.IContadorService;
 import pe.edu.upc.service.IFacturaService;
@@ -49,6 +52,7 @@ public class FacturaController {
 	@GetMapping("/nuevo")
 	public String nuevoFactura(Model model) {
 		model.addAttribute("factura", new Factura());
+		model.addAttribute("contador", new Contador());
 		model.addAttribute("listaContadores", cService.listar());
 		model.addAttribute("listaLista_Compras", icService.listar());
 		model.addAttribute("valorBoton", "Registrar");
@@ -156,7 +160,18 @@ public class FacturaController {
 	}
 	
 	
-	
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@RequestMapping("/buscar")
+	public String buscar(Map<String, Object> model, @ModelAttribute Factura factura) throws ParseException {
+
+		List<Factura> listaFacturas;
+		listaFacturas = fService.buscarNombreContador(factura.getContadorFactura().getNombreContador());
+		if (listaFacturas.isEmpty()) {
+			model.put("mensaje", "No se encontró al contador con el nombre especificado");
+		}
+		model.put("listaFacturas", listaFacturas);
+		return "factura/listaFactura";
+	}
 	
 	
 	

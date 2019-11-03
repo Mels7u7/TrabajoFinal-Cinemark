@@ -5,7 +5,6 @@ import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -38,21 +37,23 @@ import pe.edu.upc.service.IUploadFileService;
 public class RecursoController {
 	@Autowired
 	private IRecursoService rService;
-	
+
 	@Autowired
 	private IUploadFileService uploadFileService;
-	
+
 	@GetMapping("/bienvenido")
 	public String bienvenido(Model model) {
 		return "bienvenido";
 	}
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping("/nuevo")
 	public String nuevoRecurso(Model model) {
 		model.addAttribute("recurso", new Recurso());
 		model.addAttribute("valorBoton", "Registrar");
 		return "recurso/recurso";
 	}
+
 	@GetMapping(value = "/uploads/{filename:.+}")
 	public ResponseEntity<Resource> verFoto(@PathVariable String filename) {
 
@@ -69,12 +70,13 @@ public class RecursoController {
 				.body(recurso);
 	}
 
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@PostMapping("/guardar")
-	public String guardarRecurso(@Valid Recurso recurso, BindingResult result, Model model,@RequestParam("file")  MultipartFile foto,RedirectAttributes flash ,SessionStatus status)
-			throws Exception {
+	public String guardarRecurso(@Valid Recurso recurso, BindingResult result, Model model,
+			@RequestParam("file") MultipartFile foto, RedirectAttributes flash, SessionStatus status) throws Exception {
 		if (result.hasErrors()) {
-			return "/recurso/recurso";
+			model.addAttribute("valorBoton", "Registrar");
+			return "/recurso/recurso";			
 		} else {
 			if (!foto.isEmpty()) {
 
@@ -91,34 +93,30 @@ public class RecursoController {
 				}
 
 				flash.addFlashAttribute("info", "Has subido correctamente '" + uniqueFilename + "'");
-	
+
 				recurso.setFoto(uniqueFilename);
 			}
 			int rpta = -1;
-			Optional<Recurso> recursoEncontrado = rService.listarId(recurso.getIdRecurso());
-			if (!recursoEncontrado.isPresent()) {
+			if (rService.listarId(recurso.getIdRecurso()) == null) {
 				rpta = rService.insertar(recurso);
-				model.addAttribute("mensaje", "Se registró correctamente");
-				if (rpta > 0) {
-					model.addAttribute("valorBoton", "Registrar");
-					status.setComplete();
-					return "/recurso/recurso";
-				}
-
+				model.addAttribute("mensaje", "Se ha registrado correctamente");
+				model.addAttribute("valorBoton", "Registrar");
 			} else {
 				rService.modificar(recurso);
 				rpta = 1;
-				status.setComplete();
-				model.addAttribute("mensaje", "Se modificó correctamente");
+				model.addAttribute("mensaje", "Se ha modificado correctamente");
 			}
-			
+			if (rpta > 0) {
+				status.setComplete();
+				
 		}
-		model.addAttribute("listaRecursos", rService.listar());
-		
-		return "/recurso/listaRecurso";
-	
 	}
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+	model.addAttribute("listaRecursos",rService.listar());	
+	return"/recurso/listaRecurso";
+
+	}
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping("/listar")
 	public String listarRecursos(Model model) {
 		try {
@@ -152,7 +150,7 @@ public class RecursoController {
 	@GetMapping("/detalle/{id}") // modificar
 	public String detailsRecursos(@PathVariable(value = "id") int id, Model model) {
 		try {
-			Optional<Recurso> recurso = rService.listarId(id);
+			Recurso recurso = rService.listarId(id);
 			if (recurso == null) {
 				model.addAttribute("info", "Recurso no existe");
 				return "redirect:/recursos/listar";
@@ -166,7 +164,8 @@ public class RecursoController {
 		model.addAttribute("valorBoton", "Modificar");
 		return "/recurso/recurso";
 	}
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@RequestMapping("/buscar")
 	public String buscar(Map<String, Object> model, @ModelAttribute Recurso recurso) throws ParseException {
 
@@ -185,11 +184,12 @@ public class RecursoController {
 		model.put("listaRecursos", listaRecursos);
 		return "recurso/listaRecurso";
 	}
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash) {
 
-		Optional<Recurso> recurso = rService.listarId(id);
+		Recurso recurso = rService.listarId(id);
 		if (recurso == null) {
 			flash.addFlashAttribute("error", "El recurso no existe en la base de datos");
 			return "redirect:/recursos/listar";
@@ -198,5 +198,5 @@ public class RecursoController {
 
 		return "recurso/verr";
 	}
-	
+
 }

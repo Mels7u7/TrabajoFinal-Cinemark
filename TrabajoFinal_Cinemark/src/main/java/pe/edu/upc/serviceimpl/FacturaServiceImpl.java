@@ -1,6 +1,5 @@
 package pe.edu.upc.serviceimpl;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,9 +57,10 @@ public class FacturaServiceImpl implements IFacturaService {
 		return fR.findAll();
 	}
 	
-	
-	public List<Factura> buscarFecha(Date fechaFactura) {
-		return fR.findByDateFactura(fechaFactura);
+	@Override
+	public List<Factura> buscarNombreContador(String nombreContador) {
+		return fR.findByNombreContador(nombreContador);
 	}
+
 
 }

@@ -17,7 +17,7 @@
 				<div class="form-group">
 
 					<label for="factura">Buscar:</label> <input type="text"
-						class="form-control" th:field="*{fechaFactura}" id="factura" placeholder="Buscar por fecha"></input>
+						class="form-control" th:field="*{contadorFactura.nombreContador}" id="factura" placeholder="Buscar por nombre del contador"></input>
 					<div align="right">
 						<button type="submit" class="btn btn-success">Aceptar</button>
 						<a href="/facturas/listar" class="btn btn-danger">Cancelar</a>
@@ -39,9 +39,7 @@
 							<tr>
 								<th>Id</th>
 								<th>Nombre del Contador</th>
-								<th>Id lista de Compra</th>
-								
-								
+								<th>Id lista de Compra</th>	
 								<th align="center">Operación</th>
 								<th align="center">Operación</th>
 							</tr>

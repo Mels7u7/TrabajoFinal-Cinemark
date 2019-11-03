@@ -1,6 +1,5 @@
 package pe.edu.upc.service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +13,6 @@ public interface IFacturaService {
 	public void eliminar(int idFactura);
 	Optional<Factura> listarId(int idFactura);
 	List<Factura> listar();
-	List<Factura> buscarFecha (Date fechaFactura);
-	
+	List<Factura>buscarNombreContador(String nombreContador);
 	
 }
