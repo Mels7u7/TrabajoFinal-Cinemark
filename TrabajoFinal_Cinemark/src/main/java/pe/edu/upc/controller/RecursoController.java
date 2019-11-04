@@ -62,7 +62,6 @@ public class RecursoController {
 		try {
 			recurso = uploadFileService.load(filename);
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return ResponseEntity.ok()
@@ -97,7 +96,8 @@ public class RecursoController {
 				recurso.setFoto(uniqueFilename);
 			}
 			int rpta = -1;
-			if (rService.listarId(recurso.getIdRecurso()) == null) {
+			Recurso obj = rService.listarId(recurso.getIdRecurso());
+			if (obj == null) {
 				rpta = rService.insertar(recurso);
 				model.addAttribute("mensaje", "Se ha registrado correctamente");
 				model.addAttribute("valorBoton", "Registrar");
