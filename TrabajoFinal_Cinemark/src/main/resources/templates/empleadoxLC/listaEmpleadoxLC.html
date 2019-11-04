@@ -11,15 +11,31 @@
 			<a th:href="@{/empleadoxLCs/nuevo}" id="add-row" type="button"
 				class="btn btn-primary">Nueva relación empleado por orden de compra</a>
 		</div>
+		
+		
+		
 		<div>
 			<form th:action="@{/empleadoxLCs/buscar}" method="post"
 				th:object="${empleadoxLC}">
-				
+				<div class="form-group">
+
+					<label for="empleadoxLC">Buscar:</label> <input type="text"
+						class="form-control" th:field="*{empleadoEmpleadoLC.nombreEmpleado}" id="empleadoxLC" placeholder="Buscar por nombre del Empleado"></input>
+					<div align="right">
+						<button type="submit" class="btn btn-success">Aceptar</button>
+						<a href="/empleadoxLCs/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
 
 			</form>
 
 		</div>
-
+		
+		
+		
+		
+		
+		
 		<div class="card">
 			<div class="card-header text-white bg-dark mb-3">Lista de empleado por orden de compra</div>
 			<div class="card-body">

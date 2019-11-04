@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import pe.edu.upc.entity.Contador;
 import pe.edu.upc.entity.EmpleadoxLC;
 import pe.edu.upc.service.IEmpleadoService;
 import pe.edu.upc.service.IEmpleadoxLCService;
@@ -89,7 +87,7 @@ public class EmpleadoxLCController {
 	@GetMapping("/listar")
 	public String listarEmpleadoxLC(Model model) {
 		try {
-			model.addAttribute("empleadoxLC", new Contador());
+			model.addAttribute("empleadoxLC", new EmpleadoxLC());
 			model.addAttribute("listaEmpleadoxLCs", elService.listar());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
@@ -125,52 +123,32 @@ public class EmpleadoxLCController {
 		try {
 			if (id != null && id > 0) {
 				elService.eliminar(id);
-				model.put("mensaje", "Se canceló la relación empleado por orden de compra");
+				model.put("mensaje", "Se cancelÃ³ la relaciÃ³n empleado por orden de compra");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("mensaje", "No se puede anular la realción empleado por orden de compra seleccionada");
+			model.put("mensaje", "No se puede anular la realciÃ³n empleado por orden de compra seleccionada");
 		}
 		model.put("listaEmpleadoxLCs", eService.listar());
 
 		return "redirect:/empleadoxLCs/listar";
 	}
-		
-
-
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
-	@RequestMapping("/buscarLC")
-	public String buscarLC(Map<String, Object> model, @ModelAttribute EmpleadoxLC empleadoxLC) throws ParseException {
-
-		List<EmpleadoxLC> listaEmpleadoxLC;
-
-		empleadoxLC.setListaEmpleadoLC(empleadoxLC.getListaEmpleadoLC());
-		listaEmpleadoxLC = elService.buscarListaCompra(empleadoxLC.getListaEmpleadoLC());
-		
-		if (listaEmpleadoxLC.isEmpty()) {
-			model.put("mensaje", "No se encontró la lista de compra");
-		}
-		model.put("listaEmpleadoxLC", listaEmpleadoxLC);
-		return "empleadoxLC/listaEmpleadoxLCr";
-	}
 	
-	
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@RequestMapping("/buscar")
+	public String buscar(Map<String, Object> model, @ModelAttribute EmpleadoxLC empleadoxLC) throws ParseException {
 
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
-	@RequestMapping("/buscarEmpleado")
-	public String buscarEmpleado(Map<String, Object> model, @ModelAttribute EmpleadoxLC empleadoxLC) throws ParseException {
-
-		List<EmpleadoxLC> listaEmpleadoxLC;
-
-		empleadoxLC.setEmpleadoEmpleadoLC(empleadoxLC.getEmpleadoEmpleadoLC());
-		listaEmpleadoxLC = elService.buscarEmpleado(empleadoxLC.getEmpleadoEmpleadoLC());
-		
-		if (listaEmpleadoxLC.isEmpty()) {
-			model.put("mensaje", "No se encontró al empleado con el nombre especificado");
+		List<EmpleadoxLC> listaEmpleadoxLCs;
+		listaEmpleadoxLCs = elService.buscarNombreEmpleado(empleadoxLC.getEmpleadoEmpleadoLC().getNombreEmpleado());
+		if (listaEmpleadoxLCs.isEmpty()) {
+			model.put("mensaje", "No se encontrï¿½ al empleado con el nombre especificado");
 		}
-		model.put("listaEmpleadoxLC", listaEmpleadoxLC);
-		return "empleadoxLC/listaEmpleadoxLCr";
+		model.put("listaEmpleadoxLCs", listaEmpleadoxLCs);
+		return "empleadoxLC/listaEmpleadoxLC";
 	}
+		
+
+
 	
 	
 	
