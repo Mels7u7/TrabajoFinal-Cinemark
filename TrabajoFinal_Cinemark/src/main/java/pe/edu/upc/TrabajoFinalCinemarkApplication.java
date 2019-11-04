@@ -22,7 +22,7 @@ public class TrabajoFinalCinemarkApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		String password = "1";
+		String password = "cinemark2019";
 
 		for (int i = 0; i < 1; i++) {
 			String bcryptPassword = passwordEncoder.encode(password);
