@@ -47,9 +47,7 @@ public class EmpleadoxLCController {
 	public String irBienvenido() {
 		return "bienvenido";
 	}
-	
-	
-	
+		
 	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/nuevo")
 	public String nuevoEmpleadoxLC(Model model) {
@@ -66,20 +64,30 @@ public class EmpleadoxLCController {
 	public String guardarEmpleadoxLC(@Valid EmpleadoxLC empleadoxLC, BindingResult result, Model model,
 			SessionStatus status) throws Exception {
 		if (result.hasErrors()) {
+			model.addAttribute("valorBoton", "Registrar");
 			return "/empleadoxLC/empleadoxLC";
 		} else {
-			int rpta = elService.insertar(empleadoxLC);
-			if (rpta > 0) {
-				model.addAttribute("mensaje", "Ya existe un empleado con ese nombre");
-				model.addAttribute("listaEmpleados", eService.listar());
-				model.addAttribute("listaLista_Compras", lService.listar());
-				return  "/empleadoxLC/empleadoxLC";
+			int rpta = -1;
+			Optional<EmpleadoxLC> empleadoLCEncontrado = elService.listarId(empleadoxLC.getIdEmpleadoXLC());
+			if (!empleadoLCEncontrado.isPresent()) {
+				rpta = elService.insertar(empleadoxLC);
+				model.addAttribute("mensaje", "Se registró correctamente");
+				if (rpta > 0) {
+					model.addAttribute("valorBoton", "Registrar");
+					status.setComplete();
+					return "/empleadoxLC/empleadoxLC";
+				}
+
 			} else {
-				model.addAttribute("mensaje", "Se ha registrado correctamente");
+				elService.modificar(empleadoxLC);
+				rpta = 1;
 				status.setComplete();
+				model.addAttribute("mensaje", "Se modificó correctamente");
 			}
+			
 		}
 		model.addAttribute("listaEmpleadoxLCs", elService.listar());
+		
 		return "/empleadoxLC/listaEmpleadoxLC";
 	}
 	
@@ -111,10 +119,9 @@ public class EmpleadoxLCController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
+		model.addAttribute("valorBoton", "Modificar");
 		return "/empleadoxLC/empleadoxLC";
 	}
-	
-	
 	
 	
 	@Secured("ROLE_ADMIN")
@@ -147,14 +154,4 @@ public class EmpleadoxLCController {
 		return "empleadoxLC/listaEmpleadoxLC";
 	}
 		
-
-
-	
-	
-	
-	
-	
-	
-	
-	
 }
