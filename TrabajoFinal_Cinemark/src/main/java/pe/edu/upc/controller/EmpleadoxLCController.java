@@ -54,7 +54,7 @@ public class EmpleadoxLCController {
 		model.addAttribute("empleadoxLC", new EmpleadoxLC());
 		model.addAttribute("listaEmpleados", eService.listar());
 		model.addAttribute("listaLista_Compras", lService.listar());
-		
+		model.addAttribute("valorBoton", "Registrar");
 		return "empleadoxLC/empleadoxLC";
 	}
 	

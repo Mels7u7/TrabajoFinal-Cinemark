@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import pe.edu.upc.entity.Detalle_List_Compra;
 import pe.edu.upc.entity.Lista_Compra;
 import pe.edu.upc.service.IDetalle_List_CompraService;
@@ -80,9 +79,10 @@ public class Lista_CompraController {
 			}
 		}
 		model.addAttribute("listaLista_Compras", lService.listar());
-		
+
 		return "/listaCompra/listaListaCompra";
 	}
+
 	@GetMapping("/listar")
 	public String listarLista_Compras(Model model) {
 		try {
@@ -122,12 +122,13 @@ public class Lista_CompraController {
 		}
 		model.addAttribute("listaLista_Compras", lService.listar());
 		return "redirect:/listaCompras/listar";
-		
-		
+
 	}
-	@RequestMapping("/buscarestado")
+
+	@RequestMapping("/buscar")
 	public String buscarEstado(Map<String, Object> model, @ModelAttribute Lista_Compra lista_compra)
 			throws ParseException {
+
 		List<Lista_Compra> listaCompras;
 		lista_compra.setEstadoLista(lista_compra.getEstadoLista());
 		listaCompras = lService.buscarEstadoLista(lista_compra.getEstadoLista());
@@ -139,7 +140,9 @@ public class Lista_CompraController {
 		}
 		model.put("listaCompras", listaCompras);
 		return "orden/listaOrden";
+
 	}
+
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/detalle/{id}")
 	public String detailsLista(@PathVariable(value = "id") int id, Model model) {
@@ -160,6 +163,7 @@ public class Lista_CompraController {
 
 		return "/listaCompra/listaCompra";
 	}
+
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash) {
@@ -173,5 +177,5 @@ public class Lista_CompraController {
 
 		return "listaCompra/verlc";
 	}
-	
+
 }

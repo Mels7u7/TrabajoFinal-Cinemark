@@ -49,9 +49,8 @@ public class Lista_CompraServiceImpl implements ILista_CompraService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
-	public List<Lista_Compra> buscarEstadoLista(String estadoLista) {
-		return lR.findByEstadoLista(estadoLista);
+	public List<Lista_Compra> buscarEstadoLista(String nombreProveedor) {
+		return lR.findByNombreProveedor(nombreProveedor);
 	}
 
 	@Override

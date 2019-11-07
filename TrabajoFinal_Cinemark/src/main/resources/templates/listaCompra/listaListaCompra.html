@@ -13,11 +13,12 @@
 		</div>
 
 		<div>
-			<form th:action="@{/listaCompras/buscarestado}" method="post"
+			<form th:action="@{/listaCompras/buscar}" method="post"
 				th:object="${lista_Compra}">
 				<div class="form-group">
-					<label for="p">Buscar:</label> <input type="text"
-						class="form-control" th:field="*{estadoLista}" id="p"></input>
+					<label for="lista_Compra">Buscar:</label> <input type="text"
+						class="form-control" 
+						th:field="*{proveedorLista.nombreProveedor}" id="lista_Compra"></input>
 					<div align="right">
 						<button type="submit" class="btn btn-info">Aceptar</button>
 						<a href="/listaCompras/listar" class="btn btn-dark">Cancelar</a>
