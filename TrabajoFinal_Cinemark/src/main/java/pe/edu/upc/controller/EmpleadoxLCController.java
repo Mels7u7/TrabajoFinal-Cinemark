@@ -24,7 +24,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import pe.edu.upc.entity.EmpleadoxLC;
 import pe.edu.upc.service.IEmpleadoService;
 import pe.edu.upc.service.IEmpleadoxLCService;
-import pe.edu.upc.service.ILista_CompraService;
+import pe.edu.upc.service.IListaService;
 
 @Controller
 @SessionAttributes("empleadoxLC")
@@ -35,7 +35,7 @@ public class EmpleadoxLCController {
 	private IEmpleadoxLCService elService;
 
 	@Autowired
-	private ILista_CompraService lService;
+	private IListaService lService;
 
 	@Autowired
 	private IEmpleadoService eService;
@@ -67,7 +67,7 @@ public class EmpleadoxLCController {
 			Optional<EmpleadoxLC> empleadoLCEncontrado = elService.listarId(empleadoxLC.getIdEmpleadoXLC());
 			if (!empleadoLCEncontrado.isPresent()) {
 				rpta = elService.insertar(empleadoxLC);
-				model.addAttribute("mensaje", "Se registró correctamente");
+				model.addAttribute("mensaje", "Se registrï¿½ correctamente");
 				if (rpta > 0) {
 					model.addAttribute("valorBoton", "Registrar");
 					status.setComplete();
@@ -78,7 +78,7 @@ public class EmpleadoxLCController {
 				elService.modificar(empleadoxLC);
 				rpta = 1;
 				status.setComplete();
-				model.addAttribute("mensaje", "Se modificó correctamente");
+				model.addAttribute("mensaje", "Se modificï¿½ correctamente");
 			}
 
 		}
@@ -125,11 +125,11 @@ public class EmpleadoxLCController {
 		try {
 			if (id != null && id > 0) {
 				elService.eliminar(id);
-				model.put("mensaje", "Se canceló la relación empleado por orden de compra");
+				model.put("mensaje", "Se cancelï¿½ la relaciï¿½n empleado por orden de compra");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("mensaje", "No se puede anular la relación empleado por orden de compra seleccionada");
+			model.put("mensaje", "No se puede anular la relaciï¿½n empleado por orden de compra seleccionada");
 		}
 		model.put("listaEmpleadoxLCs", eService.listar());
 
@@ -143,7 +143,7 @@ public class EmpleadoxLCController {
 		List<EmpleadoxLC> listaEmpleadoxLCs;
 		listaEmpleadoxLCs = elService.buscarNombreEmpleado(empleadoxLC.getEmpleadoEmpleadoLC().getNombreEmpleado());
 		if (listaEmpleadoxLCs.isEmpty()) {
-			model.put("mensaje", "No se encontró al empleado con el nombre especificado");
+			model.put("mensaje", "No se encontrï¿½ al empleado con el nombre especificado");
 		}
 		model.put("listaEmpleadoxLCs", listaEmpleadoxLCs);
 		return "empleadoxLC/listaEmpleadoxLC";

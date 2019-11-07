@@ -24,7 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.entity.Detalle_List_Compra;
 import pe.edu.upc.service.IDetalle_List_CompraService;
-import pe.edu.upc.service.ILista_CompraService;
+import pe.edu.upc.service.IListaService;
 import pe.edu.upc.service.IRecursoService;
 
 @Controller
@@ -35,7 +35,7 @@ public class Detalle_List_CompraController {
 	@Autowired
 	private IDetalle_List_CompraService dService;
 	@Autowired
-	private ILista_CompraService lService;
+	private IListaService lService;
 	@Autowired
 	private IRecursoService rService;
 
@@ -69,7 +69,7 @@ public class Detalle_List_CompraController {
 			Optional<Detalle_List_Compra> detalleEncontrado = dService.listarId(detalle.getIdDetalle());
 			if (!detalleEncontrado.isPresent()) {
 				rpta = dService.insertar(detalle);
-				model.addAttribute("mensaje", "Se registró correctamente");
+				model.addAttribute("mensaje", "Se registrï¿½ correctamente");
 				if (rpta > 0) {
 					model.addAttribute("valorBoton", "Registrar");
 					status.setComplete();
@@ -80,7 +80,7 @@ public class Detalle_List_CompraController {
 				dService.modificar(detalle);
 				rpta = 1;
 				status.setComplete();
-				model.addAttribute("mensaje", "Se modificó correctamente");
+				model.addAttribute("mensaje", "Se modificï¿½ correctamente");
 			}
 
 		}

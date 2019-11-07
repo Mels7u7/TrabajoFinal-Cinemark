@@ -23,7 +23,7 @@ import javax.validation.constraints.Past;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "lista_Compra")
+@Table(name = "lista")
 public class Lista_Compra implements Serializable {
 
 	/**
@@ -71,7 +71,6 @@ public class Lista_Compra implements Serializable {
 
 	public Lista_Compra() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@PrePersist

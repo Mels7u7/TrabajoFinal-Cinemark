@@ -26,7 +26,7 @@ import pe.edu.upc.entity.Contador;
 import pe.edu.upc.entity.Factura;
 import pe.edu.upc.service.IContadorService;
 import pe.edu.upc.service.IFacturaService;
-import pe.edu.upc.service.ILista_CompraService;
+import pe.edu.upc.service.IListaService;
 
 @Controller
 @SessionAttributes("factura")
@@ -40,7 +40,7 @@ public class FacturaController {
 	private IContadorService cService;
 
 	@Autowired
-	private ILista_CompraService icService;
+	private IListaService icService;
 
 	@RequestMapping("/bienvenido")
 	public String irBienvenido() {
@@ -71,7 +71,7 @@ public class FacturaController {
 			Optional<Factura> facturaEncontrado = fService.listarId(factura.getIdFactura());
 			if (!facturaEncontrado.isPresent()) {
 				rpta = fService.insertar(factura);
-				model.addAttribute("mensaje", "Se registró correctamente");
+				model.addAttribute("mensaje", "Se registrï¿½ correctamente");
 				if (rpta > 0) {
 					model.addAttribute("valorBoton", "Registrar");
 					status.setComplete();
@@ -80,7 +80,7 @@ public class FacturaController {
 			} else {
 				fService.modificar(factura);
 				rpta = 1;
-				model.addAttribute("mensaje", "Se modificó correctamente");
+				model.addAttribute("mensaje", "Se modificï¿½ correctamente");
 			}
 
 		}
@@ -108,7 +108,7 @@ public class FacturaController {
 		try {
 			if (id != null && id > 0) {
 				fService.eliminar(id);
-				model.put("mensaje", "Se canceló la factura");
+				model.put("mensaje", "Se cancelï¿½ la factura");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -161,7 +161,7 @@ public class FacturaController {
 		List<Factura> listaFacturas;
 		listaFacturas = fService.buscarNombreContador(factura.getContadorFactura().getNombreContador());
 		if (listaFacturas.isEmpty()) {
-			model.put("mensaje", "No se encontró al contador con el nombre especificado");
+			model.put("mensaje", "No se encontrï¿½ al contador con el nombre especificado");
 		}
 		model.put("listaFacturas", listaFacturas);
 		return "factura/listaFactura";

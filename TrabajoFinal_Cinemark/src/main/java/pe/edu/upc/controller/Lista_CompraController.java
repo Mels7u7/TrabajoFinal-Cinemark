@@ -24,7 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pe.edu.upc.entity.Detalle_List_Compra;
 import pe.edu.upc.entity.Lista_Compra;
 import pe.edu.upc.service.IDetalle_List_CompraService;
-import pe.edu.upc.service.ILista_CompraService;
+import pe.edu.upc.service.IListaService;
 import pe.edu.upc.service.IProveedorService;
 
 @Controller
@@ -32,7 +32,7 @@ import pe.edu.upc.service.IProveedorService;
 public class Lista_CompraController {
 
 	@Autowired
-	private ILista_CompraService lService;
+	private IListaService lService;
 	@Autowired
 	private IProveedorService pService;
 
@@ -64,7 +64,7 @@ public class Lista_CompraController {
 			Optional<Lista_Compra> listaEncontrado = lService.listarId(lista_Compra.getIdLista());
 			if (!listaEncontrado.isPresent()) {
 				rpta = lService.insertar(lista_Compra);
-				model.addAttribute("mensaje", "Se registró correctamente");
+				model.addAttribute("mensaje", "Se registrï¿½ correctamente");
 				if (rpta > 0) {
 					model.addAttribute("valorBoton", "Registrar");
 					status.setComplete();
@@ -75,7 +75,7 @@ public class Lista_CompraController {
 				lService.modificar(lista_Compra);
 				rpta = 1;
 				status.setComplete();
-				model.addAttribute("mensaje", "Se modificó correctamente");
+				model.addAttribute("mensaje", "Se modifico correctamente");
 			}
 		}
 		model.addAttribute("listaLista_Compras", lService.listar());
@@ -115,7 +115,7 @@ public class Lista_CompraController {
 		try {
 			if (id != null && id > 0) {
 				lService.eliminar(id);
-				model.addAttribute("mensaje", "Se eliminó correctamente la lista de compra");
+				model.addAttribute("mensaje", "Se eliminï¿½ correctamente la lista de compra");
 			}
 		} catch (Exception e) {
 			model.addAttribute("mensaje", "No se puede eliminar la lista de compra");
@@ -125,21 +125,21 @@ public class Lista_CompraController {
 
 	}
 
-	@RequestMapping("/buscar")
-	public String buscarEstado(Map<String, Object> model, @ModelAttribute Lista_Compra lista_compra)
+	@RequestMapping("/buscarp")
+	public String buscarProveedor(Map<String, Object> model, @ModelAttribute Lista_Compra lista)
 			throws ParseException {
 
-		List<Lista_Compra> listaCompras;
-		lista_compra.setEstadoLista(lista_compra.getEstadoLista());
-		listaCompras = lService.buscarEstadoLista(lista_compra.getEstadoLista());
-		if (listaCompras.isEmpty()) {
-			listaCompras = lService.buscarEstadoLista(lista_compra.getEstadoLista());
+		List<Lista_Compra> listaListas;
+		lista.setNotaLista(lista.getNotaLista());
+		listaListas = lService.buscar(lista.getNotaLista());
+		if (listaListas.isEmpty()) {
+			listaListas = lService.buscarProveedor(lista.getNotaLista());
 		}
-		if (listaCompras.isEmpty()) {
-			model.put("mensaje", "No se encontró ningun resultado");
+		if (listaListas.isEmpty()) {
+			model.put("mensaje", "No se encontro ningun resultado");
 		}
-		model.put("listaCompras", listaCompras);
-		return "orden/listaOrden";
+		model.put("listaLista_Compras", listaListas);
+		return "listaCompra/listaListaCompra";
 
 	}
 

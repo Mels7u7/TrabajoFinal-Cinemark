@@ -5,31 +5,30 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.upc.entity.Detalle_List_Compra;
 import pe.edu.upc.entity.Lista_Compra;
-import pe.edu.upc.repository.Lista_CompraRepository;
+import pe.edu.upc.repository.ListaRepository;
 import pe.edu.upc.service.IDetalle_List_CompraService;
-import pe.edu.upc.service.ILista_CompraService;
+import pe.edu.upc.service.IListaService;
 
 @Service
-public class Lista_CompraServiceImpl implements ILista_CompraService {
+public class ListaServiceImpl implements IListaService {
 
 	@Autowired
-	private Lista_CompraRepository lR;
+	private ListaRepository lR;
 
 	@Autowired
 	private IDetalle_List_CompraService serviceDetalle;
 
 	@Override
 	@Transactional
-	public Integer insertar(Lista_Compra lista_Compra) {
+	public Integer insertar(Lista_Compra lista) {
 		int rpta = 0;
 		if (rpta == 0) {
-			lR.save(lista_Compra);
+			lR.save(lista);
 		}
 		return rpta;
 	}
@@ -41,16 +40,9 @@ public class Lista_CompraServiceImpl implements ILista_CompraService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
-	public List<Lista_Compra> listar() {
-		List<Lista_Compra> list = lR.findAll(Sort.by(Sort.Direction.DESC, "notaLista"));
-
-		return list;
-	}
-
-	@Override
-	public List<Lista_Compra> buscarEstadoLista(String nombreProveedor) {
-		return lR.findByNombreProveedor(nombreProveedor);
+	@Transactional
+	public void modificar(Lista_Compra lista) {
+		lR.save(lista);
 	}
 
 	@Override
@@ -75,9 +67,27 @@ public class Lista_CompraServiceImpl implements ILista_CompraService {
 	}
 
 	@Override
-	public void modificar(Lista_Compra lista_Compra) {
-		lR.save(lista_Compra);
+	@Transactional(readOnly = true)
+	public List<Lista_Compra> listar() {
+		return lR.findAll();
+	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public List<Lista_Compra> buscar(String notaLista) {
+		return lR.findByNotaLista(notaLista);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Lista_Compra> buscarEstado(String estadoLista) {
+		return lR.buscarEstado(estadoLista);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Lista_Compra> buscarProveedor(String nombreProveedor) {
+		return lR.findLista_CompraBynombreProveedor(nombreProveedor);
 	}
 
 }
