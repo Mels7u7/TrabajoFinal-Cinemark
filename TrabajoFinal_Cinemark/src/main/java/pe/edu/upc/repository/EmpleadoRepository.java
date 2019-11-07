@@ -11,22 +11,18 @@ import org.springframework.stereotype.Repository;
 import pe.edu.upc.entity.Empleado;
 
 @Repository
-public interface EmpleadoRepository extends JpaRepository<Empleado, Integer>{
+public interface EmpleadoRepository extends JpaRepository<Empleado, Integer> {
 	@Query("from Empleado e where e.puestoEmpleado like %:puestoEmpleado%")
-	List <Empleado> findByPuesto(@Param("puestoEmpleado")String puestoEmpleado);
+	List<Empleado> findByPuesto(@Param("puestoEmpleado") String puestoEmpleado);
 
 	@Query("select count(e.dniEmpleado) from Empleado e where e.dniEmpleado =:dniEmpleado")
 	public int buscarDNIEmpleado(@Param("dniEmpleado") String dniEmpleado);
-	
+
 	@Modifying(clearAutomatically = true)
 	@Query("update Empleado set nombreEmpleado = :nombreEmpleado ,apellidoEmpleado = :apellidoEmpleado, experienciaEmpleado = :experienciaEmpleado,sedeEmpleado = :sedeEmpleado,tituloEmpleado = :tituloEmpleado, correoEmpleado = :correoEmpleado, celularEmpleado = :celularEmpleado, puestoEmpleado = :puestoEmpleado where idEmpleado=:idEmpleado")
-	public void actualizar(@Param("nombreEmpleado")String nombreEmpleado,
-			@Param("apellidoEmpleado")String apellidoEmpleado,
-			@Param("experienciaEmpleado")int experienciaEmpleado,
-			@Param("sedeEmpleado")int sedeEmpleado,
-			@Param("tituloEmpleado")int tituloEmpleado,
-			@Param("correoEmpleado")int correoEmpleado,
-			@Param("celularEmpleado")int celularEmpleado,
-			@Param("puestoEmpleado")int puestoEmpleado,
-			@Param("idEmpleado")int idEmpleado);
+	public void actualizar(@Param("nombreEmpleado") String nombreEmpleado,
+			@Param("apellidoEmpleado") String apellidoEmpleado, @Param("experienciaEmpleado") int experienciaEmpleado,
+			@Param("sedeEmpleado") int sedeEmpleado, @Param("tituloEmpleado") int tituloEmpleado,
+			@Param("correoEmpleado") int correoEmpleado, @Param("celularEmpleado") int celularEmpleado,
+			@Param("puestoEmpleado") int puestoEmpleado, @Param("idEmpleado") int idEmpleado);
 }

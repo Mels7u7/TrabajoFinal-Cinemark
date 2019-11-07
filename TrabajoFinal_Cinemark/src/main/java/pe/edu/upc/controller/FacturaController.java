@@ -35,20 +35,19 @@ public class FacturaController {
 
 	@Autowired
 	private IFacturaService fService;
-	
+
 	@Autowired
 	private IContadorService cService;
-	
+
 	@Autowired
 	private ILista_CompraService icService;
-	
-	
+
 	@RequestMapping("/bienvenido")
 	public String irBienvenido() {
 		return "bienvenido";
 	}
-	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping("/nuevo")
 	public String nuevoFactura(Model model) {
 		model.addAttribute("factura", new Factura());
@@ -58,12 +57,11 @@ public class FacturaController {
 		model.addAttribute("valorBoton", "Registrar");
 		return "/factura/factura";
 	}
-	
-	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@PostMapping("/guardar")
-	public String guardarFactura(@Valid Factura factura, BindingResult result, Model model,
-			SessionStatus status) throws Exception {
+	public String guardarFactura(@Valid Factura factura, BindingResult result, Model model, SessionStatus status)
+			throws Exception {
 		if (result.hasErrors()) {
 			model.addAttribute("listaContadores", cService.listar());
 			model.addAttribute("valorBoton", "Registrar");
@@ -84,15 +82,15 @@ public class FacturaController {
 				rpta = 1;
 				model.addAttribute("mensaje", "Se modificó correctamente");
 			}
-			
+
 		}
 		model.addAttribute("listaFacturas", fService.listar());
-		
+
 		return "/factura/listaFactura";
-		
+
 	}
-	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping("/listar")
 	public String listarFacturas(Model model) {
 		try {
@@ -103,9 +101,8 @@ public class FacturaController {
 		}
 		return "/factura/listaFactura";
 	}
-	
-	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@RequestMapping("/eliminar")
 	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
 		try {
@@ -121,10 +118,9 @@ public class FacturaController {
 
 		return "redirect:/facturas/listar";
 	}
-	
-	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
-	@GetMapping("/detalle/{id}")//modificar
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@GetMapping("/detalle/{id}") // modificar
 	public String detailsFactura(@PathVariable(value = "id") int id, Model model) {
 		try {
 			Optional<Factura> factura = fService.listarId(id);
@@ -135,7 +131,7 @@ public class FacturaController {
 				model.addAttribute("factura", factura.get());
 				model.addAttribute("listaContadores", cService.listar());
 				model.addAttribute("listaLista_Compras", icService.listar());
-				
+
 			}
 
 		} catch (Exception e) {
@@ -144,9 +140,8 @@ public class FacturaController {
 		model.addAttribute("valorBoton", "Modificar");
 		return "/factura/factura";
 	}
-	
 
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash) {
 
@@ -158,8 +153,7 @@ public class FacturaController {
 		model.put("factura", factura.get());
 		return "factura/verf";
 	}
-	
-	
+
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@RequestMapping("/buscar")
 	public String buscar(Map<String, Object> model, @ModelAttribute Factura factura) throws ParseException {
@@ -172,12 +166,5 @@ public class FacturaController {
 		model.put("listaFacturas", listaFacturas);
 		return "factura/listaFactura";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

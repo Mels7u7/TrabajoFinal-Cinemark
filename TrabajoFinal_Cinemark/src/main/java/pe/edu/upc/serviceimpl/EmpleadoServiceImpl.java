@@ -41,7 +41,7 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
 	}
 
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	public Optional<Empleado> listarId(int idEmpleado) {
 		return eR.findById(idEmpleado);
 	}

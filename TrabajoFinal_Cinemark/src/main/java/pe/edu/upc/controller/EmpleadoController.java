@@ -29,7 +29,7 @@ import pe.edu.upc.service.IEmpleadoService;
 @SessionAttributes("empleado")
 @RequestMapping("/empleados")
 public class EmpleadoController {
-	
+
 	@Autowired
 	private IEmpleadoService eService;
 
@@ -38,18 +38,18 @@ public class EmpleadoController {
 		return "bienvenido";
 	}
 
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping("/nuevo")
 	public String nuevoEmpleado(Model model) {
 		model.addAttribute("empleado", new Empleado());
 		model.addAttribute("valorBoton", "Registrar");
 		return "empleado/empleado";
 	}
-	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@PostMapping("/guardar")
-	public String guardarEmpleado(@Valid Empleado empleado, BindingResult result, Model model,
-			SessionStatus status) throws Exception {
+	public String guardarEmpleado(@Valid Empleado empleado, BindingResult result, Model model, SessionStatus status)
+			throws Exception {
 		if (result.hasErrors()) {
 			model.addAttribute("valorBoton", "Registrar");
 			return "/empleado/empleado";
@@ -76,10 +76,10 @@ public class EmpleadoController {
 		}
 		model.addAttribute("listaEmpleados", eService.listar());
 		return "/empleado/listaEmpleado";
-	
+
 	}
-	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping("/listar")
 	public String listarEmpleados(Model model) {
 		try {
@@ -90,7 +90,7 @@ public class EmpleadoController {
 		}
 		return "/empleado/listaEmpleado";
 	}
-	
+
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("/eliminar")
 	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
@@ -107,9 +107,9 @@ public class EmpleadoController {
 
 		return "redirect:/empleados/listar";
 	}
-	
+
 	@Secured("ROLE_ADMIN")
-	@GetMapping("/detalle/{id}")//modificar
+	@GetMapping("/detalle/{id}") // modificar
 	public String DetallesEmpleado(@PathVariable(value = "id") int id, Model model) {
 		try {
 			Optional<Empleado> empleado = eService.listarId(id);
@@ -126,8 +126,8 @@ public class EmpleadoController {
 		model.addAttribute("valorBoton", "Modificar");
 		return "/empleado/empleado";
 	}
-	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@RequestMapping("/buscar")
 	public String BuscarPorPuesto(Map<String, Object> model, @ModelAttribute Empleado empleado) throws ParseException {
 
@@ -141,8 +141,8 @@ public class EmpleadoController {
 		model.put("listaEmpleados", listaEmpleados);
 		return "empleado/listaEmpleado";
 	}
-	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash) {
 

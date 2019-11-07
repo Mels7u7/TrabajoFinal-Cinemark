@@ -12,13 +12,11 @@ import pe.edu.upc.repository.EmpleadoxLCRepository;
 import pe.edu.upc.service.IEmpleadoxLCService;
 
 @Service
-public class EmpleadoxLCServiceImpl implements IEmpleadoxLCService{
-
-	
+public class EmpleadoxLCServiceImpl implements IEmpleadoxLCService {
 
 	@Autowired
 	private EmpleadoxLCRepository eR;
-	
+
 	@Override
 	@Transactional
 	public Integer insertar(EmpleadoxLC empleadoxLC) {
@@ -33,14 +31,14 @@ public class EmpleadoxLCServiceImpl implements IEmpleadoxLCService{
 	@Transactional
 	public void modificar(EmpleadoxLC empleadoxLC) {
 		eR.save(empleadoxLC);
-		
+
 	}
 
 	@Override
 	@Transactional
 	public void eliminar(int idEmpleadoXLC) {
 		eR.deleteById(idEmpleadoXLC);
-		
+
 	}
 
 	@Override
@@ -51,7 +49,7 @@ public class EmpleadoxLCServiceImpl implements IEmpleadoxLCService{
 
 	@Override
 	public List<EmpleadoxLC> listar() {
-		
+
 		return eR.findAll();
 	}
 
@@ -61,9 +59,4 @@ public class EmpleadoxLCServiceImpl implements IEmpleadoxLCService{
 		return eR.findByNombreEmpleado(nombreEmpleado);
 	}
 
-	
-
-	
-	
-	
 }

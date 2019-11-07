@@ -71,10 +71,10 @@ public class ContadorCotroller {
 				status.setComplete();
 				model.addAttribute("mensaje", "Se modificó correctamente");
 			}
-			
+
 		}
 		model.addAttribute("listaContadores", cService.listar());
-		
+
 		return "/contador/listaContador";
 	}
 
@@ -117,9 +117,9 @@ public class ContadorCotroller {
 				return "redirect:/contadores/listar";
 			} else {
 				model.addAttribute("contador", contador.get());
-				
+
 			}
-			
+
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}

@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "empleadoXLC")
-public class EmpleadoxLC implements Serializable{
+public class EmpleadoxLC implements Serializable {
 
 	/**
 	 * 
@@ -21,11 +21,11 @@ public class EmpleadoxLC implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idEmpleadoXLC;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idLista")
 	private Lista_Compra listaEmpleadoLC;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idEmpleado")
 	private Empleado empleadoEmpleadoLC;
@@ -65,6 +65,5 @@ public class EmpleadoxLC implements Serializable{
 	public void setEmpleadoEmpleadoLC(Empleado empleadoEmpleadoLC) {
 		this.empleadoEmpleadoLC = empleadoEmpleadoLC;
 	}
-	
-	
+
 }

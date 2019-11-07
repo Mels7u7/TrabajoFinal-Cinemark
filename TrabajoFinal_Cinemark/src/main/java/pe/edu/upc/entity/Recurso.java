@@ -14,7 +14,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "recurso")
-public class Recurso implements Serializable{
+public class Recurso implements Serializable {
 
 	/**
 	 * 
@@ -23,30 +23,29 @@ public class Recurso implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idRecurso;
-	
+
 	@NotEmpty(message = "Ingresa el nombre del recurso")
 	@Column(name = "nombreRecurso", nullable = false, length = 30)
 	private String nombreRecurso;
-	
+
 	@NotEmpty(message = "Ingresa el tipo de unidad")
 	@Column(name = "tipoUnidadRecurso", nullable = false, length = 20)
 	private String tipoUnidadRecurso;
-	
+
 	@Min(1)
 	@Max(1000)
 	@Column(name = "precioRecurso", nullable = false)
 	private int precioRecurso;
-	
+
 	private String foto;
 
-	public Recurso(int idRecurso, String nombreRecurso,
-			 String tipoUnidadRecurso,int precioRecurso, String foto) {
+	public Recurso(int idRecurso, String nombreRecurso, String tipoUnidadRecurso, int precioRecurso, String foto) {
 		super();
 		this.idRecurso = idRecurso;
 		this.nombreRecurso = nombreRecurso;
 		this.tipoUnidadRecurso = tipoUnidadRecurso;
 		this.precioRecurso = precioRecurso;
-		this.foto=foto;
+		this.foto = foto;
 	}
 
 	public Recurso() {
@@ -93,6 +92,5 @@ public class Recurso implements Serializable{
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
-	
-	
+
 }

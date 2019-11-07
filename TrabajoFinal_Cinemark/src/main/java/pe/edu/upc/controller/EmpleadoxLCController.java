@@ -1,8 +1,6 @@
 package pe.edu.upc.controller;
 
-
 import java.text.ParseException;
-
 
 import java.util.List;
 import java.util.Map;
@@ -35,20 +33,19 @@ public class EmpleadoxLCController {
 
 	@Autowired
 	private IEmpleadoxLCService elService;
-	
+
 	@Autowired
 	private ILista_CompraService lService;
-	
+
 	@Autowired
 	private IEmpleadoService eService;
-	
-	
+
 	@RequestMapping("/bienvenido")
 	public String irBienvenido() {
 		return "bienvenido";
 	}
-		
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping("/nuevo")
 	public String nuevoEmpleadoxLC(Model model) {
 		model.addAttribute("empleadoxLC", new EmpleadoxLC());
@@ -57,9 +54,8 @@ public class EmpleadoxLCController {
 		model.addAttribute("valorBoton", "Registrar");
 		return "empleadoxLC/empleadoxLC";
 	}
-	
-	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@PostMapping("/guardar")
 	public String guardarEmpleadoxLC(@Valid EmpleadoxLC empleadoxLC, BindingResult result, Model model,
 			SessionStatus status) throws Exception {
@@ -84,14 +80,14 @@ public class EmpleadoxLCController {
 				status.setComplete();
 				model.addAttribute("mensaje", "Se modificó correctamente");
 			}
-			
+
 		}
 		model.addAttribute("listaEmpleadoxLCs", elService.listar());
-		
+
 		return "/empleadoxLC/listaEmpleadoxLC";
 	}
-	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping("/listar")
 	public String listarEmpleadoxLC(Model model) {
 		try {
@@ -102,8 +98,8 @@ public class EmpleadoxLCController {
 		}
 		return "/empleadoxLC/listaEmpleadoxLC";
 	}
-	
-	@GetMapping("/detalle/{id}")//modificar
+
+	@GetMapping("/detalle/{id}") // modificar
 	public String detailsEmpleadoxLC(@PathVariable(value = "id") int id, Model model) {
 		try {
 			Optional<EmpleadoxLC> empleadoxLC = elService.listarId(id);
@@ -122,25 +118,24 @@ public class EmpleadoxLCController {
 		model.addAttribute("valorBoton", "Modificar");
 		return "/empleadoxLC/empleadoxLC";
 	}
-	
-	
+
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("/eliminar")
 	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
 		try {
 			if (id != null && id > 0) {
 				elService.eliminar(id);
-				model.put("mensaje", "Se cancelÃ³ la relaciÃ³n empleado por orden de compra");
+				model.put("mensaje", "Se canceló la relación empleado por orden de compra");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("mensaje", "No se puede anular la realciÃ³n empleado por orden de compra seleccionada");
+			model.put("mensaje", "No se puede anular la relación empleado por orden de compra seleccionada");
 		}
 		model.put("listaEmpleadoxLCs", eService.listar());
 
 		return "redirect:/empleadoxLCs/listar";
 	}
-	
+
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@RequestMapping("/buscar")
 	public String buscar(Map<String, Object> model, @ModelAttribute EmpleadoxLC empleadoxLC) throws ParseException {
@@ -148,10 +143,10 @@ public class EmpleadoxLCController {
 		List<EmpleadoxLC> listaEmpleadoxLCs;
 		listaEmpleadoxLCs = elService.buscarNombreEmpleado(empleadoxLC.getEmpleadoEmpleadoLC().getNombreEmpleado());
 		if (listaEmpleadoxLCs.isEmpty()) {
-			model.put("mensaje", "No se encontrï¿½ al empleado con el nombre especificado");
+			model.put("mensaje", "No se encontró al empleado con el nombre especificado");
 		}
 		model.put("listaEmpleadoxLCs", listaEmpleadoxLCs);
 		return "empleadoxLC/listaEmpleadoxLC";
 	}
-		
+
 }

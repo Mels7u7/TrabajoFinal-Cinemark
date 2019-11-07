@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import pe.edu.upc.entity.EmpleadoxLC;
 
-
 public interface IEmpleadoxLCService {
 
 	public Integer insertar(EmpleadoxLC empleadoxLC);
@@ -17,6 +16,6 @@ public interface IEmpleadoxLCService {
 
 	List<EmpleadoxLC> listar();
 
-	List<EmpleadoxLC>buscarNombreEmpleado(String nombreEmpleado);
+	List<EmpleadoxLC> buscarNombreEmpleado(String nombreEmpleado);
 
 }

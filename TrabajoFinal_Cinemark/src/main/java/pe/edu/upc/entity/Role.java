@@ -11,7 +11,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "authorities", uniqueConstraints = { @UniqueConstraint(columnNames = { "user_id", "authority" }) })
-public class Role implements Serializable{
+public class Role implements Serializable {
 	/**
 	 * 
 	 */
@@ -20,9 +20,9 @@ public class Role implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String authority;
-	
+
 	public Long getId() {
 		return id;
 	}

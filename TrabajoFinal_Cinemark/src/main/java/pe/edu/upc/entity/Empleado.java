@@ -44,7 +44,7 @@ public class Empleado implements Serializable {
 	@Column(name = "sedeEmpleado", nullable = false, length = 30)
 	private String sedeEmpleado;
 
-	@Size(min = 8, max = 8,message="El DNI tiene que ser de 8 digitos")
+	@Size(min = 8, max = 8, message = "El DNI tiene que ser de 8 digitos")
 	@NotEmpty(message = "Ingresar DNI")
 	@Column(name = "dniEmpleado", nullable = false, length = 10, unique = true)
 	private String dniEmpleado;
@@ -58,9 +58,9 @@ public class Empleado implements Serializable {
 	@Column(name = "correoEmpleado", nullable = false, length = 40)
 	private String correoEmpleado;
 
-	@Pattern(regexp="[\\d]{9}",message="El número de celular tiene que ser de 9 digitos y no puede ingresar letras")
+	@Pattern(regexp = "[\\d]{9}", message = "El número de celular tiene que ser de 9 digitos y no puede ingresar letras")
 	@NotEmpty(message = "Ingresa el celular del empleado")
-	@Column(name = "celularEmpleado", nullable = false, length=10)
+	@Column(name = "celularEmpleado", nullable = false, length = 10)
 	private String celularEmpleado;
 
 	@NotEmpty(message = "Ingresar el puesto del empleado")
@@ -68,8 +68,8 @@ public class Empleado implements Serializable {
 	private String puestoEmpleado;
 
 	public Empleado(int idEmpleado, String nombreEmpleado, String apellidoEmpleado, int experienciaEmpleado,
-			String sedeEmpleado, String dniEmpleado, String tituloEmpleado, String correoEmpleado, String celularEmpleado,
-			String puestoEmpleado) {
+			String sedeEmpleado, String dniEmpleado, String tituloEmpleado, String correoEmpleado,
+			String celularEmpleado, String puestoEmpleado) {
 		this.idEmpleado = idEmpleado;
 		this.nombreEmpleado = nombreEmpleado;
 		this.apellidoEmpleado = apellidoEmpleado;

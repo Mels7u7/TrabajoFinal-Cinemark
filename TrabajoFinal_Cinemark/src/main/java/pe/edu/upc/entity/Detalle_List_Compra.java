@@ -45,7 +45,7 @@ public class Detalle_List_Compra implements Serializable {
 	@Max(1000)
 	@Column(name = "unidadesDetalle", nullable = false)
 	private int unidadesDetalle;
-	
+
 	@Transient
 	private double importe;
 
@@ -59,8 +59,6 @@ public class Detalle_List_Compra implements Serializable {
 		this.unidadesDetalle = unidadesDetalle;
 		this.importe = precioDetalle * unidadesDetalle;
 	}
-
-	
 
 	public double getImporte() {
 		return importe;

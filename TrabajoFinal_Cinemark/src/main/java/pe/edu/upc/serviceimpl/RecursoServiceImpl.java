@@ -13,11 +13,11 @@ import pe.edu.upc.repository.RecursoRepository;
 import pe.edu.upc.service.IRecursoService;
 
 @Service
-public class RecursoServiceImpl implements IRecursoService{
+public class RecursoServiceImpl implements IRecursoService {
 
 	@Autowired
 	private RecursoRepository rR;
-	
+
 	@Override
 	@Transactional
 	public Integer insertar(Recurso recurso) {
@@ -43,8 +43,8 @@ public class RecursoServiceImpl implements IRecursoService{
 	@Override
 	@Transactional(readOnly = true)
 	public Recurso listarId(int idRecurso) {
-		Optional<Recurso> op=rR.findById(idRecurso);
-		return op.isPresent()?op.get():null;
+		Optional<Recurso> op = rR.findById(idRecurso);
+		return op.isPresent() ? op.get() : null;
 	}
 
 	@Override

@@ -46,7 +46,7 @@ public class ProveedorController {
 		return "proveedor/proveedor";
 	}
 
-	@Secured({"ROLE_ADMIN", "ROLE_USER"})
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@PostMapping("/guardar")
 	public String guardarProveedor(@Valid Proveedor proveedor, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
@@ -90,38 +90,40 @@ public class ProveedorController {
 
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("/eliminar")
-	public String eliminar(Map<String,Object>model,@RequestParam(value="id") Integer id) {
+	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
 		try {
-			if(id!=null&& id>0) {
+			if (id != null && id > 0) {
 				pService.eliminar(id);
-				model.put("mensaje", "se canceló el contrato con el proveedor seleccionado");	
+				model.put("mensaje", "se canceló el contrato con el proveedor seleccionado");
 			}
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			model.put("mensaje", "No se puede anular el contrato con el proveedor seleccionado");
 		}
 		model.put("listaProveedores", pService.listar());
 		return "redirect:/proveedores/listar";
-		}
+	}
+
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/detalle/{id}")
-	public String detailsProveedor(@PathVariable(value= "id")int id, Model model) {
+	public String detailsProveedor(@PathVariable(value = "id") int id, Model model) {
 		try {
-			Optional<Proveedor> proveedor=pService.listarId(id);
-			if(!proveedor.isPresent()) {
-				model.addAttribute("info","proveedor no existe");
+			Optional<Proveedor> proveedor = pService.listarId(id);
+			if (!proveedor.isPresent()) {
+				model.addAttribute("info", "proveedor no existe");
 				return "redirect:/proveedores/listar";
-			}else {
-					model.addAttribute("proveedor",proveedor.get());
-				}
-		}catch (Exception e) {
-			model.addAttribute("error",e.getMessage());
+			} else {
+				model.addAttribute("proveedor", proveedor.get());
+			}
+		} catch (Exception e) {
+			model.addAttribute("error", e.getMessage());
 		}
 		model.addAttribute("valorBoton", "Modificar");
-		return  "/proveedor/proveedor";
+		return "/proveedor/proveedor";
 	}
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@RequestMapping("/buscar")
 	public String buscar(Map<String, Object> model, @ModelAttribute Proveedor proveedor) throws ParseException {
 
@@ -134,7 +136,8 @@ public class ProveedorController {
 		model.put("listaProveedores", listaProveedores);
 		return "proveedor/listaProveedor";
 	}
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash) {
 
@@ -147,13 +150,5 @@ public class ProveedorController {
 
 		return "proveedor/verp";
 	}
-	
-		
-	
-	
-		
-	
-	
-			
-	
+
 }

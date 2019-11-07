@@ -75,7 +75,7 @@ public class RecursoController {
 			@RequestParam("file") MultipartFile foto, RedirectAttributes flash, SessionStatus status) throws Exception {
 		if (result.hasErrors()) {
 			model.addAttribute("valorBoton", "Registrar");
-			return "/recurso/recurso";			
+			return "/recurso/recurso";
 		} else {
 			if (!foto.isEmpty()) {
 
@@ -108,11 +108,11 @@ public class RecursoController {
 			}
 			if (rpta > 0) {
 				status.setComplete();
-				
+
+			}
 		}
-	}
-	model.addAttribute("listaRecursos",rService.listar());	
-	return"/recurso/listaRecurso";
+		model.addAttribute("listaRecursos", rService.listar());
+		return "/recurso/listaRecurso";
 
 	}
 

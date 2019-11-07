@@ -10,12 +10,12 @@ public interface ILista_CompraService {
 	public Integer insertar(Lista_Compra lista_Compra);
 
 	public void eliminar(int idLista);
-	
+
 	public void modificar(Lista_Compra lista_Compra);
 
 	List<Lista_Compra> listar();
-	
+
 	Optional<Lista_Compra> listarId(int idLista);
-	
+
 	List<Lista_Compra> buscarEstadoLista(String estadoLista);
 }

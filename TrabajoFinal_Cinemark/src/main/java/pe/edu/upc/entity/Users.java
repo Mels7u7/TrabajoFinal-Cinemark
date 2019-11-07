@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class Users implements Serializable{
+public class Users implements Serializable {
 	/**
 	 * 
 	 */
@@ -77,5 +77,5 @@ public class Users implements Serializable{
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
-	
+
 }

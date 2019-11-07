@@ -13,8 +13,8 @@ import pe.edu.upc.entity.Lista_Compra;
 public interface Lista_CompraRepository extends JpaRepository<Lista_Compra, Integer> {
 
 	@Query("from Lista_Compra l where l.estadoLista =:estadoLista")
-	public List<Lista_Compra>findByLista(@Param("estadoLista")String estadoLista);
-	
+	public List<Lista_Compra> findByLista(@Param("estadoLista") String estadoLista);
+
 	@Query("from Lista_Compra l where l.proveedorLista.nombreProveedor like %:nombreProveedor%")
-	List<Lista_Compra>findByNombreProveedor(@Param("nombreProveedor")String nombreProveedor);
+	List<Lista_Compra> findByNombreProveedor(@Param("nombreProveedor") String nombreProveedor);
 }

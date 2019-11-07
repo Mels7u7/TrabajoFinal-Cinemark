@@ -9,11 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import pe.edu.upc.entity.Factura;
 
-
 @Repository
-public interface FacturaRepository extends JpaRepository<Factura,Integer> {
-	
+public interface FacturaRepository extends JpaRepository<Factura, Integer> {
+
 	@Query("from Factura c where c.contadorFactura.nombreContador like %:nombreContador%")
-	List<Factura>findByNombreContador(@Param("nombreContador")String nombreContador);
-	
+	List<Factura> findByNombreContador(@Param("nombreContador") String nombreContador);
+
 }

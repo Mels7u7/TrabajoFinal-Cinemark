@@ -82,10 +82,10 @@ public class Detalle_List_CompraController {
 				status.setComplete();
 				model.addAttribute("mensaje", "Se modificó correctamente");
 			}
-			
+
 		}
 		model.addAttribute("listaDetalles", dService.listar());
-		
+
 		return "/detalle/listaDetalle";
 	}
 
