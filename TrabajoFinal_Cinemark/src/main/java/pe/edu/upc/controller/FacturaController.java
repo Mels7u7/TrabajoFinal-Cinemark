@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -23,8 +24,10 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.entity.Contador;
+import pe.edu.upc.entity.Detalle_List_Compra;
 import pe.edu.upc.entity.Factura;
 import pe.edu.upc.service.IContadorService;
+import pe.edu.upc.service.IDetalle_List_CompraService;
 import pe.edu.upc.service.IFacturaService;
 import pe.edu.upc.service.IListaService;
 
@@ -41,6 +44,9 @@ public class FacturaController {
 
 	@Autowired
 	private IListaService icService;
+	
+	@Autowired
+	private IDetalle_List_CompraService serviceDetalle;
 
 	@RequestMapping("/bienvenido")
 	public String irBienvenido() {
@@ -95,7 +101,23 @@ public class FacturaController {
 	public String listarFacturas(Model model) {
 		try {
 			model.addAttribute("factura", new Factura());
-			model.addAttribute("listaFacturas", fService.listar());
+
+			List<Factura> list = fService.listar();
+			List<Detalle_List_Compra> detalleLista = serviceDetalle.listar();
+
+			for (Factura l : list) {
+				float precioLista = 0;
+
+				for (Detalle_List_Compra e : detalleLista.stream()
+						.filter(c -> c.getListaDetalle().getIdLista() == l.getIdFactura()).collect(Collectors.toList()))
+					precioLista += e.getPrecioDetalle() * e.getUnidadesDetalle();
+
+				l.setPrecio(precioLista);
+
+			}
+
+			model.addAttribute("listaFacturas", list);
+
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}

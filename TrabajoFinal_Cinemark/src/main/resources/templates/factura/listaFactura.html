@@ -40,6 +40,7 @@
 								<th>Id</th>
 								<th>Nombre del Contador</th>
 								<th>Id lista de Compra</th>	
+								<th>Precio</th>	
 								<th align="center">Operación</th>
 								<th align="center">Operación</th>
 							</tr>
@@ -52,6 +53,7 @@
 									
 								<td th:text="${factura.contadorFactura.nombreContador}"></td>
 								<td th:text="${factura.listaFactura.idLista}"></td>
+								<td th:text="${factura.precio}"></td>
 
                                 <td align="center"><a
 									th:href="@{'/facturas/detalle/' + ${factura.idFactura}}"

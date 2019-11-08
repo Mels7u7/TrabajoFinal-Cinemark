@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -49,15 +51,22 @@ public class Factura implements Serializable {
 	@Column(name = "fechaFactura")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaFactura;
+	
+	@Min(0)
+	@Max(4000)
+	@Column(name = "precio", nullable = false)
+	private float precio;
 
 	public Factura(int idFactura, Lista_Compra listaFactura, Contador contadorFactura, String analisisFactura,
-			Date fechaFactura) {
+			Date fechaFactura, float precio) {
 		super();
 		this.idFactura = idFactura;
 		this.listaFactura = listaFactura;
 		this.contadorFactura = contadorFactura;
 		this.analisisFactura = analisisFactura;
 		this.fechaFactura = fechaFactura;
+		this.precio = precio;
+		
 	}
 
 	public Factura() {
@@ -103,6 +112,14 @@ public class Factura implements Serializable {
 
 	public void setFechaFactura(Date fechaFactura) {
 		this.fechaFactura = fechaFactura;
+	}
+
+	public float getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(float precio) {
+		this.precio = precio;
 	}
 
 }
