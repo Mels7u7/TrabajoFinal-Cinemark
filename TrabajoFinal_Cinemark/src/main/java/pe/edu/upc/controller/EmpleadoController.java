@@ -26,7 +26,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.entity.Empleado;
 import pe.edu.upc.entity.Users;
-import pe.edu.upc.service.IEmpleadoService;
 import pe.edu.upc.service.IUserService;
 import pe.edu.upc.serviceimpl.EmpleadoServiceImpl;
 

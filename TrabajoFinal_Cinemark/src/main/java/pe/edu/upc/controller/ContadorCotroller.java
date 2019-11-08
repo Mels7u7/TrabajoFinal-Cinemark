@@ -37,7 +37,7 @@ public class ContadorCotroller {
 		return "bienvenido";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/nuevo")
 	public String nuevoContador(Model model) {
 		model.addAttribute("contador", new Contador());
@@ -45,7 +45,7 @@ public class ContadorCotroller {
 		return "contador/contador";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/guardar")
 	public String guardarContador(@Valid Contador contador, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
