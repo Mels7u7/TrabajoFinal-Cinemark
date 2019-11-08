@@ -17,6 +17,6 @@ public interface IDetalle_List_CompraService {
 
 	List<Detalle_List_Compra> listar();
 
-	List<Detalle_List_Compra> buscarCantidadRecurso(int unidadesDetalle);
+	List<Detalle_List_Compra> FindRecursosByListaCompra(int idLista);
 
 }

@@ -66,8 +66,8 @@ public class Detalle_List_CompraServiceImpl implements IDetalle_List_CompraServi
 	}
 
 	@Override
-	public List<Detalle_List_Compra> buscarCantidadRecurso(int unidadesDetalle) {
-		return dR.findByUnidadesDetalle(unidadesDetalle);
+	public List<Detalle_List_Compra> FindRecursosByListaCompra(int idLista) {
+		return dR.findRecursosByListaCompra(idLista);
 	}
 
 }
