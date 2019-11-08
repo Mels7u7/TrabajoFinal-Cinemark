@@ -2,11 +2,14 @@ package pe.edu.upc.entity;
 
 import java.io.Serializable;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
@@ -26,6 +29,10 @@ public class Empleado implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idEmpleado;
+	
+	@OneToOne
+	@JoinColumn(name = "idUser", referencedColumnName = "id")
+	private Users user;
 
 	@NotEmpty(message = "Ingresa el nombre del empleado")
 	@Column(name = "nombreEmpleado", nullable = false, length = 30)
@@ -58,7 +65,7 @@ public class Empleado implements Serializable {
 	@Column(name = "correoEmpleado", nullable = false, length = 40)
 	private String correoEmpleado;
 
-	@Pattern(regexp = "[\\d]{9}", message = "El número de celular tiene que ser de 9 digitos y no puede ingresar letras")
+	@Pattern(regexp = "[\\d]{9}", message = "El nï¿½mero de celular tiene que ser de 9 digitos y no puede ingresar letras")
 	@NotEmpty(message = "Ingresa el celular del empleado")
 	@Column(name = "celularEmpleado", nullable = false, length = 10)
 	private String celularEmpleado;
@@ -80,6 +87,14 @@ public class Empleado implements Serializable {
 		this.correoEmpleado = correoEmpleado;
 		this.celularEmpleado = celularEmpleado;
 		this.puestoEmpleado = puestoEmpleado;
+	}
+
+	public Users getUser() {
+		return user;
+	}
+
+	public void setUser(Users user) {
+		this.user = user;
 	}
 
 	public Empleado() {
@@ -165,5 +180,7 @@ public class Empleado implements Serializable {
 	public void setPuestoEmpleado(String puestoEmpleado) {
 		this.puestoEmpleado = puestoEmpleado;
 	}
+
+
 
 }

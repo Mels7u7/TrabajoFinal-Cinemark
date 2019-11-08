@@ -10,9 +10,15 @@
 		<div class="card bg-light">
 			<div class="card-header text-black bg-blue">Registro de
 				Empleados</div>
+				
+				
+				
+				
 			<form th:action="@{/empleados/guardar}" th:object="${empleado}"
 				method="post" enctype="multipart/form-data">
 				<div class="form-group row" style="display: none !important;">
+				
+				
 					<label for="idEmpleado" class="col-sm-2 col-form-label">Id</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{idEmpleado}" class="form-control" />
@@ -127,6 +133,40 @@
 							th:errors="*{puestoEmpleado}"></small>
 					</div>
 				</div>
+				
+				<div class="form-group row">
+							<label for="user.username" class="col-sm-2 col-form-label">Username: </label>
+							<div class="col-sm-6">
+								<input type="text" th:field="*{user.username}" class="form-control"
+									th:errorclass="'form-control alert-danger'" /> <small
+									class="form-text text-danger"
+									th:if="${#fields.hasErrors('user.username')}" th:errors="*{user.username}"></small>
+							</div>
+						</div>
+
+	
+						
+							<div class="form-group row">
+							<label for="user.password" class="col-sm-2 col-form-label">Password: </label>
+							<div class="col-sm-6">
+								<input type="password" th:field="*{user.password}" class="form-control"
+									th:errorclass="'form-control alert-danger'" /> <small
+									class="form-text text-danger"
+									th:if="${#fields.hasErrors('user.password')}" th:errors="*{user.password}"></small>
+							</div>
+						</div>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 
 				<div class="form-group row">
 					<div class="col-sm-6" align="center">
@@ -136,6 +176,11 @@
 					</div>
 				</div>
 			</form>
+			
+			
+			
+			
+			
 		</div>
 	</div>
 
