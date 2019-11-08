@@ -87,7 +87,13 @@ public class ListaServiceImpl implements IListaService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Lista_Compra> buscarProveedor(String nombreProveedor) {
-		return lR.findLista_CompraBynombreProveedor(nombreProveedor);
+		return lR.buscarProveedor(nombreProveedor);
+	}
+
+	@Override
+	public List<Lista_Compra> buscarMayor(String precioLista) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

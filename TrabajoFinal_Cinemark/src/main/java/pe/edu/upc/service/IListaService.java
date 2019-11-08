@@ -8,7 +8,7 @@ import pe.edu.upc.entity.Lista_Compra;
 public interface IListaService {
 
 	public Integer insertar(Lista_Compra lista);
-
+	
 	public void eliminar(int idLista);
 
 	public void modificar(Lista_Compra lista);
@@ -22,5 +22,7 @@ public interface IListaService {
 	List<Lista_Compra> buscarEstado(String estadoLista);
 
 	List<Lista_Compra> buscarProveedor(String nombreProveedor);
+	
+	List<Lista_Compra> buscarMayor(String precioLista);
 
 }

@@ -126,8 +126,7 @@ public class Lista_CompraController {
 	}
 
 	@RequestMapping("/buscarp")
-	public String buscarProveedor(Map<String, Object> model, @ModelAttribute Lista_Compra lista)
-			throws ParseException {
+	public String buscarProveedor(Map<String, Object> model, @ModelAttribute Lista_Compra lista) throws ParseException {
 
 		List<Lista_Compra> listaListas;
 		lista.setNotaLista(lista.getNotaLista());
@@ -143,6 +142,40 @@ public class Lista_CompraController {
 
 	}
 
+	@RequestMapping("/buscare")
+	public String buscarEstado(Map<String, Object> model, @ModelAttribute Lista_Compra lista) throws ParseException {
+
+		List<Lista_Compra> listaListas;
+		lista.setNotaLista(lista.getNotaLista());
+		listaListas = lService.buscar(lista.getNotaLista());
+		if (listaListas.isEmpty()) {
+			listaListas = lService.buscarEstado(lista.getNotaLista());
+		}
+		if (listaListas.isEmpty()) {
+			model.put("mensaje", "No se encontro ningun resultado");
+		}
+		model.put("listaLista_Compras", listaListas);
+		return "listaCompra/listaListaCompra";
+
+	}
+
+	@RequestMapping("/buscarm")
+	public String buscarMayor(Map<String, Object> model, @ModelAttribute Lista_Compra lista) throws ParseException {
+
+		List<Lista_Compra> listaListas;
+		lista.setNotaLista(lista.getNotaLista());
+		listaListas = lService.buscar(lista.getNotaLista());
+		if (listaListas.isEmpty()) {
+			listaListas = lService.buscarMayor(lista.getNotaLista());
+		}
+		if (listaListas.isEmpty()) {
+			model.put("mensaje", "No se encontro ningun resultado");
+		}
+		model.put("listaLista_Compras", listaListas);
+		return "listaCompra/listaListaCompra";
+
+	}
+	
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/detalle/{id}")
 	public String detailsLista(@PathVariable(value = "id") int id, Model model) {
