@@ -92,7 +92,7 @@ public class FacturaController {
 		}
 		model.addAttribute("listaFacturas", fService.listar());
 
-		return "/factura/listaFactura";
+		return "redirect:/facturas/listar";
 
 	}
 

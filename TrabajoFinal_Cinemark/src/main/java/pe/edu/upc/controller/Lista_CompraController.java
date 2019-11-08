@@ -80,7 +80,7 @@ public class Lista_CompraController {
 		}
 		model.addAttribute("listaLista_Compras", lService.listar());
 
-		return "/listaCompra/listaListaCompra";
+		return "redirect:/listaCompras/listar";
 	}
 
 	@GetMapping("/listar")

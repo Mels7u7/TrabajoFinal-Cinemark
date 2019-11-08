@@ -84,7 +84,7 @@ public class EmpleadoxLCController {
 		}
 		model.addAttribute("listaEmpleadoxLCs", elService.listar());
 
-		return "/empleadoxLC/listaEmpleadoxLC";
+		return "redirect:/empleadoxLCs/listar";
 	}
 
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })

@@ -58,7 +58,7 @@ public class EmpleadoController {
 			Optional<Empleado> empleadoEncontrado = eService.listarId(empleado.getIdEmpleado());
 			if (!empleadoEncontrado.isPresent()) {
 				rpta = eService.insertar(empleado);
-				model.addAttribute("mensaje", "Se registró correctamente");
+				model.addAttribute("mensaje", "Se registrï¿½ correctamente");
 				if (rpta > 0) {
 					model.addAttribute("mensaje", "Ya existe el empleado con ese DNI");
 					model.addAttribute("valorBoton", "Registrar");
@@ -70,12 +70,12 @@ public class EmpleadoController {
 				eService.modificar(empleado);
 				rpta = 1;
 				status.setComplete();
-				model.addAttribute("mensaje", "Se modificó correctamente");
+				model.addAttribute("mensaje", "Se modificï¿½ correctamente");
 			}
 
 		}
 		model.addAttribute("listaEmpleados", eService.listar());
-		return "/empleado/listaEmpleado";
+		return "redirect:/empleados/listar";
 
 	}
 
@@ -101,7 +101,7 @@ public class EmpleadoController {
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("mensaje", "La operación ha sido cancelada.");
+			model.put("mensaje", "La operaciï¿½n ha sido cancelada.");
 		}
 		model.put("listaEmpleados", eService.listar());
 
@@ -136,7 +136,7 @@ public class EmpleadoController {
 		empleado.setPuestoEmpleado(empleado.getPuestoEmpleado());
 		listaEmpleados = eService.BuscarPorPuesto(empleado.getPuestoEmpleado());
 		if (listaEmpleados.isEmpty()) {
-			model.put("mensaje", "No se encontró al empleado con el puesto laboral especificado");
+			model.put("mensaje", "No se encontrï¿½ al empleado con el puesto laboral especificado");
 		}
 		model.put("listaEmpleados", listaEmpleados);
 		return "empleado/listaEmpleado";

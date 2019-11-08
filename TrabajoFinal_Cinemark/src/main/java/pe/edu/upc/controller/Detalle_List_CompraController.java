@@ -86,7 +86,7 @@ public class Detalle_List_CompraController {
 		}
 		model.addAttribute("listaDetalles", dService.listar());
 
-		return "/detalle/listaDetalle";
+		return "redirect:/detalles/listar";
 	}
 
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
