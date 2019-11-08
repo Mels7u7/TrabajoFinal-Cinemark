@@ -119,18 +119,20 @@
 					<label for="puestoEmpleado" class="col-sm-2 col-form-label">Puesto
 						Laboral</label>
 					<div class="col-sm-6">
-						<input type="text" th:field="*{puestoEmpleado}"
-							class="form-control" th:errorclass="'form-control alert-info'" />
-						<small th:if="${#fields.hasErrors('puestoEmpleado')}"
+						<select class="form-control" th:field="*{puestoEmpleado}">
+							<option value="Seleccionar" selected>Seleccionar</option>
+							<option value="San Miguel">Gerente</option>
+							<option value="Jockey Plaza">Jefe de Almacén</option>
+						</select> <small th:if="${#fields.hasErrors('puestoEmpleado')}"
 							th:errors="*{puestoEmpleado}"></small>
 					</div>
 				</div>
 
 				<div class="form-group row">
 					<div class="col-sm-6" align="center">
-						<input type="submit" th:value="${valorBoton}" class="btn btn-primary" />
-
-						<a href="/empleados/listar" class="btn btn-danger">Cancelar</a>
+						<input type="submit" th:value="${valorBoton}"
+							class="btn btn-primary" /> <a href="/empleados/listar"
+							class="btn btn-danger">Cancelar</a>
 					</div>
 				</div>
 			</form>

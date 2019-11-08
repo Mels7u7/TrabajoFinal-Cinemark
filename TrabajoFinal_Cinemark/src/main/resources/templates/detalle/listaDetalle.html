@@ -40,8 +40,7 @@
 							<tr>
 								<th>Id</th>
 								<th>Recurso</th>
-								<th>Precio</th>
-								<th>Cantidad</th>
+								<th>Lista de Compra</th>
 								<th>Total Importe</th>
 								<th align="center">Operación</th>
 								<th align="center">Operación</th>
@@ -55,9 +54,7 @@
 
 								<td th:text="${detalle.recursoDetalle.nombreRecurso}"></td>
 
-								<td th:text="${detalle.precioDetalle}"></td>
-
-								<td th:text="${detalle.unidadesDetalle}"></td>
+								<td th:text="${detalle.listaDetalle.idLista}"></td>
 								
 								<td th:text="${detalle.importe}"></td>
 								<td align="center"><a

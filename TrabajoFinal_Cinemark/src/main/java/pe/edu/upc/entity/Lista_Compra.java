@@ -47,7 +47,7 @@ public class Lista_Compra implements Serializable {
 	private String estadoLista;
 
 	@Min(0)
-	@Max(4000)
+	@Max(90000)
 	@Column(name = "precioLista", nullable = false)
 	private float precioLista;
 

@@ -40,7 +40,7 @@
 					<div class="col-sm-6">
 						<select class="form-control" th:field="*{listaDetalle.idLista}">
 							<option th:each="l: ${listaCompras}" th:value="${l.idLista}"
-								th:text="${l.notaLista}"
+								th:text="${l.idLista}"
 								th:selected="(${l.idLista} == *{listaDetalle.idLista})">
 							</option>
 						</select>
@@ -51,8 +51,9 @@
 					<label for="precioDetalle" class="col-sm-2 col-form-label">Precio</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{precioDetalle}"
-							class="form-control" th:errorclass="'form-control alert-danger'" />
-						<small th:if="${#fields.hasErrors('precioDetalle')}"
+							class="form-control" th:errorclass="'form-control alert-danger'"
+							maxlength="4" /> <small
+							th:if="${#fields.hasErrors('precioDetalle')}"
 							th:errors="*{precioDetalle}"></small>
 					</div>
 				</div>
@@ -63,8 +64,9 @@
 						de Unidades</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{unidadesDetalle}"
-							class="form-control" th:errorclass="'form-control alert-info'" />
-						<small th:if="${#fields.hasErrors('unidadesDetalle')}"
+							class="form-control" th:errorclass="'form-control alert-info'"
+							maxlength="3" /> <small
+							th:if="${#fields.hasErrors('unidadesDetalle')}"
 							th:errors="*{unidadesDetalle}"></small>
 					</div>
 				</div>
