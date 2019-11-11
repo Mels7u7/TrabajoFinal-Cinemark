@@ -10,32 +10,24 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import pe.edu.upc.serviceimpl.JpaUserDetailsService;
 
-@EnableGlobalMethodSecurity(securedEnabled=true)
+@EnableGlobalMethodSecurity(securedEnabled = true)
 @Configuration
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
+public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private JpaUserDetailsService userDetailsService;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/", "/css/**", "/js/**", "/img/**").permitAll()
-		.anyRequest().authenticated()
-		.and()
-		    .formLogin()
-		        .loginPage("/login")
-		    .permitAll()
-		.and()
-		.logout().permitAll()
-		.and()
-		.exceptionHandling().accessDeniedPage("/error");
+		http.authorizeRequests()
+				.antMatchers("/", "/css/**", "/js/**", "/img/**", "/imagenes/**", "/static/**", "/fonts/**", "/scss/**")
+				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and()
+				.logout().permitAll().and().exceptionHandling().accessDeniedPage("/error");
 	}
 
-	
 	@Autowired
 	public void configurerGlobal(AuthenticationManagerBuilder build) throws Exception {
 		build.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
