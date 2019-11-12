@@ -4,11 +4,15 @@
 
 </head>
 <meta charset="UTF-8"></meta>
-<link
+<!-- link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css"></link>
-<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900" rel="stylesheet">
+	rel="stylesheet" id="bootstrap-css"></link> -->
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900"
+	rel="stylesheet">
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"></link>
 <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}"></link>
 <link rel="stylesheet" th:href="@{/css/animate.css}"></link>
@@ -23,7 +27,7 @@
 <link rel="stylesheet" th:href="@{/css/jquery.timepicker.css}"></link>
 
 <body>
-<header th:fragment="header">
+	<header th:fragment="header">
 
 		<div class="bg-top navbar-light">
 			<div class="container">
@@ -61,12 +65,19 @@
 								<ul style="align-content: right">
 									<li class="nav-link"><form id="loginForm"
 											th:action="@{/login}" method="get">
-											<button class="btn btn-dark" style=""
-												onclick="document.getElementById('logoutForm').submit();"
-												type="submit">Ir al Login</button>
+											<button class="btn btn-dark"
+												style="padding-left: 0px !important;" type="submit">Ir
+												al Login</button>
+										</form></li>
+
+								</ul>
+								<ul style="align-content: right">
+									<li class="nav-link"><form id="createAccountFrm"
+											th:action="@{/security/createAccount}" method="get">
+											<button class="btn btn-dark"
+												style="padding-left: 0px !important;" type="submit">Registrate</button>
 										</form></li>
 								</ul>
-
 							</div>
 						</div>
 					</div>
@@ -74,70 +85,89 @@
 			</div>
 		</div>
 	</header>
-	
-	<section class="home-slider owl-carousel">
-      <div class="slider-item" style="background-image:url(imagenes/cinemarkhd1.png);" data-stellar-background-ratio="0.5">
-      	<div class="overlay"></div>
-        <div class="container">
-          <div class="row no-gutters slider-text align-items-center justify-content-end" data-scrollax-parent="true">
-          <div class="col-md-6 text ftco-animate pl-md-5">
-            <h1 class="mb-4">Bienvenido Administrador <span>Construye el futuro</span></h1>
-						<h3 class="subheading">Brindar soluciones constructivas no
-							tradicionales relacionadas al acero, a distribuidores,
-							contratistas, y constructores, con productos innovadores que
-							generen un valor agregado a su negocio.</h3>
-						<p><a href="#" class="btn btn-secondary px-4 py-3 mt-3">Ver más</a></p>
-          </div>
-        </div>
-        </div>
-      </div>
 
-      <div class="slider-item" style="background-image:url(static/imagenes/cinemarkhd2.png);" data-stellar-background-ratio="0.5">
-      	<div class="overlay"></div>
-        <div class="container">
-          <div class="row no-gutters slider-text align-items-center justify-content-end" data-scrollax-parent="true">
-          <div class="col-md-6 text ftco-animate pl-md-5">
-            <h1 class="mb-4">Recuerda... <span>Tu visión en realidad</span></h1>
+	<section class="home-slider owl-carousel">
+		<div class="slider-item"
+			style="background-image: url(imagenes/cinemarkhd1.png);"
+			data-stellar-background-ratio="0.5">
+			<div class="overlay"></div>
+			<div class="container">
+				<div
+					class="row no-gutters slider-text align-items-center justify-content-end"
+					data-scrollax-parent="true">
+					<div class="col-md-6 text ftco-animate pl-md-5">
+						<h1 class="mb-4">
+							Bienvenido Administrador <span>Construye el futuro</span>
+						</h1>
 						<h3 class="subheading">Brindar soluciones constructivas no
 							tradicionales relacionadas al acero, a distribuidores,
 							contratistas, y constructores, con productos innovadores que
 							generen un valor agregado a su negocio.</h3>
-						<p><a href="#" class="btn btn-secondary px-4 py-3 mt-3">Ver más</a></p>
-          </div>
-        </div>
-        </div>
-      </div>
-      
-      <div class="slider-item" style="background-image:url(static/imagenes/cinemarkhd3.png);" data-stellar-background-ratio="0.5">
-      	<div class="overlay"></div>
-        <div class="container">
-          <div class="row no-gutters slider-text align-items-center justify-content-end" data-scrollax-parent="true">
-          <div class="col-md-6 text ftco-animate pl-md-5">
-           
-          </div>
-        </div>
-        </div>
-      </div>
-    </section>
-	
+						<p>
+							<a href="#" class="btn btn-secondary px-4 py-3 mt-3">Ver más</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="slider-item"
+			style="background-image: url(static/imagenes/cinemarkhd2.png);"
+			data-stellar-background-ratio="0.5">
+			<div class="overlay"></div>
+			<div class="container">
+				<div
+					class="row no-gutters slider-text align-items-center justify-content-end"
+					data-scrollax-parent="true">
+					<div class="col-md-6 text ftco-animate pl-md-5">
+						<h1 class="mb-4">
+							Recuerda... <span>Tu visión en realidad</span>
+						</h1>
+						<h3 class="subheading">Brindar soluciones constructivas no
+							tradicionales relacionadas al acero, a distribuidores,
+							contratistas, y constructores, con productos innovadores que
+							generen un valor agregado a su negocio.</h3>
+						<p>
+							<a href="#" class="btn btn-secondary px-4 py-3 mt-3">Ver más</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="slider-item"
+			style="background-image: url(static/imagenes/cinemarkhd3.png);"
+			data-stellar-background-ratio="0.5">
+			<div class="overlay"></div>
+			<div class="container">
+				<div
+					class="row no-gutters slider-text align-items-center justify-content-end"
+					data-scrollax-parent="true">
+					<div class="col-md-6 text ftco-animate pl-md-5"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<footer th:replace="layout/layout :: footer"></footer>
 	<script src="/js/jquery.min.js"></script>
-		<script src="/js/jquery-migrate-3.0.1.min.js"></script>
-		<script src="/js/popper.min.js"></script>
-		<script src="/js/bootstrap.min.js"></script>
-		<script src="/js/jquery.easing.1.3.js"></script>
-		<script src="/js/jquery.waypoints.min.js"></script>
-		<script src="/js/jquery.stellar.min.js"></script>
-		<script src="/js/owl.carousel.min.js"></script>
-		<script src="/js/jquery.magnific-popup.min.js"></script>
-		<script src="/js/aos.js"></script>
-		<script src="/js/jquery.animateNumber.min.js"></script>
-		<script src="/js/bootstrap-datepicker.js"></script>
-		<script src="/js/jquery.timepicker.min.js"></script>
-		<script src="/js/scrollax.min.js"></script>
-		<script
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-		<script src="/js/google-map.js"></script>
-		<script src="/js/main.js"></script>
+	<script src="/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="/js/popper.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/jquery.easing.1.3.js"></script>
+	<script src="/js/jquery.waypoints.min.js"></script>
+	<script src="/js/jquery.stellar.min.js"></script>
+	<script src="/js/owl.carousel.min.js"></script>
+	<script src="/js/jquery.magnific-popup.min.js"></script>
+	<script src="/js/aos.js"></script>
+	<script src="/js/jquery.animateNumber.min.js"></script>
+	<script src="/js/bootstrap-datepicker.js"></script>
+	<script src="/js/jquery.timepicker.min.js"></script>
+	<script src="/js/scrollax.min.js"></script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"
+		async></script>
+	<script src="/js/google-map.js" async></script>
+	<script src="/js/main.js" async></script>
 </body>
 </html>
