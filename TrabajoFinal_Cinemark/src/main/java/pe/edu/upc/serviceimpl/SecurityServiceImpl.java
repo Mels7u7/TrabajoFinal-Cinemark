@@ -23,7 +23,7 @@ public class SecurityServiceImpl implements ISecurityService {
 	private Email emailService;
 
 	@Override
-	public Pair<Boolean, String> createUser(String username, String password, String email) {
+	public Pair<Boolean, String> createUser(String username, String password, String email, String name, String lastName) {
 
 		Pair<Boolean, String> tuple = Pair.of(true, "");
 
@@ -35,6 +35,9 @@ public class SecurityServiceImpl implements ISecurityService {
 			user.setEnabled(true);
 			user.setUsername(username);
 			user.setPassword(bcryptPassword);
+			user.setName(name);
+			user.setLastName(lastName);
+			user.setEmail(email);
 			userRepository.save(user);
 			emailService.sendEmail("Bienvenido",
 					"<img src=\"https://cinemarkla.modyocdn.com/uploads/a8852d98-cd8b-4029-a316-dbb44b8632f2/original/cinemark-logo.png\" alt=\"Cinemark\"></br> <h1>Te has registrado satisfactoriamente</h1>",
