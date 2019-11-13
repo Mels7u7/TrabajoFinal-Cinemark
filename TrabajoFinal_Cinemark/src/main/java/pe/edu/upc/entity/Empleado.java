@@ -6,8 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
@@ -28,10 +26,6 @@ public class Empleado implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idEmpleado;
 	
-	@OneToOne
-	@JoinColumn(name = "idUser", referencedColumnName = "id")
-	private Users user;
-
 	@NotEmpty(message = "Ingresa el nombre del empleado")
 	@Column(name = "nombreEmpleado", nullable = false, length = 30)
 	private String nombreEmpleado;
@@ -85,14 +79,6 @@ public class Empleado implements Serializable {
 		this.correoEmpleado = correoEmpleado;
 		this.celularEmpleado = celularEmpleado;
 		this.puestoEmpleado = puestoEmpleado;
-	}
-
-	public Users getUser() {
-		return user;
-	}
-
-	public void setUser(Users user) {
-		this.user = user;
 	}
 
 	public Empleado() {

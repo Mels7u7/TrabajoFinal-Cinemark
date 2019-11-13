@@ -20,9 +20,10 @@ public interface UserRepository extends JpaRepository<Users, Long> {
 
 	@Transactional
 	@Modifying
-	@Query(value = "insert into users (enabled, username,password) VALUES (:enabled, :username, :password)", nativeQuery = true)
+	@Query(value = "insert into users (enabled, username,password,name,lastName,email) VALUES (:enabled, :username, :password, :name, :lastName, :email)", nativeQuery = true)
 	public void addUser(@Param("enabled") boolean enabled, @Param("username") String username,
-			@Param("password") String password);
+			@Param("password") String password, @Param("name") String name, @Param("lastName") String lastName,
+			@Param("email") String email);
 
 	@Query("select count(u.username) from Users u where u.username =:username")
 	public int buscarUsername(@Param("username") String nombre);

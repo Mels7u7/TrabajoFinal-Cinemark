@@ -4,21 +4,16 @@
 <meta charset="UTF-8"></meta>
 
 <body>
-
 	<header th:replace="layout/layout :: header"></header>
 	<div class="container">
 		<div class="card bg-light">
 			<div class="card-header text-black bg-blue">Registro de
 				Empleados</div>
-				
-				
-				
-				
+								
 			<form th:action="@{/empleados/guardar}" th:object="${empleado}"
 				method="post" enctype="multipart/form-data">
 				<div class="form-group row" style="display: none !important;">
-				
-				
+							
 					<label for="idEmpleado" class="col-sm-2 col-form-label">Id</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{idEmpleado}" class="form-control" />
@@ -120,54 +115,7 @@
 							th:errors="*{celularEmpleado}"></small>
 					</div>
 				</div>
-
-				<div class="form-group row">
-					<label for="puestoEmpleado" class="col-sm-2 col-form-label">Puesto
-						Laboral</label>
-					<div class="col-sm-6">
-						<select class="form-control" th:field="*{puestoEmpleado}">
-							<option value="Seleccionar" selected>Seleccionar</option>
-							<option value="San Miguel">Gerente</option>
-							<option value="Jockey Plaza">Jefe de Almacén</option>
-						</select> <small th:if="${#fields.hasErrors('puestoEmpleado')}"
-							th:errors="*{puestoEmpleado}"></small>
-					</div>
-				</div>
-				
-				<div class="form-group row">
-							<label for="user.username" class="col-sm-2 col-form-label">Username: </label>
-							<div class="col-sm-6">
-								<input type="text" th:field="*{user.username}" class="form-control"
-									th:errorclass="'form-control alert-danger'" /> <small
-									class="form-text text-danger"
-									th:if="${#fields.hasErrors('user.username')}" th:errors="*{user.username}"></small>
-							</div>
-						</div>
-
-	
-						
-							<div class="form-group row">
-							<label for="user.password" class="col-sm-2 col-form-label">Password: </label>
-							<div class="col-sm-6">
-								<input type="password" th:field="*{user.password}" class="form-control"
-									th:errorclass="'form-control alert-danger'" /> <small
-									class="form-text text-danger"
-									th:if="${#fields.hasErrors('user.password')}" th:errors="*{user.password}"></small>
-							</div>
-						</div>
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-
+								
 				<div class="form-group row">
 					<div class="col-sm-6" align="center">
 						<input type="submit" th:value="${valorBoton}"
@@ -176,11 +124,7 @@
 					</div>
 				</div>
 			</form>
-			
-			
-			
-			
-			
+						
 		</div>
 	</div>
 

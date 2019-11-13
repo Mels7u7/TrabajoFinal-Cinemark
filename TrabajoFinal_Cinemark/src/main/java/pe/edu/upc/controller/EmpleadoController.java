@@ -10,7 +10,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,8 +24,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.entity.Empleado;
-import pe.edu.upc.entity.Users;
-import pe.edu.upc.service.IUserService;
 import pe.edu.upc.serviceimpl.EmpleadoServiceImpl;
 
 @Controller
@@ -36,12 +33,6 @@ public class EmpleadoController {
 
 	@Autowired
 	private EmpleadoServiceImpl eService;
-	
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
-	
-	@Autowired
-	private IUserService uS;
 	
 
 	@RequestMapping("/bienvenido")
@@ -65,25 +56,6 @@ public class EmpleadoController {
 			model.addAttribute("valorBoton", "Registrar");
 			return "/empleado/empleado";
 		} else {
-			
-			Users aux = new Users();
-			aux.setUsername(empleado.getUser().getUsername());
-			aux.setPassword(empleado.getUser().getPassword());
-			aux.setEnabled(true);
-			
-			String bcryptPassword = passwordEncoder.encode(aux.getPassword());
-			aux.setPassword(bcryptPassword);
-			
-			uS.insert(aux);
-			aux = uS.BuscarPorNombre(empleado.getUser().getUsername());
-
-			uS.insRol("ROLE_USER", aux.getId());
-
-			empleado.setUser(aux);
-			
-			
-			
-			
 			int rpta = -1;
 			Optional<Empleado> empleadoEncontrado = eService.listarId(empleado.getIdEmpleado());
 			if (!empleadoEncontrado.isPresent()) {
@@ -111,11 +83,6 @@ public class EmpleadoController {
 
 	}
 	
-	
-	
-	
-	
-
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping("/listar")
 	public String listarEmpleados(Model model) {
