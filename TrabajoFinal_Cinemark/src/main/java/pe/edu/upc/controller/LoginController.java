@@ -24,7 +24,7 @@ public class LoginController {
 
 		if (error != null) {
 			model.addAttribute("error",
-					"Error en el login: Nombre de usuario o contrase�a incorrecta, por favor vuelva a intentarlo!");
+					"Error en el login: Nombre de usuario o contrase\u00d1a incorrecta, por favor vuelva a intentarlo!");
 		}
 
 		if (logout != null) {
