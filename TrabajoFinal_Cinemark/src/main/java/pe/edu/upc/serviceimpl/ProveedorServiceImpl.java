@@ -56,5 +56,9 @@ public class ProveedorServiceImpl implements IProveedorService {
 	public List<Proveedor> buscarNombre(String nombreProveedor) {
 		return pR.findByNombreProveedor(nombreProveedor);
 	}
+	@Override
+	public List<Proveedor> buscarXRucProveedor(String RucProveedor) {
+		return pR.findByNombreProveedor(RucProveedor);
+	}
 
 }

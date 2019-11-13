@@ -18,4 +18,6 @@ public interface IProveedorService {
 
 	List<Proveedor> buscarNombre(String nombreProveedor);
 
+	List<Proveedor> buscarXRucProveedor(String RucProveedor);
+
 }
