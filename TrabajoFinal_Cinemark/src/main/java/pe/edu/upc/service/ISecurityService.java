@@ -2,9 +2,8 @@ package pe.edu.upc.service;
 
 import org.springframework.data.util.Pair;
 
-
 public interface ISecurityService {
 
-	public Pair<Boolean, String> createUser(String username, String password);
+	public Pair<Boolean, String> createUser(String username, String password, String email);
 
 }

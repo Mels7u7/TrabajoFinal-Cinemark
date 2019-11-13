@@ -29,7 +29,9 @@ public class UserSecurityController {
 	public String createAccount(@RequestParam(value = "error", required = false) String error, Model model, Users user,
 			RedirectAttributes flash) {
 
-		Pair<Boolean, String> outData = securityService.createUser(user.getUsername(), user.getPassword());
+		String mail = "dcalderon@idigital.pe";
+
+		Pair<Boolean, String> outData = securityService.createUser(user.getUsername(), user.getPassword(), mail);
 
 		if (outData.getFirst()) {
 			model.addAttribute("error", outData.getSecond());

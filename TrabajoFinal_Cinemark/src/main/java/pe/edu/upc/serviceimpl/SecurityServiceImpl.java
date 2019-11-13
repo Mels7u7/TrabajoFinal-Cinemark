@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import pe.edu.upc.entity.Users;
 import pe.edu.upc.repository.UserRepository;
 import pe.edu.upc.service.ISecurityService;
+import pe.edu.upc.utils.Email;
 
 @Service
 public class SecurityServiceImpl implements ISecurityService {
@@ -18,8 +19,11 @@ public class SecurityServiceImpl implements ISecurityService {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private Email emailService;
+
 	@Override
-	public Pair<Boolean, String> createUser(String username, String password) {
+	public Pair<Boolean, String> createUser(String username, String password, String email) {
 
 		Pair<Boolean, String> tuple = Pair.of(true, "");
 
@@ -32,14 +36,17 @@ public class SecurityServiceImpl implements ISecurityService {
 			user.setUsername(username);
 			user.setPassword(bcryptPassword);
 			userRepository.save(user);
-
-			user = userRepository.findByUsername(username);
+			emailService.sendEmail("Bienvenido",
+					"<img src=\"https://cinemarkla.modyocdn.com/uploads/a8852d98-cd8b-4029-a316-dbb44b8632f2/original/cinemark-logo.png\" alt=\"Cinemark\"></br> <h1>Te has registrado satisfactoriamente</h1>",
+					email);
 
 			try {
 				userRepository.insRol("ROLE_USER", user.getId());
 			} catch (Exception ex) {
 
 			}
+
+			user = userRepository.findByUsername(username);
 
 			tuple = Pair.of(false, "Se registro correctamente.");
 		}
