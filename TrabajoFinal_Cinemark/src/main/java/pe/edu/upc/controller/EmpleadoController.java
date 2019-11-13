@@ -62,7 +62,7 @@ public class EmpleadoController {
 	
 				
 				rpta = eService.insertar(empleado);
-				model.addAttribute("mensaje", "Se registr� correctamente");
+				model.addAttribute("mensaje", "Se registr\u00f3 correctamente");
 				if (rpta > 0) {
 					model.addAttribute("mensaje", "Ya existe el empleado con ese DNI");
 					model.addAttribute("valorBoton", "Registrar");
@@ -74,7 +74,7 @@ public class EmpleadoController {
 				eService.modificar(empleado);
 				rpta = 1;
 				status.setComplete();
-				model.addAttribute("mensaje", "Se modific� correctamente");
+				model.addAttribute("mensaje", "Se modific\u00f3 correctamente");
 			}
 
 		}
@@ -105,7 +105,7 @@ public class EmpleadoController {
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("mensaje", "La operaci�n ha sido cancelada.");
+			model.put("mensaje", "La operaci\u00f3n ha sido cancelada.");
 		}
 		model.put("listaEmpleados", eService.listar());
 
@@ -140,7 +140,7 @@ public class EmpleadoController {
 		empleado.setPuestoEmpleado(empleado.getPuestoEmpleado());
 		listaEmpleados = eService.BuscarPorPuesto(empleado.getPuestoEmpleado());
 		if (listaEmpleados.isEmpty()) {
-			model.put("mensaje", "No se encontr� al empleado con el puesto laboral especificado");
+			model.put("mensaje", "No se encontr\u00f3 al empleado con el puesto laboral especificado");
 		}
 		model.put("listaEmpleados", listaEmpleados);
 		return "empleado/listaEmpleado";

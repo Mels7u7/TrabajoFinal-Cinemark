@@ -99,12 +99,12 @@ public class RecursoController {
 			Recurso obj = rService.listarId(recurso.getIdRecurso());
 			if (obj == null) {
 				rpta = rService.insertar(recurso);
-				model.addAttribute("mensaje", "Se ha registrado correctamente");
+				model.addAttribute("mensaje", "Se registr\u00f3 correctamente");
 				model.addAttribute("valorBoton", "Registrar");
 			} else {
 				rService.modificar(recurso);
 				rpta = 1;
-				model.addAttribute("mensaje", "Se ha modificado correctamente");
+				model.addAttribute("mensaje", "Se modific\u00f3 correctamente");
 			}
 			if (rpta > 0) {
 				status.setComplete();
@@ -135,7 +135,7 @@ public class RecursoController {
 		try {
 			if (id != null && id > 0) {
 				rService.eliminar(id);
-				model.put("mensaje", "Se elimin� el recurso");
+				model.put("mensaje", "Se elimin\u00f3 el recurso");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -179,7 +179,7 @@ public class RecursoController {
 		}
 
 		if (listaRecursos.isEmpty()) {
-			model.put("mensaje", "No se encontr�");
+			model.put("mensaje", "No se encontr\u00f3");
 		}
 		model.put("listaRecursos", listaRecursos);
 		return "recurso/listaRecurso";

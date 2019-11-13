@@ -77,7 +77,7 @@ public class FacturaController {
 			Optional<Factura> facturaEncontrado = fService.listarId(factura.getIdFactura());
 			if (!facturaEncontrado.isPresent()) {
 				rpta = fService.insertar(factura);
-				model.addAttribute("mensaje", "Se registr� correctamente");
+				model.addAttribute("mensaje", "Se registr\u00f3 correctamente");
 				if (rpta > 0) {
 					model.addAttribute("valorBoton", "Registrar");
 					status.setComplete();
@@ -86,7 +86,7 @@ public class FacturaController {
 			} else {
 				fService.modificar(factura);
 				rpta = 1;
-				model.addAttribute("mensaje", "Se modific� correctamente");
+				model.addAttribute("mensaje", "Se modific\u00f3 correctamente");
 			}
 
 		}
@@ -130,7 +130,7 @@ public class FacturaController {
 		try {
 			if (id != null && id > 0) {
 				fService.eliminar(id);
-				model.put("mensaje", "Se cancel� la factura");
+				model.put("mensaje", "Se cancel\u00f3 la factura");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -183,7 +183,7 @@ public class FacturaController {
 		List<Factura> listaFacturas;
 		listaFacturas = fService.buscarNombreContador(factura.getContadorFactura().getNombreContador());
 		if (listaFacturas.isEmpty()) {
-			model.put("mensaje", "No se encontr� al contador con el nombre especificado");
+			model.put("mensaje", "No se encontr\u00f3 al contador con el nombre especificado");
 		}
 		model.put("listaFacturas", listaFacturas);
 		return "factura/listaFactura";

@@ -64,7 +64,7 @@ public class Lista_CompraController {
 			Optional<Lista_Compra> listaEncontrado = lService.listarId(lista_Compra.getIdLista());
 			if (!listaEncontrado.isPresent()) {
 				rpta = lService.insertar(lista_Compra);
-				model.addAttribute("mensaje", "Se registr� correctamente");
+				model.addAttribute("mensaje", "Se registr\u00f3 correctamente");
 				if (rpta > 0) {
 					model.addAttribute("valorBoton", "Registrar");
 					status.setComplete();
@@ -75,7 +75,7 @@ public class Lista_CompraController {
 				lService.modificar(lista_Compra);
 				rpta = 1;
 				status.setComplete();
-				model.addAttribute("mensaje", "Se modifico correctamente");
+				model.addAttribute("mensaje", "Se modific\u00f3 correctamente");
 			}
 		}
 		model.addAttribute("listaLista_Compras", lService.listar());
@@ -115,7 +115,7 @@ public class Lista_CompraController {
 		try {
 			if (id != null && id > 0) {
 				lService.eliminar(id);
-				model.addAttribute("mensaje", "Se elimin� correctamente la lista de compra");
+				model.addAttribute("mensaje", "Se elimin\u00f3 correctamente la lista de compra");
 			}
 		} catch (Exception e) {
 			model.addAttribute("mensaje", "No se puede eliminar la lista de compra");
@@ -135,7 +135,7 @@ public class Lista_CompraController {
 			listaListas = lService.buscarProveedor(lista.getNotaLista());
 		}
 		if (listaListas.isEmpty()) {
-			model.put("mensaje", "No se encontro ningun resultado");
+			model.put("mensaje", "No se encontr\u00f3 ning\u00fan resultado");
 		}
 		model.put("listaLista_Compras", listaListas);
 		return "listaCompra/listaListaCompra";
@@ -152,7 +152,7 @@ public class Lista_CompraController {
 			listaListas = lService.buscarEstado(lista.getNotaLista());
 		}
 		if (listaListas.isEmpty()) {
-			model.put("mensaje", "No se encontro ningun resultado");
+			model.put("mensaje", "No se encontr\u00f3 ning\u00fan resultado");
 		}
 		model.put("listaLista_Compras", listaListas);
 		return "listaCompra/listaListaCompra";
@@ -169,7 +169,7 @@ public class Lista_CompraController {
 			listaListas = lService.buscarMayor(lista.getNotaLista());
 		}
 		if (listaListas.isEmpty()) {
-			model.put("mensaje", "No se encontro ningun resultado");
+			model.put("mensaje", "No se encontr\u00f3 ning\u00fan resultado");
 		}
 		model.put("listaLista_Compras", listaListas);
 		return "listaCompra/listaListaCompra";

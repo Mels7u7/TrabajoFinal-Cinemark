@@ -67,7 +67,7 @@ public class EmpleadoxLCController {
 			Optional<EmpleadoxLC> empleadoLCEncontrado = elService.listarId(empleadoxLC.getIdEmpleadoXLC());
 			if (!empleadoLCEncontrado.isPresent()) {
 				rpta = elService.insertar(empleadoxLC);
-				model.addAttribute("mensaje", "Se registr� correctamente");
+				model.addAttribute("mensaje", "Se registr\u00f3 correctamente");
 				if (rpta > 0) {
 					model.addAttribute("valorBoton", "Registrar");
 					status.setComplete();
@@ -78,7 +78,7 @@ public class EmpleadoxLCController {
 				elService.modificar(empleadoxLC);
 				rpta = 1;
 				status.setComplete();
-				model.addAttribute("mensaje", "Se modific� correctamente");
+				model.addAttribute("mensaje", "Se modific\u00f3 correctamente");
 			}
 
 		}
@@ -125,11 +125,11 @@ public class EmpleadoxLCController {
 		try {
 			if (id != null && id > 0) {
 				elService.eliminar(id);
-				model.put("mensaje", "Se cancel� la relaci�n empleado por orden de compra");
+				model.put("mensaje", "Se cancel\u00f3 la relaci\u00f3n empleado por orden de compra");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("mensaje", "No se puede anular la relaci�n empleado por orden de compra seleccionada");
+			model.put("mensaje", "No se puede anular la relaci\u00f3n empleado por orden de compra seleccionada");
 		}
 		model.put("listaEmpleadoxLCs", eService.listar());
 
@@ -143,7 +143,7 @@ public class EmpleadoxLCController {
 		List<EmpleadoxLC> listaEmpleadoxLCs;
 		listaEmpleadoxLCs = elService.buscarNombreEmpleado(empleadoxLC.getEmpleadoEmpleadoLC().getNombreEmpleado());
 		if (listaEmpleadoxLCs.isEmpty()) {
-			model.put("mensaje", "No se encontr� al empleado con el nombre especificado");
+			model.put("mensaje", "No se encontr\u00f3 al empleado con el nombre especificado");
 		}
 		model.put("listaEmpleadoxLCs", listaEmpleadoxLCs);
 		return "empleadoxLC/listaEmpleadoxLC";

@@ -69,7 +69,7 @@ public class Detalle_List_CompraController {
 			Optional<Detalle_List_Compra> detalleEncontrado = dService.listarId(detalle.getIdDetalle());
 			if (!detalleEncontrado.isPresent()) {
 				rpta = dService.insertar(detalle);
-				model.addAttribute("mensaje", "Se registr� correctamente");
+				model.addAttribute("mensaje", "Se registr\u00f3 correctamente");
 				if (rpta > 0) {
 					model.addAttribute("valorBoton", "Registrar");
 					status.setComplete();
@@ -80,7 +80,7 @@ public class Detalle_List_CompraController {
 				dService.modificar(detalle);
 				rpta = 1;
 				status.setComplete();
-				model.addAttribute("mensaje", "Se modific� correctamente");
+				model.addAttribute("mensaje", "Se modific\u00f3 correctamente");
 			}
 
 		}

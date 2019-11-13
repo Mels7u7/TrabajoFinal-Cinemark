@@ -58,7 +58,7 @@ public class ProveedorController {
 			Optional<Proveedor> proveedorEncontrado = pService.listarId(proveedor.getIdProveedor());
 			if (!proveedorEncontrado.isPresent()) {
 				rpta = pService.insertar(proveedor);
-				model.addAttribute("mensaje", "Se registr� correctamente");
+				model.addAttribute("mensaje", "Se registr\u00f3 correctamente");
 				if (rpta > 0) {
 					model.addAttribute("mensaje", "Ya existe un proveedor con el mismo RUC");
 					model.addAttribute("valorBoton", "Registrar");
@@ -68,7 +68,7 @@ public class ProveedorController {
 			} else {
 				pService.modificar(proveedor);
 				rpta = 1;
-				model.addAttribute("mensaje", "Se modific� correctamente");
+				model.addAttribute("mensaje", "Se modific\u00f3 correctamente");
 			}
 		}
 		model.addAttribute("listaProveedores", pService.listar());
@@ -94,7 +94,7 @@ public class ProveedorController {
 		try {
 			if (id != null && id > 0) {
 				pService.eliminar(id);
-				model.put("mensaje", "se cancel� el contrato con el proveedor seleccionado");
+				model.put("mensaje", "se cancel\u00f3 el contrato con el proveedor seleccionado");
 			}
 
 		} catch (Exception e) {
@@ -131,7 +131,7 @@ public class ProveedorController {
 		proveedor.setNombreProveedor(proveedor.getNombreProveedor());
 		listaProveedores = pService.buscarNombre(proveedor.getNombreProveedor());
 		if (listaProveedores.isEmpty()) {
-			model.put("mensaje", "No se encontr� al proveedor con el nombre especificado");
+			model.put("mensaje", "No se encontr\u00f3 al proveedor con el nombre especificado");
 		}
 		model.put("listaProveedores", listaProveedores);
 		return "proveedor/listaProveedor";

@@ -57,7 +57,7 @@ public class ContadorCotroller {
 			Optional<Contador> contadorEncontrado = cService.listarId(contador.getIdContador());
 			if (!contadorEncontrado.isPresent()) {
 				rpta = cService.insertar(contador);
-				model.addAttribute("mensaje", "Se registr� correctamente");
+				model.addAttribute("mensaje", "Se registr\u00f3 correctamente");
 				if (rpta > 0) {
 					model.addAttribute("mensaje", "Ya existe el contador con ese DNI");
 					model.addAttribute("valorBoton", "Registrar");
@@ -69,7 +69,7 @@ public class ContadorCotroller {
 				cService.modificar(contador);
 				rpta = 1;
 				status.setComplete();
-				model.addAttribute("mensaje", "Se modific� correctamente");
+				model.addAttribute("mensaje", "Se modific\u00f3 correctamente");
 			}
 
 		}
@@ -96,7 +96,7 @@ public class ContadorCotroller {
 		try {
 			if (id != null && id > 0) {
 				cService.eliminar(id);
-				model.put("mensaje", "Se cancel� el contrato con el contador");
+				model.put("mensaje", "Se cancel\u00f3 el contrato con el contador");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -136,7 +136,7 @@ public class ContadorCotroller {
 		contador.setNombreContador(contador.getNombreContador());
 		listaContadores = cService.buscarNombre(contador.getNombreContador());
 		if (listaContadores.isEmpty()) {
-			model.put("mensaje", "No se encontr� al contador con el nombre especificado");
+			model.put("mensaje", "No se encontr\u00f3 al contador con el nombre especificado");
 		}
 		model.put("listaContadores", listaContadores);
 		return "contador/listaContador";
