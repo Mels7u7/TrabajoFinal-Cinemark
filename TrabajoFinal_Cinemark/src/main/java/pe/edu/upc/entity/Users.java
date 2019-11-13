@@ -1,7 +1,6 @@
 package pe.edu.upc.entity;
 
 import java.io.Serializable;
-
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -27,6 +26,15 @@ public class Users implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(length = 70, nullable = true)
+	private String name;
+
+	@Column(length = 70, nullable = true)
+	private String lastName;
+
+	@Column(length = 70)
+	private String email;
+	
 	@Column(length = 30, unique = true)
 	private String username;
 
@@ -77,6 +85,30 @@ public class Users implements Serializable {
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

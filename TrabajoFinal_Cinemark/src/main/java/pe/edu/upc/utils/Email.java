@@ -27,7 +27,6 @@ public class Email {
 
 			javaMailSender.send(msg);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
