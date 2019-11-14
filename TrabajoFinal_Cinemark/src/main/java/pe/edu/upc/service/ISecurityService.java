@@ -4,6 +4,6 @@ import org.springframework.data.util.Pair;
 
 public interface ISecurityService {
 
-	public Pair<Boolean, String> createUser(String username, String password, String email, String name, String lastName);
+	public Pair<Boolean, String> createUser(String username, String password, String email, String name, String lastName,String role);
 
 }

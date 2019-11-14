@@ -23,7 +23,8 @@ public class SecurityServiceImpl implements ISecurityService {
 	private Email emailService;
 
 	@Override
-	public Pair<Boolean, String> createUser(String username, String password, String email, String name, String lastName) {
+	public Pair<Boolean, String> createUser(String username, String password, String email, String name,
+			String lastName, String role) {
 
 		Pair<Boolean, String> tuple = Pair.of(true, "");
 
@@ -39,12 +40,19 @@ public class SecurityServiceImpl implements ISecurityService {
 			user.setLastName(lastName);
 			user.setEmail(email);
 			userRepository.save(user);
-			emailService.sendEmail("Bienvenido",
-					"<img src=\"https://cinemarkla.modyocdn.com/uploads/a8852d98-cd8b-4029-a316-dbb44b8632f2/original/cinemark-logo.png\" alt=\"Cinemark\"></br> <h1>Te has registrado satisfactoriamente</h1>",
-					email);
 
+			String nombreCompleto = name.trim() + " " + lastName.trim();
+
+			String mensajeCorreo = "<img src=\"https://cinemarkla.modyocdn.com/uploads/a8852d98-cd8b-4029-a316-dbb44b8632f2/original/cinemark-logo.png\" alt=\"Cinemark\"></br>";
+			mensajeCorreo += "<h2>Estimado(a) " + nombreCompleto + " te has registrado satisfactoriamente</h2>";
+			mensajeCorreo += "</br></br><h3>Tu usuario es: " + username + "</h3>";
 			try {
-				userRepository.insRol("ROLE_USER", user.getId());
+				emailService.sendEmail("Bienvenido", mensajeCorreo, email);
+			} catch (Exception ex) {
+
+			}
+			try {
+				userRepository.insRol(role, user.getId());
 			} catch (Exception ex) {
 
 			}

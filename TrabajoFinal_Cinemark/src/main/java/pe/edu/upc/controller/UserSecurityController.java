@@ -30,7 +30,7 @@ public class UserSecurityController {
 			RedirectAttributes flash) {
 
 		Pair<Boolean, String> outData = securityService.createUser(user.getUsername(), user.getPassword(), user.getEmail(),
-																	user.getName(),user.getLastName());
+																	user.getName(),user.getLastName(),"ROLE_USER");
 
 		if (outData.getFirst()) {
 			model.addAttribute("error", outData.getSecond());

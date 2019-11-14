@@ -30,4 +30,8 @@ public interface UserRepository extends JpaRepository<Users, Long> {
 
 	@Query("from Users u where u.username = :username")
 	public Users buscarNombre(@Param("username") String username);
+	
+	
+	@Query("select count(u.username) from Users u ")
+	public int totalUsuarios();
 }
