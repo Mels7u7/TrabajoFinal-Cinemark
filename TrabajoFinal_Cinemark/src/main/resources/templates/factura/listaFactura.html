@@ -17,7 +17,7 @@
 				<div class="form-group">
 
 					<label for="factura">Buscar:</label> <input type="text"
-						class="form-control" th:field="*{contadorFactura.nombreContador}" id="factura" placeholder="Buscar por nombre del contador"></input>
+						class="form-control" th:field="*{contadorFactura.name}" id="factura" placeholder="Buscar por nombre del contador"></input>
 					<div align="right">
 						<button type="submit" class="btn btn-success">Aceptar</button>
 						<a href="/facturas/listar" class="btn btn-danger">Cancelar</a>
@@ -51,7 +51,7 @@
 									th:href="@{/facturas/ver/} + ${factura.idFactura}"
 									th:text="${factura.idFactura}"></a></td>
 									
-								<td th:text="${factura.contadorFactura.nombreContador}"></td>
+								<td th:text="${factura.contadorFactura.name}"></td>
 								<td th:text="${factura.listaFactura.idLista}"></td>
 								<td th:text="${factura.precio}"></td>
 

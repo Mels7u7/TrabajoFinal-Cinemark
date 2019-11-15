@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import pe.edu.upc.entity.Contador;
+import pe.edu.upc.entity.Accountant;
 import pe.edu.upc.entity.Detalle_List_Compra;
 import pe.edu.upc.entity.Factura;
-import pe.edu.upc.service.IContadorService;
+import pe.edu.upc.service.IAccountantService;
 import pe.edu.upc.service.IDetalle_List_CompraService;
 import pe.edu.upc.service.IFacturaService;
 import pe.edu.upc.service.IListaService;
@@ -40,11 +40,11 @@ public class FacturaController {
 	private IFacturaService fService;
 
 	@Autowired
-	private IContadorService cService;
+	private IAccountantService cService;
 
 	@Autowired
 	private IListaService icService;
-	
+
 	@Autowired
 	private IDetalle_List_CompraService serviceDetalle;
 
@@ -57,7 +57,7 @@ public class FacturaController {
 	@GetMapping("/nuevo")
 	public String nuevoFactura(Model model) {
 		model.addAttribute("factura", new Factura());
-		model.addAttribute("contador", new Contador());
+		model.addAttribute("contador", new Accountant());
 		model.addAttribute("listaContadores", cService.listar());
 		model.addAttribute("listaLista_Compras", icService.listar());
 		model.addAttribute("valorBoton", "Registrar");
@@ -181,7 +181,7 @@ public class FacturaController {
 	public String buscar(Map<String, Object> model, @ModelAttribute Factura factura) throws ParseException {
 
 		List<Factura> listaFacturas;
-		listaFacturas = fService.buscarNombreContador(factura.getContadorFactura().getNombreContador());
+		listaFacturas = fService.buscarNombreContador(factura.getContadorFactura().getName());
 		if (listaFacturas.isEmpty()) {
 			model.put("mensaje", "No se encontr\u00f3 al contador con el nombre especificado");
 		}

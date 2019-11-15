@@ -22,39 +22,39 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import pe.edu.upc.entity.Contador;
-import pe.edu.upc.service.IContadorService;
+import pe.edu.upc.entity.Accountant;
+import pe.edu.upc.service.IAccountantService;
 
 @Controller
 @SessionAttributes("contador")
 @RequestMapping("/contadores")
-public class ContadorCotroller {
+public class AccountantController {
 	@Autowired
-	private IContadorService cService;
+	private IAccountantService cService;
 
-	@RequestMapping("/bienvenido")
-	public String irBienvenido() {
+	@RequestMapping("/welcome")
+	public String goHome() {
 		return "bienvenido";
 	}
 
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/nuevo")
-	public String nuevoContador(Model model) {
-		model.addAttribute("contador", new Contador());
+	public String addAccountant(Model model) {
+		model.addAttribute("accountant", new Accountant());
 		model.addAttribute("valorBoton", "Registrar");
 		return "contador/contador";
 	}
 
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/guardar")
-	public String guardarContador(@Valid Contador contador, BindingResult result, Model model, SessionStatus status)
+	public String saveAccountant(@Valid Accountant contador, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {
 			model.addAttribute("valorBoton", "Registrar");
 			return "/contador/contador";
 		} else {
 			int rpta = -1;
-			Optional<Contador> contadorEncontrado = cService.listarId(contador.getIdContador());
+			Optional<Accountant> contadorEncontrado = cService.listarId(contador.getAccountantId());
 			if (!contadorEncontrado.isPresent()) {
 				rpta = cService.insertar(contador);
 				model.addAttribute("mensaje", "Se registr\u00f3 correctamente");
@@ -82,7 +82,7 @@ public class ContadorCotroller {
 	@GetMapping("/listar")
 	public String listarContadores(Model model) {
 		try {
-			model.addAttribute("contador", new Contador());
+			model.addAttribute("contador", new Accountant());
 			model.addAttribute("listaContadores", cService.listar());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
@@ -111,7 +111,7 @@ public class ContadorCotroller {
 	@GetMapping("/detalle/{id}") // modificar
 	public String detailsContador(@PathVariable(value = "id") int id, Model model) {
 		try {
-			Optional<Contador> contador = cService.listarId(id);
+			Optional<Accountant> contador = cService.listarId(id);
 			if (!contador.isPresent()) {
 				model.addAttribute("info", "Contador no existe");
 				return "redirect:/contadores/listar";
@@ -129,12 +129,12 @@ public class ContadorCotroller {
 
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@RequestMapping("/buscar")
-	public String buscar(Map<String, Object> model, @ModelAttribute Contador contador) throws ParseException {
+	public String buscar(Map<String, Object> model, @ModelAttribute Accountant accountant) throws ParseException {
 
-		List<Contador> listaContadores;
+		List<Accountant> listaContadores;
 
-		contador.setNombreContador(contador.getNombreContador());
-		listaContadores = cService.buscarNombre(contador.getNombreContador());
+		accountant.setName(accountant.getName());
+		listaContadores = cService.buscarNombre(accountant.getName());
 		if (listaContadores.isEmpty()) {
 			model.put("mensaje", "No se encontr\u00f3 al contador con el nombre especificado");
 		}
@@ -146,12 +146,12 @@ public class ContadorCotroller {
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash) {
 
-		Optional<Contador> contador = cService.listarId(id);
-		if (contador == null) {
+		Optional<Accountant> accountant = cService.listarId(id);
+		if (accountant == null) {
 			flash.addFlashAttribute("error", "El contador no existe en la base de datos");
 			return "redirect:/contadores/listar";
 		}
-		model.put("contador", contador.get());
+		model.put("contador", accountant.get());
 
 		return "contador/verc";
 	}

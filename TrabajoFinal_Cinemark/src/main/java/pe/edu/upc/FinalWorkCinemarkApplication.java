@@ -10,7 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import pe.edu.upc.service.ISecurityService;
 
 @SpringBootApplication
-public class TrabajoFinalCinemarkApplication implements CommandLineRunner {
+public class FinalWorkCinemarkApplication implements CommandLineRunner {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
@@ -23,7 +23,7 @@ public class TrabajoFinalCinemarkApplication implements CommandLineRunner {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(TrabajoFinalCinemarkApplication.class, args);
+		SpringApplication.run(FinalWorkCinemarkApplication.class, args);
 	}
 
 	@Override

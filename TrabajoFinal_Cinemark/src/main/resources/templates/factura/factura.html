@@ -24,10 +24,10 @@
 					<label for="contadorFactura" class="col-sm-2 col-form-label">Contador:</label>
 					<div class="col-sm-6">
 						<select class="form-control"
-							th:field="*{contadorFactura.idContador}">
+							th:field="*{contadorFactura.accountantId}">
 							<option th:each="l: ${listaContadores}"
-								th:value="${l.idContador}" th:text="${l.nombreContador}"
-								th:selected="(${l.idContador} == *{contadorFactura.idContador})"></option>
+								th:value="${l.accountantId}" th:text="${l.name}"
+								th:selected="(${l.accountantId} == *{contadorFactura.accountantId})"></option>
 						</select>
 					</div>
 				</div>

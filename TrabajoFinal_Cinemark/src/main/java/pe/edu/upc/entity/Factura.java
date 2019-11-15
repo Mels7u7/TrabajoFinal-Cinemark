@@ -39,9 +39,9 @@ public class Factura implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "idContador")
-	private Contador contadorFactura;
+	private Accountant contadorFactura;
 
-	@NotEmpty(message = "Ingresa el análisis de la factura")
+	@NotEmpty(message = "Ingresa el anï¿½lisis de la factura")
 	@Column(name = "analisisFactura", nullable = false, length = 60)
 	private String analisisFactura;
 
@@ -57,7 +57,7 @@ public class Factura implements Serializable {
 	@Column(name = "precio", nullable = false)
 	private float precio;
 
-	public Factura(int idFactura, Lista_Compra listaFactura, Contador contadorFactura, String analisisFactura,
+	public Factura(int idFactura, Lista_Compra listaFactura, Accountant contadorFactura, String analisisFactura,
 			Date fechaFactura, float precio) {
 		super();
 		this.idFactura = idFactura;
@@ -90,11 +90,11 @@ public class Factura implements Serializable {
 		this.listaFactura = listaFactura;
 	}
 
-	public Contador getContadorFactura() {
+	public Accountant getContadorFactura() {
 		return contadorFactura;
 	}
 
-	public void setContadorFactura(Contador contadorFactura) {
+	public void setContadorFactura(Accountant contadorFactura) {
 		this.contadorFactura = contadorFactura;
 	}
 

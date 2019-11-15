@@ -17,7 +17,7 @@
 				<div class="form-group">
 
 					<label for="contador">Buscar:</label> <input type="text"
-						class="form-control" th:field="*{nombreContador}" id="contador" placeholder="Buscar por nombre del Contador"></input>
+						class="form-control" th:field="*{name}" id="contador" placeholder="Buscar por nombre del Contador"></input>
 					<div align="right">
 						<button type="submit" class="btn btn-success">Aceptar</button>
 						<a href="/contadores/listar" class="btn btn-danger">Cancelar</a>
@@ -47,18 +47,18 @@
 						<tbody id="contador-list">
 							<tr th:each="contador:${listaContadores}">
 								<td><a class="btn btn-primary btn-xs"
-									th:href="@{/contadores/ver/} + ${contador.idContador}"
-									th:text="${contador.idContador}"></a></td>
+									th:href="@{/contadores/ver/} + ${contador.accountantId}"
+									th:text="${contador.accountantId}"></a></td>
 
-								<td th:text="${contador.nombreContador}"></td>
+								<td th:text="${contador.name}"></td>
 
-								<td th:text="${contador.dniContador}"></td>
+								<td th:text="${contador.documentNumber}"></td>
 
 								<td align="center"><a
-									th:href="@{/contadores/eliminar?id=}+${contador.idContador}"
+									th:href="@{/contadores/eliminar?id=}+${contador.accountantId}"
 									type="button" class="btn btn-default btn-lg">Eliminar</a></td>
 								<td align="center"><a
-									th:href="@{'/contadores/detalle/' + ${contador.idContador}}"
+									th:href="@{'/contadores/detalle/' + ${contador.accountantId}}"
 									type="button" class="btn btn-default btn-lg">Editar</a></td>
 							</tr>
 						</tbody>

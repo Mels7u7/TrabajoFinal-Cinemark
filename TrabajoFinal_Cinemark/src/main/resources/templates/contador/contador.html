@@ -13,53 +13,53 @@
 			<form th:action="@{/contadores/guardar}" th:object="${contador}"
 				method="post">
 				<div class="form-group row" style="display: none !important;">
-					<label for="idContador" class="col-sm-2 col-form-label">Id</label>
+					<label for="accountantId" class="col-sm-2 col-form-label">Id</label>
 					<div class="col-sm-6">
-						<input type="text" th:field="*{idContador}" class="form-control" />
+						<input type="text" th:field="*{accountantId}" class="form-control" />
 					</div>
 				</div>
 
 				<div class="form-group row">
-					<label for="nombreContador" class="col-sm-2 col-form-label">Nombre
+					<label for="name" class="col-sm-2 col-form-label">Nombre
 						del Contador</label>
 					<div class="col-sm-6">
-						<input type="text" th:field="*{nombreContador}"
+						<input type="text" th:field="*{name}"
 							class="form-control" th:errorclass="'form-control alert-info'" />
-						<small th:if="${#fields.hasErrors('nombreContador')}"
-							th:errors="*{nombreContador}"></small>
+						<small th:if="${#fields.hasErrors('name')}"
+							th:errors="*{name}"></small>
 					</div>
 				</div>
 
 				<div class="form-group row">
-					<label for="dniContador" class="col-sm-2 col-form-label">DNI</label>
+					<label for="documentNumber" class="col-sm-2 col-form-label">DNI</label>
 					<div class="col-sm-6">
-						<input type="text" th:field="*{dniContador}" class="form-control"
+						<input type="text" th:field="*{documentNumber}" class="form-control"
 							th:errorclass="'form-control alert-danger'" /> <small
-							th:if="${#fields.hasErrors('dniContador')}"
-							th:errors="*{dniContador}"></small>
+							th:if="${#fields.hasErrors('documentNumber')}"
+							th:errors="*{documentNumber}"></small>
 					</div>
 				</div>
 
 
 				<div class="form-group row">
-					<label for="institucionContador" class="col-sm-2 col-form-label">Nombre
+					<label for="accountingInstitution" class="col-sm-2 col-form-label">Nombre
 						de la institución del contador</label>
 					<div class="col-sm-6">
-						<input type="text" th:field="*{institucionContador}"
+						<input type="text" th:field="*{accountingInstitution}"
 							class="form-control" th:errorclass="'form-control alert-info'" />
-						<small th:if="${#fields.hasErrors('institucionContador')}"
-							th:errors="*{institucionContador}"></small>
+						<small th:if="${#fields.hasErrors('accountingInstitution')}"
+							th:errors="*{accountingInstitution}"></small>
 					</div>
 				</div>
 
 				<div class="form-group row">
-					<label for="numeroContactoContador" class="col-sm-2 col-form-label">Número
+					<label for="contactNumber" class="col-sm-2 col-form-label">Número
 						de contacto del contador</label>
 					<div class="col-sm-6">
-						<input type="text" th:field="*{numeroContactoContador}"
+						<input type="text" th:field="*{contactNumber}"
 							class="form-control" th:errorclass="'form-control alert-info'" />
-						<small th:if="${#fields.hasErrors('numeroContactoContador')}"
-							th:errors="*{numeroContactoContador}"></small>
+						<small th:if="${#fields.hasErrors('contactNumber')}"
+							th:errors="*{contactNumber}"></small>
 					</div>
 				</div>
 

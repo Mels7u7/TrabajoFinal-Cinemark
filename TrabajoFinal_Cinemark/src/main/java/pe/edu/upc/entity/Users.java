@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 
 @Entity
 @Table(name = "users")
@@ -33,6 +34,7 @@ public class Users implements Serializable {
 	private String lastName;
 
 	@Column(length = 70)
+	@Email(message = "Ingresar un email valido.")
 	private String email;
 	
 	@Column(length = 30, unique = true)

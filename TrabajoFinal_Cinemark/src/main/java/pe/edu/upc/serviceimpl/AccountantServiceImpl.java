@@ -7,20 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pe.edu.upc.entity.Contador;
-import pe.edu.upc.repository.ContadorRepository;
-import pe.edu.upc.service.IContadorService;
+import pe.edu.upc.entity.Accountant;
+import pe.edu.upc.repository.AccountantRepository;
+import pe.edu.upc.service.IAccountantService;
 
 @Service
-public class ContadorServiceImpl implements IContadorService {
+public class AccountantServiceImpl implements IAccountantService {
 
 	@Autowired
-	private ContadorRepository cR;
+	private AccountantRepository cR;
 
 	@Override
 	@Transactional
-	public Integer insertar(Contador contador) {
-		int rpta = cR.buscarDNIContador(contador.getDniContador());
+	public Integer insertar(Accountant contador) {
+		int rpta = cR.buscarDNIContador(contador.getDocumentNumber());
 		if (rpta == 0) {
 			cR.save(contador);
 		}
@@ -29,9 +29,9 @@ public class ContadorServiceImpl implements IContadorService {
 
 	@Override
 	@Transactional
-	public void modificar(Contador contador) {
-		cR.actualizar(contador.getNombreContador(), contador.getInstitucionContador(),
-				contador.getNumeroContactoContador(), contador.getIdContador());
+	public void modificar(Accountant contador) {
+		cR.actualizar(contador.getName(), contador.getAccountingInstitution(), contador.getAccountingInstitution(),
+				contador.getAccountantId());
 	}
 
 	@Override
@@ -42,17 +42,17 @@ public class ContadorServiceImpl implements IContadorService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<Contador> listarId(int idContador) {
+	public Optional<Accountant> listarId(int idContador) {
 		return cR.findById(idContador);
 	}
 
 	@Override
-	public List<Contador> listar() {
+	public List<Accountant> listar() {
 		return cR.findAll();
 	}
 
 	@Override
-	public List<Contador> buscarNombre(String nombreContador) {
+	public List<Accountant> buscarNombre(String nombreContador) {
 		return cR.findByNombreContador(nombreContador);
 	}
 

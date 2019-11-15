@@ -12,7 +12,7 @@ import pe.edu.upc.entity.Factura;
 @Repository
 public interface FacturaRepository extends JpaRepository<Factura, Integer> {
 
-	@Query("from Factura c where c.contadorFactura.nombreContador like %:nombreContador%")
-	List<Factura> findByNombreContador(@Param("nombreContador") String nombreContador);
+	@Query("from Factura c where c.contadorFactura.name like %:accountantName%")
+	List<Factura> findByNombreContador(@Param("accountantName") String accountantName);
 
 }
