@@ -6,15 +6,15 @@ import java.util.Optional;
 import pe.edu.upc.entity.Accountant;
 
 public interface IAccountantService {
-	public Integer insertar(Accountant contador);
+	public Integer insert(Accountant accountant);
 
-	public void modificar(Accountant contador);
+	public void modify(Accountant accountant);
 
-	public void eliminar(int idContador);
+	public void delete(int accountantId);
 
-	Optional<Accountant> listarId(int idContador);
+	Optional<Accountant> listId(int accountantId);
 
-	List<Accountant> listar();
+	List<Accountant> list();
 
-	List<Accountant> buscarNombre(String nombreContador);
+	List<Accountant> findByName(String name);
 }

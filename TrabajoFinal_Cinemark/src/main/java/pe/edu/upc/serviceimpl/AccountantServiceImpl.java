@@ -19,41 +19,41 @@ public class AccountantServiceImpl implements IAccountantService {
 
 	@Override
 	@Transactional
-	public Integer insertar(Accountant contador) {
-		int rpta = cR.buscarDNIContador(contador.getDocumentNumber());
+	public Integer insert(Accountant accountant) {
+		int rpta = cR.findByDocument(accountant.getDocumentNumber());
 		if (rpta == 0) {
-			cR.save(contador);
+			cR.save(accountant);
 		}
 		return rpta;
 	}
 
 	@Override
 	@Transactional
-	public void modificar(Accountant contador) {
-		cR.actualizar(contador.getName(), contador.getAccountingInstitution(), contador.getAccountingInstitution(),
-				contador.getAccountantId());
+	public void modify(Accountant accountant) {
+		cR.update(accountant.getName(), accountant.getAccountingInstitution(), accountant.getContactNumber(),
+				accountant.getAccountantId());
 	}
 
 	@Override
 	@Transactional
-	public void eliminar(int idContador) {
-		cR.deleteById(idContador);
+	public void delete(int accountantId) {
+		cR.deleteById(accountantId);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<Accountant> listarId(int idContador) {
-		return cR.findById(idContador);
+	public Optional<Accountant> listId(int accountant) {
+		return cR.findById(accountant);
 	}
 
 	@Override
-	public List<Accountant> listar() {
+	public List<Accountant> list() {
 		return cR.findAll();
 	}
 
 	@Override
-	public List<Accountant> buscarNombre(String nombreContador) {
-		return cR.findByNombreContador(nombreContador);
+	public List<Accountant> findByName(String name) {
+		return cR.findByName(name);
 	}
 
 }

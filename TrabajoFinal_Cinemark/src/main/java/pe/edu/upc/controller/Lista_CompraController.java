@@ -54,7 +54,7 @@ public class Lista_CompraController {
 
 	@PostMapping("/guardar")
 	public String guardarLista_Compra(@Valid Lista_Compra lista_Compra, BindingResult result, Model model,
-			SessionStatus status) throws Exception {
+			SessionStatus status, RedirectAttributes redirAttrs) throws Exception {
 		if (result.hasErrors()) {
 			model.addAttribute("listaProveedor", pService.listar());
 			model.addAttribute("valorBoton", "Registrar");
@@ -64,7 +64,7 @@ public class Lista_CompraController {
 			Optional<Lista_Compra> listaEncontrado = lService.listarId(lista_Compra.getIdLista());
 			if (!listaEncontrado.isPresent()) {
 				rpta = lService.insertar(lista_Compra);
-				model.addAttribute("mensaje", "Se registr\u00f3 correctamente");
+				redirAttrs.addFlashAttribute("mensaje", "Se registr\u00f3 correctamente");
 				if (rpta > 0) {
 					model.addAttribute("valorBoton", "Registrar");
 					status.setComplete();
@@ -75,7 +75,7 @@ public class Lista_CompraController {
 				lService.modificar(lista_Compra);
 				rpta = 1;
 				status.setComplete();
-				model.addAttribute("mensaje", "Se modific\u00f3 correctamente");
+				redirAttrs.addFlashAttribute("mensaje", "Se modific\u00f3 correctamente");
 			}
 		}
 		model.addAttribute("listaLista_Compras", lService.listar());
@@ -118,10 +118,35 @@ public class Lista_CompraController {
 				model.addAttribute("mensaje", "Se elimin\u00f3 correctamente la lista de compra");
 			}
 		} catch (Exception e) {
-			model.addAttribute("mensaje", "No se puede eliminar la lista de compra");
+
+			model.addAttribute("mensaje",
+					"No se puede eliminar la lista de compra por que cuenta con detalles de lista de compra y/o al empleado por lista de compra.");
 		}
-		model.addAttribute("listaLista_Compras", lService.listar());
-		return "redirect:/listaCompras/listar";
+
+		try {
+			model.addAttribute("lista_Compra", new Lista_Compra());
+
+			List<Lista_Compra> list = lService.listar();
+			List<Detalle_List_Compra> detalleLista = serviceDetalle.listar();
+
+			for (Lista_Compra l : list) {
+				float precioLista = 0;
+
+				for (Detalle_List_Compra e : detalleLista.stream()
+						.filter(c -> c.getListaDetalle().getIdLista() == l.getIdLista()).collect(Collectors.toList()))
+					precioLista += e.getPrecioDetalle() * e.getUnidadesDetalle();
+
+				l.setPrecioLista(precioLista);
+
+			}
+
+			model.addAttribute("listaLista_Compras", list);
+
+		} catch (Exception e) {
+			model.addAttribute("error", e.getMessage());
+		}
+
+		return "/listaCompra/listaListaCompra";
 
 	}
 
@@ -175,7 +200,7 @@ public class Lista_CompraController {
 		return "listaCompra/listaListaCompra";
 
 	}
-	
+
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/detalle/{id}")
 	public String detailsLista(@PathVariable(value = "id") int id, Model model) {

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.entity.EmpleadoxLC;
 import pe.edu.upc.service.IEmpleadoService;
@@ -58,7 +59,7 @@ public class EmpleadoxLCController {
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@PostMapping("/guardar")
 	public String guardarEmpleadoxLC(@Valid EmpleadoxLC empleadoxLC, BindingResult result, Model model,
-			SessionStatus status) throws Exception {
+			SessionStatus status, RedirectAttributes redirAttrs) throws Exception {
 		if (result.hasErrors()) {
 			model.addAttribute("valorBoton", "Registrar");
 			return "/empleadoxLC/empleadoxLC";
@@ -67,7 +68,9 @@ public class EmpleadoxLCController {
 			Optional<EmpleadoxLC> empleadoLCEncontrado = elService.listarId(empleadoxLC.getIdEmpleadoXLC());
 			if (!empleadoLCEncontrado.isPresent()) {
 				rpta = elService.insertar(empleadoxLC);
-				model.addAttribute("mensaje", "Se registr\u00f3 correctamente");
+
+				redirAttrs.addFlashAttribute("mensaje", "Se registr\u00f3 correctamente");
+
 				if (rpta > 0) {
 					model.addAttribute("valorBoton", "Registrar");
 					status.setComplete();
@@ -78,13 +81,14 @@ public class EmpleadoxLCController {
 				elService.modificar(empleadoxLC);
 				rpta = 1;
 				status.setComplete();
-				model.addAttribute("mensaje", "Se modific\u00f3 correctamente");
+				redirAttrs.addFlashAttribute("mensaje", "Se modific\u00f3 correctamente");
 			}
 
 		}
 		model.addAttribute("listaEmpleadoxLCs", elService.listar());
 
 		return "redirect:/empleadoxLCs/listar";
+
 	}
 
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
@@ -133,7 +137,7 @@ public class EmpleadoxLCController {
 		}
 		model.put("listaEmpleadoxLCs", eService.listar());
 
-		return "redirect:/empleadoxLCs/listar";
+		return this.listarEmpleadoxLC((Model) model);
 	}
 
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })

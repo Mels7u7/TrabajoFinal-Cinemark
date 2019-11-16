@@ -56,20 +56,21 @@ public class Detalle_List_CompraController {
 
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@PostMapping("/guardar")
-	public String guardarDetalle(@Valid Detalle_List_Compra detalle, BindingResult result, Model model,
-			SessionStatus status) throws Exception {
+	public String guardarDetalle(@Valid @ModelAttribute(value = "detalle") Detalle_List_Compra detalle_List_Compra,
+			BindingResult result, Model model, SessionStatus status, RedirectAttributes redirAttrs) throws Exception {
 
 		if (result.hasErrors()) {
 			model.addAttribute("listaCompras", lService.listar());
 			model.addAttribute("listaRecursos", rService.listar());
-
+			model.addAttribute("detalle", detalle_List_Compra);
+			model.addAttribute("valorBoton", "Registrar");
 			return "/detalle/detalle";
 		} else {
 			int rpta = -1;
-			Optional<Detalle_List_Compra> detalleEncontrado = dService.listarId(detalle.getIdDetalle());
+			Optional<Detalle_List_Compra> detalleEncontrado = dService.listarId(detalle_List_Compra.getIdDetalle());
 			if (!detalleEncontrado.isPresent()) {
-				rpta = dService.insertar(detalle);
-				model.addAttribute("mensaje", "Se registr\u00f3 correctamente");
+				rpta = dService.insertar(detalle_List_Compra);
+				redirAttrs.addFlashAttribute("mensaje", "Se registr\u00f3 correctamente");
 				if (rpta > 0) {
 					model.addAttribute("valorBoton", "Registrar");
 					status.setComplete();
@@ -77,10 +78,10 @@ public class Detalle_List_CompraController {
 				}
 
 			} else {
-				dService.modificar(detalle);
+				dService.modificar(detalle_List_Compra);
 				rpta = 1;
 				status.setComplete();
-				model.addAttribute("mensaje", "Se modific\u00f3 correctamente");
+				redirAttrs.addFlashAttribute("mensaje", "Se modific\u00f3 correctamente");
 			}
 
 		}

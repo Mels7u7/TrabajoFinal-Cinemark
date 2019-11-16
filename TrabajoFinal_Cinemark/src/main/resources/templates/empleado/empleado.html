@@ -9,11 +9,11 @@
 		<div class="card bg-light">
 			<div class="card-header text-black bg-blue">Registro de
 				Empleados</div>
-								
+
 			<form th:action="@{/empleados/guardar}" th:object="${empleado}"
 				method="post" enctype="multipart/form-data">
 				<div class="form-group row" style="display: none !important;">
-							
+
 					<label for="idEmpleado" class="col-sm-2 col-form-label">Id</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{idEmpleado}" class="form-control" />
@@ -104,18 +104,29 @@
 					</div>
 				</div>
 
+
+				<div class="form-group row">
+					<label for="celularEmpleado" class="col-sm-2 col-form-label">Puesto
+						del Empleado</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{puestoEmpleado}"
+							class="form-control" th:errorclass="'form-control alert-info'" />
+						<small th:if="${#fields.hasErrors('puestoEmpleado')}"
+							th:errors="*{puestoEmpleado}"></small>
+					</div>
+				</div>
+
 				<div class="form-group row">
 					<label for="celularEmpleado" class="col-sm-2 col-form-label">Celular
 						del Empleado</label>
 					<div class="col-sm-6">
-						<input type="text" th:field="*{celularEmpleado}"
-							class="form-control" th:errorclass="'form-control alert-info'"
-							maxlength="9" /> <small
-							th:if="${#fields.hasErrors('celularEmpleado')}"
+						<input type="text" th:field="*{celularEmpleado}" maxlength="9"
+							class="form-control" th:errorclass="'form-control alert-info'" />
+						<small th:if="${#fields.hasErrors('celularEmpleado')}"
 							th:errors="*{celularEmpleado}"></small>
 					</div>
 				</div>
-								
+
 				<div class="form-group row">
 					<div class="col-sm-6" align="center">
 						<input type="submit" th:value="${valorBoton}"
@@ -124,7 +135,7 @@
 					</div>
 				</div>
 			</form>
-						
+
 		</div>
 	</div>
 

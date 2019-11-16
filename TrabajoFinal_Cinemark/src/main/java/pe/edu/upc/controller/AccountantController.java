@@ -47,17 +47,17 @@ public class AccountantController {
 
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/guardar")
-	public String saveAccountant(@Valid Accountant contador, BindingResult result, Model model, SessionStatus status)
-			throws Exception {
+	public String saveAccountant(@Valid Accountant accountant, BindingResult result, Model model, SessionStatus status,
+			RedirectAttributes redirAttrs) throws Exception {
 		if (result.hasErrors()) {
 			model.addAttribute("valorBoton", "Registrar");
 			return "/contador/contador";
 		} else {
 			int rpta = -1;
-			Optional<Accountant> contadorEncontrado = cService.listarId(contador.getAccountantId());
+			Optional<Accountant> contadorEncontrado = cService.listId(accountant.getAccountantId());
 			if (!contadorEncontrado.isPresent()) {
-				rpta = cService.insertar(contador);
-				model.addAttribute("mensaje", "Se registr\u00f3 correctamente");
+				rpta = cService.insert(accountant);
+				redirAttrs.addFlashAttribute("mensaje", "Se registr\u00f3 correctamente");
 				if (rpta > 0) {
 					model.addAttribute("mensaje", "Ya existe el contador con ese DNI");
 					model.addAttribute("valorBoton", "Registrar");
@@ -66,14 +66,15 @@ public class AccountantController {
 				}
 
 			} else {
-				cService.modificar(contador);
+				cService.modify(accountant);
 				rpta = 1;
 				status.setComplete();
-				model.addAttribute("mensaje", "Se modific\u00f3 correctamente");
+
+				redirAttrs.addFlashAttribute("mensaje", "Se modific\u00f3 correctamente");
 			}
 
 		}
-		model.addAttribute("listaContadores", cService.listar());
+		model.addAttribute("listaContadores", cService.list());
 
 		return "redirect:/contadores/listar";
 	}
@@ -83,7 +84,7 @@ public class AccountantController {
 	public String listarContadores(Model model) {
 		try {
 			model.addAttribute("contador", new Accountant());
-			model.addAttribute("listaContadores", cService.listar());
+			model.addAttribute("listaContadores", cService.list());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
@@ -92,17 +93,18 @@ public class AccountantController {
 
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("/eliminar")
-	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
+	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id,
+			RedirectAttributes redirAttrs) {
 		try {
 			if (id != null && id > 0) {
-				cService.eliminar(id);
-				model.put("mensaje", "Se cancel\u00f3 el contrato con el contador");
+				cService.delete(id);
+				redirAttrs.addFlashAttribute("mensaje", "Se cancel\u00f3 el contrato con el contador");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("mensaje", "No se puede anular el contrato con el contador seleccionado");
+			redirAttrs.addFlashAttribute("mensaje", "No se puede anular el contrato con el contador seleccionado");
 		}
-		model.put("listaContadores", cService.listar());
+		model.put("listaContadores", cService.list());
 
 		return "redirect:/contadores/listar";
 	}
@@ -111,12 +113,12 @@ public class AccountantController {
 	@GetMapping("/detalle/{id}") // modificar
 	public String detailsContador(@PathVariable(value = "id") int id, Model model) {
 		try {
-			Optional<Accountant> contador = cService.listarId(id);
+			Optional<Accountant> contador = cService.listId(id);
 			if (!contador.isPresent()) {
 				model.addAttribute("info", "Contador no existe");
 				return "redirect:/contadores/listar";
 			} else {
-				model.addAttribute("contador", contador.get());
+				model.addAttribute("accountant", contador.get());
 
 			}
 
@@ -134,7 +136,7 @@ public class AccountantController {
 		List<Accountant> listaContadores;
 
 		accountant.setName(accountant.getName());
-		listaContadores = cService.buscarNombre(accountant.getName());
+		listaContadores = cService.findByName(accountant.getName());
 		if (listaContadores.isEmpty()) {
 			model.put("mensaje", "No se encontr\u00f3 al contador con el nombre especificado");
 		}
@@ -146,12 +148,12 @@ public class AccountantController {
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash) {
 
-		Optional<Accountant> accountant = cService.listarId(id);
+		Optional<Accountant> accountant = cService.listId(id);
 		if (accountant == null) {
 			flash.addFlashAttribute("error", "El contador no existe en la base de datos");
 			return "redirect:/contadores/listar";
 		}
-		model.put("contador", accountant.get());
+		model.put("accountant", accountant.get());
 
 		return "contador/verc";
 	}

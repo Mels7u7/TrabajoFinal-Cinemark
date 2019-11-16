@@ -58,7 +58,7 @@ public class FacturaController {
 	public String nuevoFactura(Model model) {
 		model.addAttribute("factura", new Factura());
 		model.addAttribute("contador", new Accountant());
-		model.addAttribute("listaContadores", cService.listar());
+		model.addAttribute("listaContadores", cService.list());
 		model.addAttribute("listaLista_Compras", icService.listar());
 		model.addAttribute("valorBoton", "Registrar");
 		return "/factura/factura";
@@ -66,10 +66,10 @@ public class FacturaController {
 
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@PostMapping("/guardar")
-	public String guardarFactura(@Valid Factura factura, BindingResult result, Model model, SessionStatus status)
-			throws Exception {
+	public String guardarFactura(@Valid Factura factura, BindingResult result, Model model, SessionStatus status,
+			RedirectAttributes redirAttrs) throws Exception {
 		if (result.hasErrors()) {
-			model.addAttribute("listaContadores", cService.listar());
+			model.addAttribute("listaContadores", cService.list());
 			model.addAttribute("valorBoton", "Registrar");
 			return "/factura/factura";
 		} else {
@@ -77,7 +77,7 @@ public class FacturaController {
 			Optional<Factura> facturaEncontrado = fService.listarId(factura.getIdFactura());
 			if (!facturaEncontrado.isPresent()) {
 				rpta = fService.insertar(factura);
-				model.addAttribute("mensaje", "Se registr\u00f3 correctamente");
+				redirAttrs.addFlashAttribute("mensaje", "Se registr\u00f3 correctamente");
 				if (rpta > 0) {
 					model.addAttribute("valorBoton", "Registrar");
 					status.setComplete();
@@ -86,7 +86,7 @@ public class FacturaController {
 			} else {
 				fService.modificar(factura);
 				rpta = 1;
-				model.addAttribute("mensaje", "Se modific\u00f3 correctamente");
+				redirAttrs.addFlashAttribute("mensaje", "Se modific\u00f3 correctamente");
 			}
 
 		}
@@ -109,7 +109,8 @@ public class FacturaController {
 				float precioLista = 0;
 
 				for (Detalle_List_Compra e : detalleLista.stream()
-						.filter(c -> c.getListaDetalle().getIdLista() == l.getIdFactura()).collect(Collectors.toList()))
+						.filter(c -> c.getListaDetalle().getIdLista() == l.getListaFactura().getIdLista())
+						.collect(Collectors.toList()))
 					precioLista += e.getPrecioDetalle() * e.getUnidadesDetalle();
 
 				l.setPrecio(precioLista);
@@ -126,17 +127,18 @@ public class FacturaController {
 
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@RequestMapping("/eliminar")
-	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
+	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id,
+			RedirectAttributes redirAttrs) {
 		try {
 			if (id != null && id > 0) {
 				fService.eliminar(id);
-				model.put("mensaje", "Se cancel\u00f3 la factura");
+				redirAttrs.addFlashAttribute("mensaje", "Se cancel\u00f3 la factura");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			model.put("mensaje", "No se puede anular la factura");
 		}
-		model.put("listaFacturas", fService.listar());
+		redirAttrs.addFlashAttribute("listaFacturas", fService.listar());
 
 		return "redirect:/facturas/listar";
 	}
@@ -151,7 +153,7 @@ public class FacturaController {
 				return "redirect:/facturas/listar";
 			} else {
 				model.addAttribute("factura", factura.get());
-				model.addAttribute("listaContadores", cService.listar());
+				model.addAttribute("listaContadores", cService.list());
 				model.addAttribute("listaLista_Compras", icService.listar());
 
 			}

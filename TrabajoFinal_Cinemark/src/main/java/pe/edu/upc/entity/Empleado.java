@@ -25,7 +25,7 @@ public class Empleado implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idEmpleado;
-	
+
 	@NotEmpty(message = "Ingresa el nombre del empleado")
 	@Column(name = "nombreEmpleado", nullable = false, length = 30)
 	private String nombreEmpleado;
@@ -52,12 +52,12 @@ public class Empleado implements Serializable {
 	@Column(name = "tituloEmpleado", nullable = false, length = 30)
 	private String tituloEmpleado;
 
-	@Email
+	@Email(message = "Ingresa un email con el formato correcto.")
 	@NotEmpty(message = "Ingresa el correo")
 	@Column(name = "correoEmpleado", nullable = false, length = 40)
 	private String correoEmpleado;
 
-	@Pattern(regexp = "[\\d]{9}", message = "El n�mero de celular tiene que ser de 9 digitos y no puede ingresar letras")
+	@Pattern(regexp = "[\\d]{9}", message = "El n\u00FAmero de celular tiene que ser de 9 digitos y no puede ingresar letras")
 	@NotEmpty(message = "Ingresa el celular del empleado")
 	@Column(name = "celularEmpleado", nullable = false, length = 10)
 	private String celularEmpleado;
@@ -164,7 +164,5 @@ public class Empleado implements Serializable {
 	public void setPuestoEmpleado(String puestoEmpleado) {
 		this.puestoEmpleado = puestoEmpleado;
 	}
-
-
 
 }

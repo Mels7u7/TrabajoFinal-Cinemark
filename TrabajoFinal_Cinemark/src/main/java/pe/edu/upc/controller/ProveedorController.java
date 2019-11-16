@@ -48,8 +48,8 @@ public class ProveedorController {
 
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@PostMapping("/guardar")
-	public String guardarProveedor(@Valid Proveedor proveedor, BindingResult result, Model model, SessionStatus status)
-			throws Exception {
+	public String guardarProveedor(@Valid Proveedor proveedor, BindingResult result, Model model, SessionStatus status,
+			RedirectAttributes redirAttrs) throws Exception {
 		if (result.hasErrors()) {
 			model.addAttribute("valorBoton", "Registrar");
 			return "/proveedor/proveedor";
@@ -60,7 +60,7 @@ public class ProveedorController {
 				rpta = pService.insertar(proveedor);
 				model.addAttribute("mensaje", "Se registr\u00f3 correctamente");
 				if (rpta > 0) {
-					model.addAttribute("mensaje", "Ya existe un proveedor con el mismo RUC");
+					redirAttrs.addFlashAttribute("mensaje", "Ya existe un proveedor con el mismo RUC");
 					model.addAttribute("valorBoton", "Registrar");
 					status.setComplete();
 					return "/proveedor/proveedor";
@@ -68,7 +68,7 @@ public class ProveedorController {
 			} else {
 				pService.modificar(proveedor);
 				rpta = 1;
-				model.addAttribute("mensaje", "Se modific\u00f3 correctamente");
+				redirAttrs.addFlashAttribute("mensaje", "Se modific\u00f3 correctamente");
 			}
 		}
 		model.addAttribute("listaProveedores", pService.listar());

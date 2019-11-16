@@ -33,7 +33,6 @@ public class EmpleadoController {
 
 	@Autowired
 	private EmpleadoServiceImpl eService;
-	
 
 	@RequestMapping("/bienvenido")
 	public String irBienvenido() {
@@ -50,8 +49,8 @@ public class EmpleadoController {
 
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@PostMapping("/guardar")
-	public String guardarEmpleado(@Valid Empleado empleado, BindingResult result, Model model, SessionStatus status)
-			throws Exception {
+	public String guardarEmpleado(@Valid Empleado empleado, BindingResult result, Model model, SessionStatus status,
+			RedirectAttributes redirAttrs) throws Exception {
 		if (result.hasErrors()) {
 			model.addAttribute("valorBoton", "Registrar");
 			return "/empleado/empleado";
@@ -59,10 +58,9 @@ public class EmpleadoController {
 			int rpta = -1;
 			Optional<Empleado> empleadoEncontrado = eService.listarId(empleado.getIdEmpleado());
 			if (!empleadoEncontrado.isPresent()) {
-	
-				
+
 				rpta = eService.insertar(empleado);
-				model.addAttribute("mensaje", "Se registr\u00f3 correctamente");
+				redirAttrs.addFlashAttribute("mensaje", "Se registr\u00f3 correctamente");
 				if (rpta > 0) {
 					model.addAttribute("mensaje", "Ya existe el empleado con ese DNI");
 					model.addAttribute("valorBoton", "Registrar");
@@ -74,7 +72,7 @@ public class EmpleadoController {
 				eService.modificar(empleado);
 				rpta = 1;
 				status.setComplete();
-				model.addAttribute("mensaje", "Se modific\u00f3 correctamente");
+				redirAttrs.addFlashAttribute("mensaje", "Se modific\u00f3 correctamente");
 			}
 
 		}
@@ -82,7 +80,7 @@ public class EmpleadoController {
 		return "redirect:/empleados/listar";
 
 	}
-	
+
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping("/listar")
 	public String listarEmpleados(Model model) {

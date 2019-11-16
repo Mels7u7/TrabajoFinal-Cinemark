@@ -65,9 +65,10 @@
 					<div class="col-sm-6">
 						<input type="text" th:field="*{unidadesDetalle}"
 							class="form-control" th:errorclass="'form-control alert-info'"
-							maxlength="3" /> <small
-							th:if="${#fields.hasErrors('unidadesDetalle')}"
+							maxlength="3" /> 
+							<small th:if="${#fields.hasErrors('unidadesDetalle')}"
 							th:errors="*{unidadesDetalle}"></small>
+							
 					</div>
 				</div>
 
