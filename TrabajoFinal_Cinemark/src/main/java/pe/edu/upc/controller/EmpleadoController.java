@@ -95,15 +95,16 @@ public class EmpleadoController {
 
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("/eliminar")
-	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
+	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id,
+			RedirectAttributes redirAttrs) {
 		try {
 			if (id != null && id > 0) {
 				eService.eliminar(id);
-				model.put("mensaje", "Se ha eliminado correctamente.");
+				redirAttrs.addFlashAttribute("mensaje", "Se ha eliminado correctamente.");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("mensaje", "La operaci\u00f3n ha sido cancelada.");
+			redirAttrs.addFlashAttribute("mensaje", "La operaci\u00f3n ha sido cancelada.");
 		}
 		model.put("listaEmpleados", eService.listar());
 

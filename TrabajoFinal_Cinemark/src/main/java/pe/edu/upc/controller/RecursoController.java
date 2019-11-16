@@ -99,12 +99,12 @@ public class RecursoController {
 			Recurso obj = rService.listarId(recurso.getIdRecurso());
 			if (obj == null) {
 				rpta = rService.insertar(recurso);
-				model.addAttribute("mensaje", "Se registr\u00f3 correctamente");
+				flash.addFlashAttribute("mensaje", "Se registr\u00f3 correctamente");
 				model.addAttribute("valorBoton", "Registrar");
 			} else {
 				rService.modificar(recurso);
 				rpta = 1;
-				model.addAttribute("mensaje", "Se modific\u00f3 correctamente");
+				flash.addFlashAttribute("mensaje", "Se modific\u00f3 correctamente");
 			}
 			if (rpta > 0) {
 				status.setComplete();
@@ -131,15 +131,16 @@ public class RecursoController {
 
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("/eliminar")
-	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
+	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id,
+			RedirectAttributes redirAttrs) {
 		try {
 			if (id != null && id > 0) {
 				rService.eliminar(id);
-				model.put("mensaje", "Se elimin\u00f3 el recurso");
+				redirAttrs.addFlashAttribute("mensaje", "Se elimin\u00f3 el recurso");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("mensaje", "No se puede eliminar el recurso seleccionado");
+			redirAttrs.addFlashAttribute("mensaje", "No se puede eliminar el recurso seleccionado");
 		}
 		model.put("listaRecursos", rService.listar());
 
