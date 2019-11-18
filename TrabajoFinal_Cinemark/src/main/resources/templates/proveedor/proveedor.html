@@ -24,7 +24,7 @@
 						del Proveedor:</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{nombreProveedor}"
-							class="form-control" th:errorclass="'form-control alert-info'" />
+							class="form-control" th:errorclass="'form-control alert-info'" maxlength="30"/>
 						<small th:if="${#fields.hasErrors('nombreProveedor')}"
 							th:errors="*{nombreProveedor}"></small>
 					</div>
@@ -35,7 +35,7 @@
 					<label for="direccionProveedor" class="col-sm-2 col-form-label">DIRECCIÓN:</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{direccionProveedor}"
-							class="form-control" th:errorclass="'form-control alert-danger'" />
+							class="form-control" th:errorclass="'form-control alert-danger'" maxlength="50"/>
 						<small th:if="${#fields.hasErrors('direccionProveedor')}"
 							th:errors="*{direccionProveedor}"></small>
 					</div>
@@ -45,7 +45,7 @@
 					<label for="rucProveedor" class="col-sm-2 col-form-label">RUC:</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{rucProveedor}" class="form-control"
-							th:errorclass="'form-control alert-danger'" /> <small
+							th:errorclass="'form-control alert-danger'" maxlength="11"/> <small
 							th:if="${#fields.hasErrors('rucProveedor')}"
 							th:errors="*{rucProveedor}"></small>
 					</div>
@@ -58,7 +58,7 @@
 						proveedor:</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{nombrecontactoProveedor}"
-							class="form-control" th:errorclass="'form-control alert-info'" />
+							class="form-control" th:errorclass="'form-control alert-info'" maxlength="70"/>
 						<small th:if="${#fields.hasErrors('nombrecontactoProveedor')}"
 							th:errors="*{nombrecontactoProveedor}"></small>
 					</div>
@@ -70,7 +70,7 @@
 						proveedor:</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{numerocontactoProveedor}"
-							class="form-control" th:errorclass="'form-control alert-info'" />
+							class="form-control" th:errorclass="'form-control alert-info'" maxlength="9"/>
 						<small th:if="${#fields.hasErrors('numerocontactoProveedor')}"
 							th:errors="*{numerocontactoProveedor}"></small>
 					</div>

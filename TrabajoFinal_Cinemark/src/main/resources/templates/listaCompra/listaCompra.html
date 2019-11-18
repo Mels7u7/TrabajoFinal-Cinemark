@@ -40,6 +40,7 @@
 						actual de la Lista de compra:</label>
 					<div class="col-sm-6">
 						<select class="form-control" th:field="*{estadoLista}">
+							<option value="Seleccionar" selected>Seleccionar</option>
 							<option th:value="Pendiente" th:text="Pendiente"></option>
 							<option th:value="Facturado" th:text="Facturado"></option>
 							<option th:value="Retrasado" th:text="Retrasado"></option>
@@ -76,9 +77,9 @@
 
 				<div class="form-group row">
 					<div class="col-sm-6" align="center">
-						<input type="submit" th:value="${valorBoton}" class="btn btn-primary" />
-
-						<a href="/listaCompras/listar" class="btn btn-danger">Cancelar</a>
+						<input type="submit" th:value="${valorBoton}"
+							class="btn btn-primary" /> <a href="/listaCompras/listar"
+							class="btn btn-danger">Cancelar</a>
 					</div>
 				</div>
 			</form>
