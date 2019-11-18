@@ -160,25 +160,12 @@ public class Lista_CompraController {
 			listaListas = lService.buscarProveedor(lista.getNotaLista());
 		}
 		if (listaListas.isEmpty()) {
-			model.put("mensaje", "No se encontr\u00f3 ning\u00fan resultado");
-		}
-		model.put("listaLista_Compras", listaListas);
-		return "listaCompra/listaListaCompra";
-
-	}
-
-	@RequestMapping("/buscare")
-	public String buscarEstado(Map<String, Object> model, @ModelAttribute Lista_Compra lista) throws ParseException {
-
-		List<Lista_Compra> listaListas;
-		lista.setNotaLista(lista.getNotaLista());
-		listaListas = lService.buscar(lista.getNotaLista());
-		if (listaListas.isEmpty()) {
 			listaListas = lService.buscarEstado(lista.getNotaLista());
 		}
 		if (listaListas.isEmpty()) {
 			model.put("mensaje", "No se encontr\u00f3 ning\u00fan resultado");
 		}
+		
 		model.put("listaLista_Compras", listaListas);
 		return "listaCompra/listaListaCompra";
 

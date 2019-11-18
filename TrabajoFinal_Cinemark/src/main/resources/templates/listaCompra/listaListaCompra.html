@@ -16,9 +16,9 @@
 			<form th:action="@{/listaCompras/buscarp}" method="post"
 				th:object="${lista_Compra}">
 				<div class="form-group">
-					<label for="compra">Buscar por proveedor:</label> <input type="text"
-						class="form-control" 
-						th:field="*{notaLista}" id="compra"></input>
+					<label for="compra">Buscar:</label> <input type="text"
+						class="form-control" th:field="*{notaLista}" id="compra"
+						placeholder="Ingre el nombre del proveedor o el estado de la lista"></input>
 					<div align="right">
 						<button type="submit" class="btn btn-info">Aceptar</button>
 						<a href="/listaCompras/listar" class="btn btn-dark">Cancelar</a>
@@ -26,29 +26,13 @@
 				</div>
 			</form>
 		</div>
-		
-		<div>
-			<form th:action="@{/listaCompras/buscare}" method="post"
-				th:object="${lista_Compra}">
-				<div class="form-group">
-					<label for="lcompra">Buscar por estado:</label> <input type="text"
-						class="form-control" 
-						th:field="*{notaLista}" id="lcompra"></input>
-					<div align="right">
-						<button type="submit" class="btn btn-info">Aceptar</button>
-						<a href="/listaCompras/listar" class="btn btn-dark">Cancelar</a>
-					</div>
-				</div>
-			</form>
-		</div>
-		
+
 		<div>
 			<form th:action="@{/listaCompras/buscarm}" method="post"
 				th:object="${lista_Compra}">
 				<div class="form-group">
 					<label for="mcompra">Buscar por mayor:</label> <input type="text"
-						class="form-control" 
-						th:field="*{notaLista}" id="mcompra"></input>
+						class="form-control" th:field="*{notaLista}" id="mcompra"></input>
 					<div align="right">
 						<button type="submit" class="btn btn-info">Aceptar</button>
 						<a href="/listaCompras/listar" class="btn btn-dark">Cancelar</a>
@@ -80,7 +64,7 @@
 
 								<td><a class="btn btn-primary btn-xs"
 									th:href="@{/listaCompras/ver/} + ${lista_Compra.idLista}"
-									th:text="${lista_Compra.idLista}" ></a></td>
+									th:text="${lista_Compra.idLista}"></a></td>
 
 								<td th:text="${lista_Compra.proveedorLista.nombreProveedor}"></td>
 
