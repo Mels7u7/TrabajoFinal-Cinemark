@@ -32,7 +32,7 @@ public class AccountantController {
 	@Autowired
 	private IAccountantService cService;
 
-	@RequestMapping("/welcome")
+	@RequestMapping("/bienvenido")
 	public String goHome() {
 		return "bienvenido";
 	}
