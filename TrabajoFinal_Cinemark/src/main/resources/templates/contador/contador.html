@@ -24,7 +24,7 @@
 						del Contador</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{name}"
-							class="form-control" th:errorclass="'form-control alert-info'" />
+							class="form-control" th:errorclass="'form-control alert-info'" maxlength="30"/>
 						<small th:if="${#fields.hasErrors('name')}"
 							th:errors="*{name}"></small>
 					</div>
@@ -34,7 +34,7 @@
 					<label for="documentNumber" class="col-sm-2 col-form-label">DNI</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{documentNumber}" class="form-control"
-							th:errorclass="'form-control alert-danger'" /> <small
+							th:errorclass="'form-control alert-danger'" maxlength="8"/> <small
 							th:if="${#fields.hasErrors('documentNumber')}"
 							th:errors="*{documentNumber}"></small>
 					</div>
@@ -46,7 +46,7 @@
 						de la institución del contador</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{accountingInstitution}"
-							class="form-control" th:errorclass="'form-control alert-info'" />
+							class="form-control" th:errorclass="'form-control alert-info'" maxlength="30"/>
 						<small th:if="${#fields.hasErrors('accountingInstitution')}"
 							th:errors="*{accountingInstitution}"></small>
 					</div>
@@ -57,7 +57,7 @@
 						de contacto del contador</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{contactNumber}"
-							class="form-control" th:errorclass="'form-control alert-info'" />
+							class="form-control" th:errorclass="'form-control alert-info'" maxlength="9"/>
 						<small th:if="${#fields.hasErrors('contactNumber')}"
 							th:errors="*{contactNumber}"></small>
 					</div>
