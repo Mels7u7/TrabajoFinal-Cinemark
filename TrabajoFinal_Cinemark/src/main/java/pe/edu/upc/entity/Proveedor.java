@@ -28,11 +28,11 @@ public class Proveedor implements Serializable {
 	@Column(name = "nombreProveedor", nullable = false, length = 30)
 	private String nombreProveedor;
 
-	@NotEmpty(message = "Ingresa la direccion del proveedor")
+	@NotEmpty(message = "Ingresa la direcci\u00f3n del proveedor")
 	@Column(name = "direccionProveedor", nullable = false, length = 50)
 	private String direccionProveedor;
 
-	@Size(min = 11, max = 11, message = "EL RUC tiene que ser de 11 digitos")
+	@Size(min = 11, max = 11, message = "EL RUC tiene que ser de 11 d\u00edgitos")
 	@NotEmpty(message = "Ingresar RUC")
 	@Column(name = "rucProveedor", nullable = false, length = 45, unique = true)
 	private String rucProveedor;
@@ -41,8 +41,8 @@ public class Proveedor implements Serializable {
 	@Column(name = "nombrecontactoProveedor", nullable = false, length = 70)
 	private String nombrecontactoProveedor;
 
-	@Pattern(regexp = "[\\d]{9}", message = "El número de celular tiene que ser de 9 digitos y no puede ingresar letras")
-	@NotEmpty(message = "Ingresa el número de contacto del proveedor")
+	@Pattern(regexp = "[\\d]{9}", message = "El n\u00famero de celular tiene que ser de 9 d\u00edgitos y no puede ingresar letras")
+	@NotEmpty(message = "Ingresa el n\u00famero de contacto del proveedor")
 	@Column(name = "numerocontactoProveedor", nullable = false, length = 10)
 	private String numerocontactoProveedor;
 

@@ -56,7 +56,7 @@ public class Lista_CompraController {
 	public String guardarLista_Compra(@Valid Lista_Compra lista_Compra, BindingResult result, Model model,
 			SessionStatus status, RedirectAttributes redirAttrs) throws Exception {
 		if (result.hasErrors()) {
-			model.addAttribute("listaProveedor", pService.listar());
+			model.addAttribute("listaProveedores", pService.listar());
 			model.addAttribute("valorBoton", "Registrar");
 			return "/listaCompra/listaCompra";
 		} else {
@@ -79,7 +79,7 @@ public class Lista_CompraController {
 			}
 		}
 		model.addAttribute("listaLista_Compras", lService.listar());
-
+		
 		return "redirect:/listaCompras/listar";
 	}
 

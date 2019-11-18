@@ -70,6 +70,7 @@ public class FacturaController {
 			RedirectAttributes redirAttrs) throws Exception {
 		if (result.hasErrors()) {
 			model.addAttribute("listaContadores", cService.list());
+			model.addAttribute("listaLista_Compras", icService.listar());
 			model.addAttribute("valorBoton", "Registrar");
 			return "/factura/factura";
 		} else {

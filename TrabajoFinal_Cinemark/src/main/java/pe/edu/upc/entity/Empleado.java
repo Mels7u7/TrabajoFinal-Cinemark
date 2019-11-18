@@ -48,7 +48,7 @@ public class Empleado implements Serializable {
 	@Column(name = "dniEmpleado", nullable = false, length = 10, unique = true)
 	private String dniEmpleado;
 
-	@NotEmpty(message = "Ingresa el titulo del empleado")
+	@NotEmpty(message = "Ingresa el t\u00edtulo del empleado")
 	@Column(name = "tituloEmpleado", nullable = false, length = 30)
 	private String tituloEmpleado;
 

@@ -28,17 +28,17 @@ public class Accountant implements Serializable {
 	@Column(name = "name", nullable = false, length = 30)
 	private String name;
 
-	@Size(min = 8, max = 8, message = "El DNI tiene que ser de 8 digitos")
+	@Size(min = 8, max = 8, message = "El DNI tiene que ser de 8 d\u00edgitos")
 	@NotEmpty(message = "Ingresar DNI")
 	@Column(name = "documentNumber", nullable = false, length = 9, unique = true)
 	private String documentNumber;
 
-	@NotEmpty(message = "Ingresar institucion")
+	@NotEmpty(message = "Ingresar instituci\u00f3n")
 	@Column(name = "accountingInstitution", nullable = false, length = 30)
 	private String accountingInstitution;
 
-	@Pattern(regexp = "[\\d]{9}", message = "El numero de celular tiene que ser de 9 digitos y no se puede ingresar letras")
-	@NotEmpty(message = "Ingresar numero del contador")
+	@Pattern(regexp = "[\\d]{9}", message = "El n\u00famero de celular tiene que ser de 9 d\u00edgitos y no se puede ingresar letras")
+	@NotEmpty(message = "Ingresar n\u00famero del contador")
 	@Column(name = "contactNumber", nullable = false, length = 10)
 	private String contactNumber;
 
