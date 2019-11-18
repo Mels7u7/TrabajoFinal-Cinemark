@@ -18,9 +18,6 @@ public interface ListaRepository extends JpaRepository<Lista_Compra, Integer> {
 	@Query("select o from Lista_Compra o where o.proveedorLista.nombreProveedor like %:name%")
 	public List<Lista_Compra> buscarProveedor(@Param("name") String nombreProveedor);
 
-	@Query("select l from Lista_Compra l where l.precioLista > ?1")
-	public List<Lista_Compra> mayorquePrecioLista(String precioLista);
-
 	@Query("select o from Lista_Compra o where o.notaLista like %?1%")
 	public List<Lista_Compra> findByNotaLista(String term);
 }

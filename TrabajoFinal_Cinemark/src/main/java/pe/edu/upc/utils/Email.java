@@ -23,8 +23,6 @@ public class Email {
 			helper.setSubject(subject);
 			helper.setText(content, true);
 
-			//helper.addAttachment("logo.png", new ClassPathResource("static/imagenes/logo.png"));
-
 			javaMailSender.send(msg);
 		} catch (Exception e) {
 			e.printStackTrace();

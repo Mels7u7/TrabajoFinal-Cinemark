@@ -90,10 +90,4 @@ public class ListaServiceImpl implements IListaService {
 		return lR.buscarProveedor(nombreProveedor);
 	}
 
-	@Override
-	public List<Lista_Compra> buscarMayor(String precioLista) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

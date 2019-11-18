@@ -22,7 +22,5 @@ public interface IListaService {
 	List<Lista_Compra> buscarEstado(String estadoLista);
 
 	List<Lista_Compra> buscarProveedor(String nombreProveedor);
-	
-	List<Lista_Compra> buscarMayor(String precioLista);
 
 }

@@ -18,7 +18,7 @@
 				<div class="form-group">
 					<label for="compra">Buscar:</label> <input type="text"
 						class="form-control" th:field="*{notaLista}" id="compra"
-						placeholder="Ingre el nombre del proveedor o el estado de la lista"></input>
+						placeholder="Ingrese el nombre del proveedor o el estado de la lista"></input>
 					<div align="right">
 						<button type="submit" class="btn btn-info">Aceptar</button>
 						<a href="/listaCompras/listar" class="btn btn-dark">Cancelar</a>
@@ -32,7 +32,7 @@
 				th:object="${lista_Compra}">
 				<div class="form-group">
 					<label for="mcompra">Buscar por mayor:</label> <input type="text"
-						class="form-control" th:field="*{notaLista}" id="mcompra"></input>
+						class="form-control" th:field="*{precioLista}" id="mcompra"></input>
 					<div align="right">
 						<button type="submit" class="btn btn-info">Aceptar</button>
 						<a href="/listaCompras/listar" class="btn btn-dark">Cancelar</a>

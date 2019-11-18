@@ -1,6 +1,7 @@
 package pe.edu.upc.controller;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -91,6 +92,9 @@ public class Lista_CompraController {
 			List<Lista_Compra> list = lService.listar();
 			List<Detalle_List_Compra> detalleLista = serviceDetalle.listar();
 
+			
+			
+			
 			for (Lista_Compra l : list) {
 				float precioLista = 0;
 
@@ -99,6 +103,8 @@ public class Lista_CompraController {
 					precioLista += e.getPrecioDetalle() * e.getUnidadesDetalle();
 
 				l.setPrecioLista(precioLista);
+				
+				
 
 			}
 
@@ -174,11 +180,24 @@ public class Lista_CompraController {
 	@RequestMapping("/buscarm")
 	public String buscarMayor(Map<String, Object> model, @ModelAttribute Lista_Compra lista) throws ParseException {
 
-		List<Lista_Compra> listaListas;
-		lista.setNotaLista(lista.getNotaLista());
-		listaListas = lService.buscar(lista.getNotaLista());
-		if (listaListas.isEmpty()) {
-			listaListas = lService.buscarMayor(lista.getNotaLista());
+		List<Lista_Compra> listaListas = new ArrayList<>();
+		lista.setPrecioLista(lista.getPrecioLista());
+		
+		List<Lista_Compra> list = lService.listar();
+		List<Detalle_List_Compra> detalleLista = serviceDetalle.listar();
+
+		for (Lista_Compra l : list) {
+			float precioLista = 0;
+
+			for (Detalle_List_Compra e : detalleLista.stream()
+					.filter(c -> c.getListaDetalle().getIdLista() == l.getIdLista()).collect(Collectors.toList()))
+				precioLista += e.getPrecioDetalle() * e.getUnidadesDetalle();
+
+			l.setPrecioLista(precioLista);
+			
+			if(l.getPrecioLista() > lista.getPrecioLista())listaListas.add(l);
+			
+
 		}
 		if (listaListas.isEmpty()) {
 			model.put("mensaje", "No se encontr\u00f3 ning\u00fan resultado");
