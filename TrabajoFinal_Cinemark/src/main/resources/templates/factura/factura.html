@@ -51,7 +51,7 @@
 					<label for="analisisFactura" class="col-sm-2 col-form-label">Análisis</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{analisisFactura}"
-							class="form-control" th:errorclass="'form-control alert-info'" />
+							class="form-control" th:errorclass="'form-control alert-info'" maxlength="60"/>
 						<small th:if="${#fields.hasErrors('analisisFactura')}"
 							th:errors="*{analisisFactura}"></small>
 					</div>
