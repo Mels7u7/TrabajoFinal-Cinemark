@@ -38,7 +38,7 @@ public class Factura implements Serializable {
 	private Lista_Compra listaFactura;
 
 	@ManyToOne
-	@JoinColumn(name = "idContador")
+	@JoinColumn(name = "accountantId")
 	private Accountant contadorFactura;
 
 	@NotEmpty(message = "Ingresa el an�lisis de la factura")

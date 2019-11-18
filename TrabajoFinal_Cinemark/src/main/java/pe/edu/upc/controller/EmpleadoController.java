@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.entity.Empleado;
 import pe.edu.upc.serviceimpl.EmpleadoServiceImpl;
+import pe.edu.upc.utils.Email;
 
 @Controller
 @SessionAttributes("empleado")
@@ -33,6 +34,9 @@ public class EmpleadoController {
 
 	@Autowired
 	private EmpleadoServiceImpl eService;
+	
+	@Autowired
+	private Email emailService;
 
 	@RequestMapping("/bienvenido")
 	public String irBienvenido() {
@@ -60,10 +64,19 @@ public class EmpleadoController {
 			if (!empleadoEncontrado.isPresent()) {
 
 				rpta = eService.insertar(empleado);
+				
+				String mensajeCorreo = "<img src=\"https://cinemarkla.modyocdn.com/uploads/a8852d98-cd8b-4029-a316-dbb44b8632f2/original/cinemark-logo.png\" alt=\"Cinemark\"></br>";
+				mensajeCorreo += "<h2>Estimado(a) Empleado" + " te has registrado satisfactoriamente</h2>";
+				try {
+					emailService.sendEmail("Bienvenido", mensajeCorreo, empleado.getCorreoEmpleado());
+				} catch (Exception ex) {
+
+				}
 				redirAttrs.addFlashAttribute("mensaje", "Se registr\u00f3 correctamente");
 				if (rpta > 0) {
 					model.addAttribute("mensaje", "Ya existe el empleado con ese DNI");
 					model.addAttribute("valorBoton", "Registrar");
+					
 					status.setComplete();
 					return "/empleado/empleado";
 				}

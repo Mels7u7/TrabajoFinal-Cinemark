@@ -58,7 +58,7 @@ public class ProveedorController {
 			Optional<Proveedor> proveedorEncontrado = pService.listarId(proveedor.getIdProveedor());
 			if (!proveedorEncontrado.isPresent()) {
 				rpta = pService.insertar(proveedor);
-				model.addAttribute("mensaje", "Se registr\u00f3 correctamente");
+				redirAttrs.addFlashAttribute("mensaje", "Se registr\u00f3 correctamente");
 				if (rpta > 0) {
 					redirAttrs.addFlashAttribute("mensaje", "Ya existe un proveedor con el mismo RUC");
 					model.addAttribute("valorBoton", "Registrar");
@@ -90,16 +90,17 @@ public class ProveedorController {
 
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("/eliminar")
-	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
+	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id,
+			RedirectAttributes redirAttrs) {
 		try {
 			if (id != null && id > 0) {
 				pService.eliminar(id);
-				model.put("mensaje", "se cancel\u00f3 el contrato con el proveedor seleccionado");
+				redirAttrs.addFlashAttribute("mensaje", "se cancel\u00f3 el contrato con el proveedor seleccionado");
 			}
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			model.put("mensaje", "No se puede anular el contrato con el proveedor seleccionado");
+			redirAttrs.addFlashAttribute("mensaje", "No se puede anular el contrato con el proveedor seleccionado");
 		}
 		model.put("listaProveedores", pService.listar());
 		return "redirect:/proveedores/listar";
