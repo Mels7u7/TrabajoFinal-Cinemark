@@ -11,13 +11,13 @@
 				class="btn btn-primary">Nuevo Proveedor</a>
 		</div>
 		<div>
-			<form th:action="@{/proveedores/buscar}" method="post"
+			<form th:action="@{/proveedores/buscarruc}" method="post"
 				th:object="${proveedor}">
 				<div class="form-group">
 
 					<label for="proveedor">Buscar:</label> <input type="text"
-						class="form-control" th:field="*{nombreProveedor}" id="proveedor"
-						placeholder="Buscar por nombre del Proveedor "></input>
+						class="form-control" th:field="*{direccionProveedor}" id="proveedor"
+						placeholder="Ingrese el nombre del proveedor o su ruc"></input>
 					<div align="right">
 						<button type="submit" class="btn btn-success">Aceptar</button>
 						<a href="/proveedores/listar" class="btn btn-danger">Cancelar</a>
