@@ -17,8 +17,8 @@
 				<div class="form-group">
 
 					<label for="detalle">Buscar por ID de Lista de Compra:</label> <input
-						type="text" class="form-control" th:field="*{listaDetalle.idLista}"
-						id="detalle"></input>
+						type="text" class="form-control"
+						th:field="*{listaDetalle.idLista}" id="detalle"></input>
 					<div align="right">
 						<button type="submit" class="btn btn-success">Aceptar</button>
 						<a href="/detalles/listar" class="btn btn-danger">Cancelar</a>
@@ -55,14 +55,16 @@
 								<td th:text="${detalle.recursoDetalle.nombreRecurso}"></td>
 
 								<td th:text="${detalle.listaDetalle.idLista}"></td>
-								
+
 								<td th:text="${detalle.importe}"></td>
-								<td align="center"><a
-									th:href="@{/detalles/eliminar?id=}+${detalle.idDetalle}"
-									type="button" class="btn btn-default btn-lg">Eliminar</a></td>
-								<td align="center"><a
+
+								<td align="left"><a th:id="${detalle.idDetalle}"
+									class="fas fa-trash-alt fa-2x button-default"
+									onclick="ondelete(this);"></a> | <a
 									th:href="@{'/detalles/detalle/' + ${detalle.idDetalle}}"
-									type="button" class="btn btn-default btn-lg">Editar</a></td>
+									class="fas fa-edit fa-2x button-default"></a></td>
+
+
 							</tr>
 						</tbody>
 					</table>
@@ -76,4 +78,21 @@
 
 	<footer th:replace="layout/layout :: footer"></footer>
 </body>
-</html>
+
+<script type="text/javascript">
+	function ondelete(a){
+		Swal.fire({
+			title: '¿Estas seguro?',
+			text: "No podrás revertir esto!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',  
+			cancelButtonColor: '#d33',
+		   	confirmButtonText: 'Si, eliminar!'
+		}).then((result) => {
+	if (result.value) {
+		    location.href = "/facturas/eliminar?id="+a.id;
+		 }
+	});
+}
+</script>
