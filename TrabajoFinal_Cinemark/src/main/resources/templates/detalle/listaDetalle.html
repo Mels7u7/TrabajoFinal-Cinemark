@@ -42,8 +42,7 @@
 								<th>Recurso</th>
 								<th>Id Lista de Compra</th>
 								<th>Total Importe</th>
-								<th align="center">Operación</th>
-								<th align="center">Operación</th>
+								<th align="left">Operaciones</th>
 							</tr>
 						</thead>
 						<tbody id="detalle-list">
@@ -63,7 +62,6 @@
 									onclick="ondelete(this);"></a> | <a
 									th:href="@{'/detalles/detalle/' + ${detalle.idDetalle}}"
 									class="fas fa-edit fa-2x button-default"></a></td>
-
 
 							</tr>
 						</tbody>
@@ -91,7 +89,7 @@
 		   	confirmButtonText: 'Si, eliminar!'
 		}).then((result) => {
 	if (result.value) {
-		    location.href = "/facturas/eliminar?id="+a.id;
+		    location.href = "/detalles/eliminar?id="+a.id;
 		 }
 	});
 }

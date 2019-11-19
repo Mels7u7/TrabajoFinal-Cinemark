@@ -43,8 +43,7 @@
 								<th>Apellidos</th>
 								<th>Sede</th>
 								<th>Puesto</th>
-								<th align="center">Operación</th>
-								<th align="center">Operación</th>
+								<th align="left">Operaciones</th>
 							</tr>
 						</thead>
 						<tbody id="empleado-list">
@@ -88,7 +87,7 @@
 			   	confirmButtonText: 'Si, eliminar!'
 			}).then((result) => {
 		if (result.value) {
-			    location.href = "/listaCompras/eliminar?id="+a.id;
+			    location.href = "/empleados/eliminar?id="+a.id;
 			 }
 		});
 	}
