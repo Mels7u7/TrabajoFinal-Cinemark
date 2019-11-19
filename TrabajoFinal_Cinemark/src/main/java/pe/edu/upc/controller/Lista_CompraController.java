@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pe.edu.upc.entity.Detalle_List_Compra;
@@ -29,6 +30,7 @@ import pe.edu.upc.service.IListaService;
 import pe.edu.upc.service.IProveedorService;
 
 @Controller
+@SessionAttributes("listaCompra")
 @RequestMapping("/listaCompras")
 public class Lista_CompraController {
 
@@ -44,7 +46,8 @@ public class Lista_CompraController {
 	public String bienvenido(Model model) {
 		return "bienvenido";
 	}
-
+	
+	@Secured({"ROLE ADMIN","ROLE_USER"})
 	@GetMapping("/nuevo")
 	public String nuevaLista_Compra(Model model) {
 		model.addAttribute("lista_Compra", new Lista_Compra());
@@ -52,7 +55,8 @@ public class Lista_CompraController {
 		model.addAttribute("valorBoton", "Registrar");
 		return "/listaCompra/listaCompra";
 	}
-
+	
+	@Secured({"ROLE ADMIN","ROLE_USER"})
 	@PostMapping("/guardar")
 	public String guardarLista_Compra(@Valid Lista_Compra lista_Compra, BindingResult result, Model model,
 			SessionStatus status, RedirectAttributes redirAttrs) throws Exception {
@@ -83,7 +87,8 @@ public class Lista_CompraController {
 		
 		return "redirect:/listaCompras/listar";
 	}
-
+	
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping("/listar")
 	public String listarLista_Compras(Model model) {
 		try {
@@ -91,10 +96,7 @@ public class Lista_CompraController {
 
 			List<Lista_Compra> list = lService.listar();
 			List<Detalle_List_Compra> detalleLista = serviceDetalle.listar();
-
-			
-			
-			
+	
 			for (Lista_Compra l : list) {
 				float precioLista = 0;
 
@@ -103,11 +105,8 @@ public class Lista_CompraController {
 					precioLista += e.getPrecioDetalle() * e.getUnidadesDetalle();
 
 				l.setPrecioLista(precioLista);
-				
-				
-
+								
 			}
-
 			model.addAttribute("listaLista_Compras", list);
 
 		} catch (Exception e) {
@@ -115,7 +114,8 @@ public class Lista_CompraController {
 		}
 		return "/listaCompra/listaListaCompra";
 	}
-
+	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/eliminar")
 	public String eliminar(Model model, @RequestParam(value = "id") Integer id) {
 		try {
@@ -155,7 +155,7 @@ public class Lista_CompraController {
 		return "/listaCompra/listaListaCompra";
 
 	}
-
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@RequestMapping("/buscarp")
 	public String buscarProveedor(Map<String, Object> model, @ModelAttribute Lista_Compra lista) throws ParseException {
 
@@ -176,7 +176,7 @@ public class Lista_CompraController {
 		return "listaCompra/listaListaCompra";
 
 	}
-
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@RequestMapping("/buscarm")
 	public String buscarMayor(Map<String, Object> model, @ModelAttribute Lista_Compra lista) throws ParseException {
 

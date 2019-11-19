@@ -46,7 +46,7 @@ public class EmpleadoxLCController {
 		return "bienvenido";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/nuevo")
 	public String nuevoEmpleadoxLC(Model model) {
 		model.addAttribute("empleadoxLC", new EmpleadoxLC());
@@ -56,7 +56,7 @@ public class EmpleadoxLCController {
 		return "empleadoxLC/empleadoxLC";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/guardar")
 	public String guardarEmpleadoxLC(@Valid EmpleadoxLC empleadoxLC, BindingResult result, Model model,
 			SessionStatus status, RedirectAttributes redirAttrs) throws Exception {
@@ -103,6 +103,7 @@ public class EmpleadoxLCController {
 		return "/empleadoxLC/listaEmpleadoxLC";
 	}
 
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/detalle/{id}") // modificar
 	public String detailsEmpleadoxLC(@PathVariable(value = "id") int id, Model model) {
 		try {

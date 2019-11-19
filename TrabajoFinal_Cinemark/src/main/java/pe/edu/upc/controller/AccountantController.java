@@ -79,7 +79,7 @@ public class AccountantController {
 		return "redirect:/contadores/listar";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/listar")
 	public String listarContadores(Model model) {
 		try {
@@ -129,7 +129,7 @@ public class AccountantController {
 		return "/contador/contador";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/buscar")
 	public String buscar(Map<String, Object> model, @ModelAttribute Accountant accountant) throws ParseException {
 
@@ -144,7 +144,7 @@ public class AccountantController {
 		return "contador/listaContador";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@Secured("ROLE_ADMIN")
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash) {
 

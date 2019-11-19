@@ -53,7 +53,7 @@ public class FacturaController {
 		return "bienvenido";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/nuevo")
 	public String nuevoFactura(Model model) {
 		model.addAttribute("factura", new Factura());
@@ -64,7 +64,7 @@ public class FacturaController {
 		return "/factura/factura";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/guardar")
 	public String guardarFactura(@Valid Factura factura, BindingResult result, Model model, SessionStatus status,
 			RedirectAttributes redirAttrs) throws Exception {
@@ -126,7 +126,7 @@ public class FacturaController {
 		return "/factura/listaFactura";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/eliminar")
 	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id,
 			RedirectAttributes redirAttrs) {
@@ -144,7 +144,7 @@ public class FacturaController {
 		return "redirect:/facturas/listar";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/detalle/{id}") // modificar
 	public String detailsFactura(@PathVariable(value = "id") int id, Model model) {
 		try {

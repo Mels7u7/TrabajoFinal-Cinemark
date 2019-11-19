@@ -43,7 +43,7 @@ public class EmpleadoController {
 		return "bienvenido";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/nuevo")
 	public String nuevoEmpleado(Model model) {
 		model.addAttribute("empleado", new Empleado());
@@ -51,7 +51,7 @@ public class EmpleadoController {
 		return "empleado/empleado";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/guardar")
 	public String guardarEmpleado(@Valid Empleado empleado, BindingResult result, Model model, SessionStatus status,
 			RedirectAttributes redirAttrs) throws Exception {
@@ -158,7 +158,7 @@ public class EmpleadoController {
 		return "empleado/listaEmpleado";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@Secured("ROLE_ADMIN")
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash) {
 

@@ -129,7 +129,7 @@ public class RecursoController {
 		return "/recurso/listaRecurso";
 	}
 
-	@Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@RequestMapping("/eliminar")
 	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id,
 			RedirectAttributes redirAttrs) {

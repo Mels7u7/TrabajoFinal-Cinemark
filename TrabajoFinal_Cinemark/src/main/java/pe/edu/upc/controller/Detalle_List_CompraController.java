@@ -44,7 +44,7 @@ public class Detalle_List_CompraController {
 		return "bienvenido";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/nuevo")
 	public String nuevoDetalle(Model model) {
 		model.addAttribute("detalle", new Detalle_List_Compra());
@@ -54,7 +54,7 @@ public class Detalle_List_CompraController {
 		return "detalle/detalle";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/guardar")
 	public String guardarDetalle(@Valid @ModelAttribute(value = "detalle") Detalle_List_Compra detalle_List_Compra,
 			BindingResult result, Model model, SessionStatus status, RedirectAttributes redirAttrs) throws Exception {

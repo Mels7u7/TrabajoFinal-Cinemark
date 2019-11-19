@@ -38,7 +38,7 @@ public class ProveedorController {
 		return "bienvenido";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/nuevo")
 	public String nuevoProveedor(Model model) {
 		model.addAttribute("proveedor", new Proveedor());
@@ -46,7 +46,7 @@ public class ProveedorController {
 		return "proveedor/proveedor";
 	}
 
-	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/guardar")
 	public String guardarProveedor(@Valid Proveedor proveedor, BindingResult result, Model model, SessionStatus status,
 			RedirectAttributes redirAttrs) throws Exception {
@@ -137,6 +137,8 @@ public class ProveedorController {
 		model.put("listaProveedores", listaProveedores);
 		return "proveedor/listaProveedor";
 	}
+	
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@RequestMapping("/buscarruc")
 	public String buscarRuc(Map<String, Object> model, @ModelAttribute Proveedor proveedor) throws ParseException {
 
