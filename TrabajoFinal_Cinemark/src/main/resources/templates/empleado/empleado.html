@@ -25,8 +25,9 @@
 						del Empleado</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{nombreEmpleado}"
-							class="form-control" th:errorclass="'form-control alert-info'" maxlength="30"/>
-						<small th:if="${#fields.hasErrors('nombreEmpleado')}"
+							class="form-control" th:errorclass="'form-control alert-info'"
+							maxlength="30" /> <small
+							th:if="${#fields.hasErrors('nombreEmpleado')}"
 							th:errors="*{nombreEmpleado}"></small>
 					</div>
 				</div>
@@ -36,8 +37,9 @@
 						del Empleado</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{apellidoEmpleado}"
-							class="form-control" th:errorclass="'form-control alert-info'" maxlength="30"/>
-						<small th:if="${#fields.hasErrors('apellidoEmpleado')}"
+							class="form-control" th:errorclass="'form-control alert-info'"
+							maxlength="30" /> <small
+							th:if="${#fields.hasErrors('apellidoEmpleado')}"
 							th:errors="*{apellidoEmpleado}"></small>
 					</div>
 				</div>
@@ -87,8 +89,9 @@
 						del Empleado</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{tituloEmpleado}"
-							class="form-control" th:errorclass="'form-control alert-info'" maxlength="30"/>
-						<small th:if="${#fields.hasErrors('tituloEmpleado')}"
+							class="form-control" th:errorclass="'form-control alert-info'"
+							maxlength="30" /> <small
+							th:if="${#fields.hasErrors('tituloEmpleado')}"
 							th:errors="*{tituloEmpleado}"></small>
 					</div>
 				</div>
@@ -98,8 +101,9 @@
 						Electrónico</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{correoEmpleado}"
-							class="form-control" th:errorclass="'form-control alert-info'" maxlength="40"/>
-						<small th:if="${#fields.hasErrors('correoEmpleado')}"
+							class="form-control" th:errorclass="'form-control alert-info'"
+							maxlength="40" /> <small
+							th:if="${#fields.hasErrors('correoEmpleado')}"
 							th:errors="*{correoEmpleado}"></small>
 					</div>
 				</div>
@@ -109,11 +113,10 @@
 					<label for="celularEmpleado" class="col-sm-2 col-form-label">Puesto
 						del Empleado</label>
 					<div class="col-sm-6">
-						<select class="form-control" th:field="*{puestoEmpleado}">
-							<option value="Seleccionar" selected>Seleccionar</option>
-							<option th:value="Gerente" th:text="Gerente"></option>
-							<option th:value="Jefe de almacen" th:text="Jefe de almacen"></option>
-						</select> <small th:if="${#fields.hasErrors('puestoEmpleado')}"
+						<input type="text" class="form-control"
+							th:field="*{puestoEmpleado}"
+							th:errorclass="'form-control alert-info'"> <small
+							th:if="${#fields.hasErrors('puestoEmpleado')}"
 							th:errors="*{puestoEmpleado}"></small>
 					</div>
 				</div>
