@@ -49,8 +49,8 @@
 								<th>Lista de compra</th>
 								
 								
-								<th align="center">Operación</th>
-								<th align="center">Operación</th>
+								<th align="center">Operaciones</th>
+								
 							</tr>
 						</thead>
 						<tbody id="empleadoxLC-list">
@@ -62,12 +62,18 @@
 
 								<td th:text="${empleadoxLC.listaEmpleadoLC.idLista}"></td>
 								
-                                <td align="center"><a
+                              
+								
+								
+								<td align="left"><a th:id="${empleadoxLC.idEmpleadoXLC}"
+									class="fas fa-trash-alt fa-2x button-default"
+									onclick="ondelete(this);"></a> | <a
+									
 									th:href="@{'/empleadoxLCs/detalle/' + ${empleadoxLC.idEmpleadoXLC}}"
-									type="button" class="btn btn-default btn-lg">Editar</a></td>
-								<td align="center"><a
-									th:href="@{/empleadoxLCs/eliminar?id=}+${empleadoxLC.idEmpleadoXLC}"
-									type="button" class="btn btn-default btn-lg">Eliminar</a></td>
+									class="fas fa-edit fa-2x button-default"></a></td>
+								
+								
+								
 								
 							</tr>
 						</tbody>
@@ -82,4 +88,23 @@
 
 	<footer th:replace="layout/layout :: footer"></footer>
 </body>
+
+<script type="text/javascript">
+	function ondelete(a){
+		Swal.fire({
+			title: '¿Estas seguro?',
+			text: "No podrás revertir esto!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',  
+			cancelButtonColor: '#d33',
+		   	confirmButtonText: 'Si, eliminar!'
+		}).then((result) => {
+	if (result.value) {
+		    location.href = "/empleadoxLCs/eliminar?id="+a.id;
+		 }
+	});
+}
+</script>
+
 </html>
