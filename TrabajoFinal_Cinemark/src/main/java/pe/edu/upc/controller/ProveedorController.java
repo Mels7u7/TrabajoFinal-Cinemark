@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import pe.edu.upc.entity.Lista_Compra;
 import pe.edu.upc.entity.Proveedor;
 import pe.edu.upc.service.IProveedorService;
 
@@ -137,7 +138,26 @@ public class ProveedorController {
 		model.put("listaProveedores", listaProveedores);
 		return "proveedor/listaProveedor";
 	}
+	@RequestMapping("/buscarruc")
+	public String buscarRuc(Map<String, Object> model, @ModelAttribute Proveedor proveedor) throws ParseException {
 
+		List<Proveedor> listaprovedor;
+		proveedor.setDireccionProveedor(proveedor.getDireccionProveedor());
+		listaprovedor = pService.buscarDireccion(proveedor.getDireccionProveedor());
+		if (listaprovedor.isEmpty()) {
+			listaprovedor = pService.buscarNombre(proveedor.getDireccionProveedor());
+		}
+		if (listaprovedor.isEmpty()) {
+			listaprovedor = pService.buscarXRucProveedor(proveedor.getDireccionProveedor());
+		}
+		if (listaprovedor.isEmpty()) {
+			model.put("mensaje", "No se encontr\u00f3 ning\u00fan resultado");
+		}
+		
+		model.put("listaProveedores", listaprovedor);
+		return "proveedor/listaProveedor";
+
+	}
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash) {
