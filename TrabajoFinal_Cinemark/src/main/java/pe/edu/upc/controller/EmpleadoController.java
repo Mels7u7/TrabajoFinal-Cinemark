@@ -117,7 +117,7 @@ public class EmpleadoController {
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			redirAttrs.addFlashAttribute("mensaje", "La operaci\u00f3n ha sido cancelada.");
+			redirAttrs.addFlashAttribute("mensaje", "No se puede eliminar el empleado porque está enlazado a una lista de compra.");
 		}
 		model.put("listaEmpleados", eService.listar());
 
