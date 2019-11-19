@@ -16,7 +16,8 @@
 				<div class="form-group">
 
 					<label for="proveedor">Buscar:</label> <input type="text"
-						class="form-control" th:field="*{nombreProveedor}" id="proveedor" placeholder="Buscar por nombre del Proveedor"></input>
+						class="form-control" th:field="*{nombreProveedor}" id="proveedor"
+						placeholder="Buscar por nombre del Proveedor "></input>
 					<div align="right">
 						<button type="submit" class="btn btn-success">Aceptar</button>
 						<a href="/proveedores/listar" class="btn btn-danger">Cancelar</a>
@@ -39,8 +40,7 @@
 								<th>Id</th>
 								<th>Nombre del proveedor</th>
 								<th>RUC</th>
-								<th align="center">Operación</th>
-								<th align="center">Operación</th>
+								<th align="left">Operaciones</th>
 							</tr>
 						</thead>
 						<tbody id="proveedor-list">
@@ -51,14 +51,11 @@
 
 								<td th:text="${proveedor.nombreProveedor}"></td>
 								<td th:text="${proveedor.rucProveedor}"></td>
-
-
-								<td align="center"><a
-									th:href="@{/proveedores/eliminar?id=}+${proveedor.idProveedor}"
-									type="button" class="btn btn-default btn-lg">Eliminar</a></td>
-								<td align="center"><a
+								<td align="left"><a th:id="${proveedor.idProveedor}"
+									class="fas fa-trash-alt fa-2x button-default"
+									onclick="ondelete(this);"></a> | <a
 									th:href="@{'/proveedores/detalle/' + ${proveedor.idProveedor}}"
-									type="button" class="btn btn-default btn-lg">Editar</a></td>
+									class="fas fa-edit fa-2x button-default"></a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -71,6 +68,21 @@
 	</div>
 
 	<footer th:replace="layout/layout :: footer"></footer>
-
 </body>
-</html>
+<script type="text/javascript">
+	function ondelete(a){
+	Swal.fire({
+				title: '¿Estas seguro?',
+				text: "No podrás revertir esto!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',  
+				cancelButtonColor: '#d33',
+			   	confirmButtonText: 'Si, eliminar!'
+			}).then((result) => {
+		if (result.value) {
+			    location.href = "/proveedores/eliminar?id="+a.id;
+			 }
+		});
+	}
+</script>
