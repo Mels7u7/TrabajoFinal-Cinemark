@@ -21,7 +21,7 @@ public class ProveedorServiceImpl implements IProveedorService {
 	@Override
 	@Transactional
 	public Integer insertar(Proveedor proveedor) {
-		int rpta = pR.buscarRUCProveedor(proveedor.getRucProveedor());
+		int rpta = 0;
 		if (rpta == 0) {
 			pR.save(proveedor);
 		}
@@ -62,8 +62,8 @@ public class ProveedorServiceImpl implements IProveedorService {
 		return pR.findByNombreProveedor(nombreProveedor);
 	}
 	@Override
-	public List<Proveedor> buscarXRucProveedor(String RucProveedor) {
-		return pR.findByNombreProveedor(RucProveedor);
+	public List<Proveedor> buscarRuc(String RucProveedor) {
+		return pR.findByRucProveedor(RucProveedor);
 	}
 
 }

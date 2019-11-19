@@ -18,7 +18,7 @@ public interface IProveedorService {
 
 	List<Proveedor> buscarNombre(String nombreProveedor);
 
-	List<Proveedor> buscarXRucProveedor(String RucProveedor);
+	List<Proveedor> buscarRuc(String rucProveedor);
 
 	List<Proveedor> buscarDireccion(String direccionProveedor);
 

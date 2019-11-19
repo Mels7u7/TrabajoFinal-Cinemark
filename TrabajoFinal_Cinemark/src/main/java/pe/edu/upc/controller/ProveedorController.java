@@ -147,7 +147,7 @@ public class ProveedorController {
 			listaprovedor = pService.buscarNombre(proveedor.getDireccionProveedor());
 		}
 		if (listaprovedor.isEmpty()) {
-			listaprovedor = pService.buscarXRucProveedor(proveedor.getDireccionProveedor());
+			listaprovedor = pService.buscarRuc(proveedor.getDireccionProveedor());
 		}
 		if (listaprovedor.isEmpty()) {
 			model.put("mensaje", "No se encontr\u00f3 ning\u00fan resultado");
