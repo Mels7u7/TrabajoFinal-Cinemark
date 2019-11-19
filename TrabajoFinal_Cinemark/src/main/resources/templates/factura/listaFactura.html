@@ -41,8 +41,8 @@
 								<th>Nombre del Contador</th>
 								<th>Id lista de Compra</th>	
 								<th>Precio</th>	
-								<th align="center">Operación</th>
-								<th align="center">Operación</th>
+								<th align="Left">Operaciones</th>
+								
 							</tr>
 						</thead>
 						<tbody id="factura-list">
@@ -55,14 +55,14 @@
 								<td th:text="${factura.listaFactura.idLista}"></td>
 								<td th:text="${factura.precio}"></td>
 
-                                <td align="center"><a
-									th:href="@{'/facturas/detalle/' + ${factura.idFactura}}"
-									type="button" class="btn btn-default btn-lg">Editar</a></td>
+								<td align="left"><a th:id="${factura.idFactura}"
+									class="fas fa-trash-alt fa-2x button-default"
+									onclick="ondelete(this);"></a> | <a
 									
-								<td align="center"><a
-									th:href="@{/facturas/eliminar?id=}+${factura.idFactura}"
-									type="button" class="btn btn-default btn-lg">Eliminar</a></td>
+									th:href="@{'/facturas/detalle/' + ${factura.idFactura}}"
+									class="fas fa-edit fa-2x button-default"></a></td>
 								
+		
 							</tr>
 						</tbody>
 					</table>
@@ -76,4 +76,24 @@
 
 	<footer th:replace="layout/layout :: footer"></footer>
 </body>
+
+<script type="text/javascript">
+	function ondelete(a){
+		Swal.fire({
+			title: '¿Estas seguro?',
+			text: "No podrás revertir esto!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',  
+			cancelButtonColor: '#d33',
+		   	confirmButtonText: 'Si, eliminar!'
+		}).then((result) => {
+	if (result.value) {
+		    location.href = "/facturas/eliminar?id="+a.id;
+		 }
+	});
+}
+</script>
+
+
 </html>
