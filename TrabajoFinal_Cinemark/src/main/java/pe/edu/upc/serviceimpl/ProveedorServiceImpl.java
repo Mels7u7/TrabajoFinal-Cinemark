@@ -51,11 +51,7 @@ public class ProveedorServiceImpl implements IProveedorService {
 	public List<Proveedor> listar() {
 		return pR.findAll(Sort.by(Sort.Direction.DESC, "nombreProveedor"));
 	}
-	@Override
-	@Transactional(readOnly = true)
-	public List<Proveedor> buscarDireccion(String direccionProveedor) {
-		return pR.findByDireccion(direccionProveedor);
-	}
+
 
 	@Override
 	public List<Proveedor> buscarNombre(String nombreProveedor) {
