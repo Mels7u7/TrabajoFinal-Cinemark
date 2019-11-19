@@ -31,7 +31,7 @@ public class FinalWorkCinemarkApplication implements CommandLineRunner {
 
 		String password = "cinemark2019";
 		secService.createUser("admin", password, "meli33638@gmail.com", "ADMIN", "ADMIN", "ROLE_ADMIN");
-		
+
 		String bcryptPassword = passwordEncoder.encode(password);
 		System.out.println(bcryptPassword);
 

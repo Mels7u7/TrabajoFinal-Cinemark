@@ -17,7 +17,8 @@
 				<div class="form-group">
 
 					<label for="contador">Buscar:</label> <input type="text"
-						class="form-control" th:field="*{name}" id="contador" placeholder="Buscar por nombre del Contador"></input>
+						class="form-control" th:field="*{name}" id="contador"
+						placeholder="Buscar por nombre del Contador"></input>
 					<div align="right">
 						<button type="submit" class="btn btn-success">Aceptar</button>
 						<a href="/contadores/listar" class="btn btn-danger">Cancelar</a>
@@ -40,8 +41,7 @@
 								<th>Id</th>
 								<th>Nombre del contador</th>
 								<th>DNI</th>
-								<th align="center">Operación</th>
-								<th align="center">Operación</th>
+								<th align="left">Operaciones</th>
 							</tr>
 						</thead>
 						<tbody id="contador-list">
@@ -54,12 +54,12 @@
 
 								<td th:text="${contador.documentNumber}"></td>
 
-								<td align="center"><a
-									th:href="@{/contadores/eliminar?id=}+${contador.accountantId}"
-									type="button" class="btn btn-default btn-lg">Eliminar</a></td>
-								<td align="center"><a
+								<td align="left"><a th:id="${contador.accountantId}"
+									class="fas fa-trash-alt fa-2x button-default"
+									onclick="ondelete(this);"></a> | <a
+									
 									th:href="@{'/contadores/detalle/' + ${contador.accountantId}}"
-									type="button" class="btn btn-default btn-lg">Editar</a></td>
+									class="fas fa-edit fa-2x button-default"></a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -73,4 +73,20 @@
 
 	<footer th:replace="layout/layout :: footer"></footer>
 </body>
-</html>
+<script type="text/javascript">
+	function ondelete(a){
+		Swal.fire({
+			title: '¿Estas seguro?',
+			text: "No podrás revertir esto!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',  
+			cancelButtonColor: '#d33',
+		   	confirmButtonText: 'Si, eliminar!'
+		}).then((result) => {
+	if (result.value) {
+		    location.href = "/contadores/eliminar?id="+a.id;
+		 }
+	});
+}
+</script>
