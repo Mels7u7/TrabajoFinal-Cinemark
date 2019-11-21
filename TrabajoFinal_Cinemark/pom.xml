@@ -12,7 +12,7 @@
 	<groupId>pe.edu.upc</groupId>
 	<artifactId>TrabajoFinal_Cinemark</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	
+	<packaging>war</packaging>
 	<name>TrabajoFinal_Cinemark</name>
 	<description>Demo project for Spring Boot</description>
 
