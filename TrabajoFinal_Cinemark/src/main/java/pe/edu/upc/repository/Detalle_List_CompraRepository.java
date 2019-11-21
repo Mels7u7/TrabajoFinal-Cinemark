@@ -13,8 +13,7 @@ public interface Detalle_List_CompraRepository extends JpaRepository<Detalle_Lis
 	@Query("select d from Detalle_List_Compra d where d.listaDetalle.idLista= ?1")
 	List<Detalle_List_Compra> findRecursosByListaCompra(int idLista);
 	
-	/*@Query("select d from Detalle_List_Compra d where d.idLista= ?1")
-	List<Detalle_List_Compra> findByUnidadesDetalle(intunidadesDetalle);
-	*/
+	@Query("from Detalle_List_Compra g where g.listaDetalle.idLista = ?1")
+	List<Detalle_List_Compra> findByNumeroLista(int idLista);
 	
 }

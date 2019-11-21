@@ -49,6 +49,37 @@
 						la lista de compra
 					</a>
 				</div>
+
+				<br>
+				<br>
+
+				<table class="table table-white">
+					<thead class="bg-dark mb-3 text-white">
+						<tr>
+							<th>Id Detalle</th>
+							<th>Recurso</th>
+							<th>Id Lista de Compra</th>
+							<th>Total Importe</th>
+						</tr>
+					</thead>
+
+					<tbody id="detalle-list">
+						<tr th:each="detalle:${listaRecursosDentro}">
+							
+							<td th:text="${detalle.idDetalle}"></td>
+
+							<td th:text="${detalle.recursoDetalle.nombreRecurso}"></td>
+
+							<td th:text="${detalle.listaDetalle.idLista}"></td>
+
+							<td th:text="${detalle.importe}"></td>
+
+						</tr>
+					</tbody>
+				</table>
+
+
+
 			</div>
 		</div>
 	</div>

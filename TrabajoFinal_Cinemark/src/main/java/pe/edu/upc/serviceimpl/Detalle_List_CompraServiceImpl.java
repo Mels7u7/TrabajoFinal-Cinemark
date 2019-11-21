@@ -70,4 +70,9 @@ public class Detalle_List_CompraServiceImpl implements IDetalle_List_CompraServi
 		return dR.findRecursosByListaCompra(idLista);
 	}
 
+	@Override
+	public List<Detalle_List_Compra> buscarlistaspropietaria(int idLista) {
+		return dR.findByNumeroLista(idLista);
+	}
+
 }

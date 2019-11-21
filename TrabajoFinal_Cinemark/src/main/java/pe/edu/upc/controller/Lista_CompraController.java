@@ -230,7 +230,7 @@ public class Lista_CompraController {
 
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping(value = "/ver/{id}")
-	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash) {
+	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash, Model model2) {
 
 		Optional<Lista_Compra> lista_Compra = lService.listarId(id);
 		if (lista_Compra == null) {
@@ -238,7 +238,7 @@ public class Lista_CompraController {
 			return "redirect:/listaCompras/listar";
 		}
 		model.put("lista_Compra", lista_Compra.get());
-
+		model2.addAttribute("listaRecursosDentro", serviceDetalle.buscarlistaspropietaria(id));
 		return "listaCompra/verlc";
 	}
 

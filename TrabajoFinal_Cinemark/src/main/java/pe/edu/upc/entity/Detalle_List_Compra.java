@@ -41,7 +41,7 @@ public class Detalle_List_Compra implements Serializable {
 	@Column(name = "precioDetalle", nullable = false)
 	private int precioDetalle;
 
-	@Min(2)
+	@Min(1)
 	@Max(1000)
 	@Column(name = "unidadesDetalle", nullable = false)
 	private int unidadesDetalle;
