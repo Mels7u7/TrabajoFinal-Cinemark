@@ -47,7 +47,7 @@ public class Lista_CompraController {
 		return "bienvenido";
 	}
 
-	@Secured({ "ROLE ADMIN" })
+	@Secured({ "ROLE_ADMIN" })
 	@GetMapping("/nuevo")
 	public String nuevaLista_Compra(Model model) {
 		model.addAttribute("lista_Compra", new Lista_Compra());
