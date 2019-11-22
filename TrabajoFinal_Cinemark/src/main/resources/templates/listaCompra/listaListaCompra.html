@@ -59,7 +59,7 @@
 									<th>Precio</th>
 									<th>Estado</th>
 									<th align="left">Operaciones</th>
-									<th align="left">Operaciones</th>
+									<th align="left">Operación</th>
 								</tr>
 							</thead>
 
@@ -82,8 +82,8 @@
 										th:href="@{'/listaCompras/detalle/' + ${lista_Compra.idLista}}"
 										class="fas fa-edit fa-2x button-default"></a></td>
 
-									<td><a class="btn btn-primary btn-xs"
-										th:href="@{/detalles/nuevodentro/} + ${lista_Compra.idLista}"></a>Agregar</td>
+									<td><a class="fas fa-cart-plus fa-2x button-default"
+										th:href="@{/detalles/nuevodentro/} + ${lista_Compra.idLista}"></a></td>
 								</tr>
 							</tbody>
 						</table>
