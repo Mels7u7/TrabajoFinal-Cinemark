@@ -22,7 +22,7 @@ public interface EmpleadoRepository extends JpaRepository<Empleado, Integer> {
 	@Query("update Empleado set nombreEmpleado = :nombreEmpleado ,apellidoEmpleado = :apellidoEmpleado, experienciaEmpleado = :experienciaEmpleado,sedeEmpleado = :sedeEmpleado,tituloEmpleado = :tituloEmpleado, correoEmpleado = :correoEmpleado, celularEmpleado = :celularEmpleado, puestoEmpleado = :puestoEmpleado where idEmpleado=:idEmpleado")
 	public void actualizar(@Param("nombreEmpleado") String nombreEmpleado,
 			@Param("apellidoEmpleado") String apellidoEmpleado, @Param("experienciaEmpleado") int experienciaEmpleado,
-			@Param("sedeEmpleado") int sedeEmpleado, @Param("tituloEmpleado") int tituloEmpleado,
-			@Param("correoEmpleado") int correoEmpleado, @Param("celularEmpleado") int celularEmpleado,
-			@Param("puestoEmpleado") int puestoEmpleado, @Param("idEmpleado") int idEmpleado);
+			@Param("sedeEmpleado") String sedeEmpleado, @Param("tituloEmpleado") String tituloEmpleado,
+			@Param("correoEmpleado") String correoEmpleado, @Param("celularEmpleado") String celularEmpleado,
+			@Param("puestoEmpleado") String puestoEmpleado, @Param("idEmpleado") int idEmpleado);
 }

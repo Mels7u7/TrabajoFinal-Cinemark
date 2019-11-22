@@ -69,8 +69,7 @@ public class AccountantController {
 				cService.modify(accountant);
 				rpta = 1;
 				status.setComplete();
-
-				redirAttrs.addFlashAttribute("mensaje", "Se modific\u00f3 correctamente");
+				redirAttrs.addFlashAttribute("mensaje", "Se modific\u00f3 correctamente, excepto el campo del DNI ya que este no puede ser modificado porque es \u00fanico.");
 			}
 
 		}

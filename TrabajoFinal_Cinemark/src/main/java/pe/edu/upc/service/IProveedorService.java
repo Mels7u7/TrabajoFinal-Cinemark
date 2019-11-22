@@ -8,7 +8,7 @@ import pe.edu.upc.entity.Proveedor;
 public interface IProveedorService {
 	public Integer insertar(Proveedor proveedor);
 
-	public void modificar(Proveedor proveedor);
+	public Integer modificar(Proveedor proveedor);
 
 	public void eliminar(int idProveedor);
 

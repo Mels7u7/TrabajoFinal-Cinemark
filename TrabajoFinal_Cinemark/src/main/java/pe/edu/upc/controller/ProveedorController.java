@@ -66,10 +66,16 @@ public class ProveedorController {
 					return "/proveedor/proveedor";
 				}
 			} else {
-				pService.modificar(proveedor);
-				rpta = 1;
+				rpta = pService.modificar(proveedor);
+				if (rpta > 0) {
+					model.addAttribute("mensaje", "Ya existe un proveedor con el mismo RUC");
+					model.addAttribute("valorBoton", "Modificar");
+					status.setComplete();
+					return "/proveedor/proveedor";
+				}
 				redirAttrs.addFlashAttribute("mensaje", "Se modific\u00f3 correctamente");
 			}
+
 		}
 		model.addAttribute("listaProveedores", pService.listar());
 
@@ -137,7 +143,7 @@ public class ProveedorController {
 		model.put("listaProveedores", listaProveedores);
 		return "proveedor/listaProveedor";
 	}
-	
+
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@RequestMapping("/buscarruc")
 	public String buscarRuc(Map<String, Object> model, @ModelAttribute Proveedor proveedor) throws ParseException {
@@ -154,11 +160,12 @@ public class ProveedorController {
 		if (listaprovedor.isEmpty()) {
 			model.put("mensaje", "No se encontr\u00f3 ning\u00fan resultado");
 		}
-		
+
 		model.put("listaProveedores", listaprovedor);
 		return "proveedor/listaProveedor";
 
 	}
+
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash) {

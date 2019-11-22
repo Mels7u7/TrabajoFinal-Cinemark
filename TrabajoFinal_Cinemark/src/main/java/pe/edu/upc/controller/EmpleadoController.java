@@ -85,7 +85,7 @@ public class EmpleadoController {
 				eService.modificar(empleado);
 				rpta = 1;
 				status.setComplete();
-				redirAttrs.addFlashAttribute("mensaje", "Se modific\u00f3 correctamente");
+				redirAttrs.addFlashAttribute("mensaje", "Se modific\u00f3 correctamente, excepto el campo del DNI ya que este no puede ser modificado porque es \u00fanico.");
 			}
 
 		}
@@ -117,7 +117,7 @@ public class EmpleadoController {
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			redirAttrs.addFlashAttribute("mensaje", "No se puede eliminar el empleado porque está enlazado a una lista de compra.");
+			redirAttrs.addFlashAttribute("mensaje", "No se puede eliminar el empleado porque est\u00e1 enlazado a una lista de compra.");
 		}
 		model.put("listaEmpleados", eService.listar());
 

@@ -31,7 +31,9 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
 	@Override
 	@Transactional
 	public void modificar(Empleado empleado) {
-		eR.save(empleado);
+		eR.actualizar(empleado.getNombreEmpleado(), empleado.getApellidoEmpleado(), empleado.getExperienciaEmpleado(),
+				empleado.getSedeEmpleado(),empleado.getTituloEmpleado(),empleado.getCorreoEmpleado(),empleado.getCelularEmpleado(),
+				empleado.getPuestoEmpleado(),empleado.getIdEmpleado());
 	}
 
 	@Override
