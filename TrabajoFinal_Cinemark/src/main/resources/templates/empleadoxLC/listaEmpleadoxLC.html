@@ -5,74 +5,80 @@
 
 <body>
 	<header th:replace="layout/layout :: header"></header>
+	<div style="height: 1000px; padding: 3px;">
+		<br>
 
-	<div class="container">
-		<div align="right">
-			<a th:href="@{/empleadoxLCs/nuevo}" id="add-row" type="button"
-				class="btn btn-primary">Nueva relación empleado por orden de compra</a>
-		</div>
-		
-		
-		
-		<div>
-			<form th:action="@{/empleadoxLCs/buscar}" method="post"
-				th:object="${empleadoxLC}">
-				<div class="form-group">
+		<div class="container">
+			<div align="right">
+				<a th:href="@{/empleadoxLCs/nuevo}" id="add-row" type="button"
+					class="btn btn-primary">Nueva relación empleado por orden de
+					compra</a>
+			</div>
 
-					<label for="empleadoxLC">Buscar:</label> <input type="text"
-						class="form-control" th:field="*{empleadoEmpleadoLC.nombreEmpleado}" id="empleadoxLC" placeholder="Buscar por nombre del Empleado"></input>
-					<div align="right">
-						<button type="submit" class="btn btn-success">Aceptar</button>
-						<a href="/empleadoxLCs/listar" class="btn btn-danger">Cancelar</a>
+
+
+			<div>
+				<form th:action="@{/empleadoxLCs/buscar}" method="post"
+					th:object="${empleadoxLC}">
+					<div class="form-group">
+
+						<label for="empleadoxLC">Buscar:</label> <input type="text"
+							class="form-control"
+							th:field="*{empleadoEmpleadoLC.nombreEmpleado}" id="empleadoxLC"
+							placeholder="Buscar por nombre del Empleado"></input>
+						<div align="right">
+							<button type="submit" class="btn btn-success">Aceptar</button>
+							<a href="/empleadoxLCs/listar" class="btn btn-danger">Cancelar</a>
+						</div>
 					</div>
-				</div>
 
-			</form>
+				</form>
 
-		</div>
-		
-		
-		
-		
-		
-		
-		<div class="card">
-			<div class="card-header text-white bg-dark mb-3">Lista de empleado por orden de compra</div>
-			<div class="card-body">
+			</div>
 
-				<div class="table-responsive">
-					<table class="table table-white">
-						<thead class="bg-dark mb-3 text-white">
-							<tr>
-								<th>Id</th>
-								<th>Nombre del empleado</th>
-								<th>Lista de compra</th>
-								
-								
-								<th align="center">Operaciones</th>
-								
-							</tr>
-						</thead>
-						<tbody id="empleadoxLC-list">
-							<tr th:each="empleadoxLC:${listaEmpleadoxLCs}">
-								
-								<td><a  th:text="${empleadoxLC.idEmpleadoXLC}"></a></td>
 
-								<td th:text="${empleadoxLC.empleadoEmpleadoLC.nombreEmpleado}"></td>
 
-								<td th:text="${empleadoxLC.listaEmpleadoLC.idLista}"></td>
-								
-								<td align="left"><a th:id="${empleadoxLC.idEmpleadoXLC}"
-									class="fas fa-trash-alt fa-2x button-default"
-									onclick="ondelete(this);"></a> | <a
-									
-									th:href="@{'/empleadoxLCs/detalle/' + ${empleadoxLC.idEmpleadoXLC}}"
-									class="fas fa-edit fa-2x button-default"></a></td>						
-							</tr>
-						</tbody>
-					</table>
-					<div th:if="${mensaje}" class="alert alert-info">
-						<p th:text="${mensaje}"></p>
+
+
+
+			<div class="card">
+				<div class="card-header text-white bg-dark mb-3">Lista de
+					empleado por orden de compra</div>
+				<div class="card-body">
+
+					<div class="table-responsive">
+						<table class="table table-white">
+							<thead class="bg-dark mb-3 text-white">
+								<tr>
+									<th>Id</th>
+									<th>Nombre del empleado</th>
+									<th>Lista de compra</th>
+
+
+									<th align="center">Operaciones</th>
+
+								</tr>
+							</thead>
+							<tbody id="empleadoxLC-list">
+								<tr th:each="empleadoxLC:${listaEmpleadoxLCs}">
+
+									<td><a th:text="${empleadoxLC.idEmpleadoXLC}"></a></td>
+
+									<td th:text="${empleadoxLC.empleadoEmpleadoLC.nombreEmpleado}"></td>
+
+									<td th:text="${empleadoxLC.listaEmpleadoLC.idLista}"></td>
+
+									<td align="left"><a th:id="${empleadoxLC.idEmpleadoXLC}"
+										class="fas fa-trash-alt fa-2x button-default"
+										onclick="ondelete(this);"></a> | <a
+										th:href="@{'/empleadoxLCs/detalle/' + ${empleadoxLC.idEmpleadoXLC}}"
+										class="fas fa-edit fa-2x button-default"></a></td>
+								</tr>
+							</tbody>
+						</table>
+						<div th:if="${mensaje}" class="alert alert-info">
+							<p th:text="${mensaje}"></p>
+						</div>
 					</div>
 				</div>
 			</div>

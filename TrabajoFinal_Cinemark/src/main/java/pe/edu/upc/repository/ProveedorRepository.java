@@ -17,7 +17,7 @@ public interface ProveedorRepository extends JpaRepository<Proveedor, Integer> {
 	@Query("from Proveedor p where p.rucProveedor like %:rucProveedor%")
 	List<Proveedor> findByRucProveedor(@Param("rucProveedor") String rucProveedor);
 
-	@Query("select p from Proveedor p where p.direccionProveedor like %?1%")
+	@Query("select p from Proveedor p where p.direccionProveedor like ?1")
 	List<Proveedor> findByDireccion(String direccionProveedor);
 
 }

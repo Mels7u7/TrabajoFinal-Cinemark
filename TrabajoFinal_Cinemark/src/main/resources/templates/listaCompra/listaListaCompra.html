@@ -5,88 +5,92 @@
 
 <body>
 	<header th:replace="layout/layout :: header"></header>
+	<div style="height: 1000px; padding: 3px;">
+		<br>
 
-	<div class="container">
-		<div align="right">
-			<a th:href="@{/listaCompras/nuevo}" id="add-row" type="button"
-				class="btn btn-primary">Nuevo Lista de compra</a>
-		</div>
-
-		<div>
-			<form th:action="@{/listaCompras/buscarp}" method="post"
-				th:object="${lista_Compra}">
-				<div class="form-group">
-					<label for="compra">Buscar:</label> <input type="text"
-						class="form-control" th:field="*{notaLista}" id="compra"
-						placeholder="Ingrese el nombre del proveedor o el estado de la lista"></input>
-					<div align="right">
-						<button type="submit" class="btn btn-info">Aceptar</button>
-						<a href="/listaCompras/listar" class="btn btn-dark">Cancelar</a>
-					</div>
+		<div class="container">
+			<div align="right">
+				<a th:href="@{/listaCompras/nuevo}" id="add-row" type="button"
+					class="btn btn-primary">Nuevo Lista de compra</a>
+			</div>
+			<div style="width: 600px; float: left;">
+				<div>
+					<form th:action="@{/listaCompras/buscarp}" method="post"
+						th:object="${lista_Compra}">
+						<div class="form-group">
+							<label for="compra">Buscar:</label> <input type="text"
+								class="form-control" th:field="*{notaLista}" id="compra"
+								placeholder="Ingrese el nombre del proveedor o el estado de la lista"></input>
+							<div align="right">
+								<button type="submit" class="btn btn-info">Aceptar</button>
+								<a href="/listaCompras/listar" class="btn btn-dark">Cancelar</a>
+							</div>
+						</div>
+					</form>
 				</div>
-			</form>
-		</div>
+			</div>
 
-		<div>
-			<form th:action="@{/listaCompras/buscarm}" method="post"
-				th:object="${lista_Compra}">
-				<div class="form-group">
-					<label for="mcompra">Buscar por mayor:</label> <input type="text"
-						class="form-control" th:field="*{precioLista}" id="mcompra"></input>
-					<div align="right">
-						<button type="submit" class="btn btn-info">Aceptar</button>
-						<a href="/listaCompras/listar" class="btn btn-dark">Cancelar</a>
-					</div>
+			<div style="width: 600px; float: right;">
+				<div>
+					<form th:action="@{/listaCompras/buscarm}" method="post"
+						th:object="${lista_Compra}">
+						<div class="form-group">
+							<label for="mcompra">Buscar por mayor:</label> <input type="text"
+								class="form-control" th:field="*{precioLista}" id="mcompra"></input>
+							<div align="right">
+								<button type="submit" class="btn btn-info">Aceptar</button>
+								<a href="/listaCompras/listar" class="btn btn-dark">Cancelar</a>
+							</div>
+						</div>
+					</form>
 				</div>
-			</form>
-		</div>
+			</div>
+			<div class="card">
+				<div class="card-header text-white bg-dark mb-3">Lista de
+					compras solicitadas registradas</div>
+				<div class="card-body">
 
-		<div class="card">
-			<div class="card-header text-white bg-dark mb-3">Lista de
-				compras solicitadas registradas</div>
-			<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-white">
+							<thead class="bg-dark mb-3 text-white">
+								<tr>
+									<th>Id</th>
+									<th>Proveedor</th>
+									<th>Precio</th>
+									<th>Estado</th>
+									<th align="left">Operaciones</th>
+								</tr>
+							</thead>
 
-				<div class="table-responsive">
-					<table class="table table-white">
-						<thead class="bg-dark mb-3 text-white">
-							<tr>
-								<th>Id</th>
-								<th>Proveedor</th>
-								<th>Precio</th>
-								<th>Estado</th>
-								<th align="left">Operaciones</th>
-							</tr>
-						</thead>
+							<tbody id="lista_Compra-list">
+								<tr th:each="lista_Compra:${listaLista_Compras}">
 
-						<tbody id="lista_Compra-list">
-							<tr th:each="lista_Compra:${listaLista_Compras}">
+									<td><a class="btn btn-primary btn-xs"
+										th:href="@{/listaCompras/ver/} + ${lista_Compra.idLista}"
+										th:text="${lista_Compra.idLista}"></a></td>
 
-								<td><a class="btn btn-primary btn-xs"
-									th:href="@{/listaCompras/ver/} + ${lista_Compra.idLista}"
-									th:text="${lista_Compra.idLista}"></a></td>
+									<td th:text="${lista_Compra.proveedorLista.nombreProveedor}"></td>
 
-								<td th:text="${lista_Compra.proveedorLista.nombreProveedor}"></td>
+									<td th:text="${lista_Compra.precioLista}"></td>
 
-								<td th:text="${lista_Compra.precioLista}"></td>
+									<td th:text="${lista_Compra.estadoLista}"></td>
 
-								<td th:text="${lista_Compra.estadoLista}"></td>
-
-								<td align="left"><a th:id="${lista_Compra.idLista}"
-									class="fas fa-trash-alt fa-2x button-default"
-									onclick="ondelete(this);"></a> | <a
-									th:href="@{'/listaCompras/detalle/' + ${lista_Compra.idLista}}"
-									class="fas fa-edit fa-2x button-default"></a></td>
-							</tr>
-						</tbody>
-					</table>
-					<div th:if="${mensaje}" class="alert alert-info">
-						<p th:text="${mensaje}"></p>
+									<td align="left"><a th:id="${lista_Compra.idLista}"
+										class="fas fa-trash-alt fa-2x button-default"
+										onclick="ondelete(this);"></a> | <a
+										th:href="@{'/listaCompras/detalle/' + ${lista_Compra.idLista}}"
+										class="fas fa-edit fa-2x button-default"></a></td>
+								</tr>
+							</tbody>
+						</table>
+						<div th:if="${mensaje}" class="alert alert-info">
+							<p th:text="${mensaje}"></p>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<footer th:replace="layout/layout :: footer"></footer>
 </body>
 <script type="text/javascript">
