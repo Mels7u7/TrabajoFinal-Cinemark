@@ -46,8 +46,8 @@ public class Lista_CompraController {
 	public String bienvenido(Model model) {
 		return "bienvenido";
 	}
-	
-	@Secured({"ROLE ADMIN","ROLE_USER"})
+
+	@Secured({ "ROLE ADMIN" })
 	@GetMapping("/nuevo")
 	public String nuevaLista_Compra(Model model) {
 		model.addAttribute("lista_Compra", new Lista_Compra());
@@ -55,8 +55,7 @@ public class Lista_CompraController {
 		model.addAttribute("valorBoton", "Registrar");
 		return "/listaCompra/listaCompra";
 	}
-	
-	@Secured({"ROLE ADMIN","ROLE_USER"})
+
 	@PostMapping("/guardar")
 	public String guardarLista_Compra(@Valid Lista_Compra lista_Compra, BindingResult result, Model model,
 			SessionStatus status, RedirectAttributes redirAttrs) throws Exception {
@@ -84,10 +83,10 @@ public class Lista_CompraController {
 			}
 		}
 		model.addAttribute("listaLista_Compras", lService.listar());
-		
+
 		return "redirect:/listaCompras/listar";
 	}
-	
+
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping("/listar")
 	public String listarLista_Compras(Model model) {
@@ -96,7 +95,7 @@ public class Lista_CompraController {
 
 			List<Lista_Compra> list = lService.listar();
 			List<Detalle_List_Compra> detalleLista = serviceDetalle.listar();
-	
+
 			for (Lista_Compra l : list) {
 				float precioLista = 0;
 
@@ -105,7 +104,7 @@ public class Lista_CompraController {
 					precioLista += e.getPrecioDetalle() * e.getUnidadesDetalle();
 
 				l.setPrecioLista(precioLista);
-								
+
 			}
 			model.addAttribute("listaLista_Compras", list);
 
@@ -114,7 +113,7 @@ public class Lista_CompraController {
 		}
 		return "/listaCompra/listaListaCompra";
 	}
-	
+
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("/eliminar")
 	public String eliminar(Model model, @RequestParam(value = "id") Integer id) {
@@ -155,6 +154,7 @@ public class Lista_CompraController {
 		return "/listaCompra/listaListaCompra";
 
 	}
+
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@RequestMapping("/buscarp")
 	public String buscarProveedor(Map<String, Object> model, @ModelAttribute Lista_Compra lista) throws ParseException {
@@ -171,18 +171,19 @@ public class Lista_CompraController {
 		if (listaListas.isEmpty()) {
 			model.put("mensaje", "No se encontr\u00f3 ning\u00fan resultado");
 		}
-		
+
 		model.put("listaLista_Compras", listaListas);
 		return "listaCompra/listaListaCompra";
 
 	}
+
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@RequestMapping("/buscarm")
 	public String buscarMayor(Map<String, Object> model, @ModelAttribute Lista_Compra lista) throws ParseException {
 
 		List<Lista_Compra> listaListas = new ArrayList<>();
 		lista.setPrecioLista(lista.getPrecioLista());
-		
+
 		List<Lista_Compra> list = lService.listar();
 		List<Detalle_List_Compra> detalleLista = serviceDetalle.listar();
 
@@ -194,9 +195,9 @@ public class Lista_CompraController {
 				precioLista += e.getPrecioDetalle() * e.getUnidadesDetalle();
 
 			l.setPrecioLista(precioLista);
-			
-			if(l.getPrecioLista() > lista.getPrecioLista())listaListas.add(l);
-			
+
+			if (l.getPrecioLista() > lista.getPrecioLista())
+				listaListas.add(l);
 
 		}
 		if (listaListas.isEmpty()) {
@@ -230,7 +231,8 @@ public class Lista_CompraController {
 
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping(value = "/ver/{id}")
-	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash, Model model2) {
+	public String ver(@PathVariable(value = "id") Integer id, Map<String, Object> model, RedirectAttributes flash,
+			Model model2) {
 
 		Optional<Lista_Compra> lista_Compra = lService.listarId(id);
 		if (lista_Compra == null) {
