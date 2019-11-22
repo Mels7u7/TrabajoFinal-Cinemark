@@ -20,13 +20,13 @@ public class ProveedorServiceImpl implements IProveedorService {
 
 	@Override
 	@Transactional
-	public Integer insertar(Proveedor proveedor) {
-		int rpta = pR.findByRucProveedor(proveedor.getRucProveedor());
-		if (rpta == 0) {
+	public Integer insertar(Proveedor proveedor) 
+	{
+		int rpta=0;
+		if(rpta==0) {
 			pR.save(proveedor);
 		}
 		return rpta;
-
 	}
 
 	@Override
