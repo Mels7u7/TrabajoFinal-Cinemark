@@ -14,6 +14,9 @@ public interface ListaRepository extends JpaRepository<Lista_Compra, Integer> {
 
 	@Query("select o from Lista_Compra o where o.estadoLista like %?1%")
 	public List<Lista_Compra> buscarEstado(String estadoLista);
+	
+	@Query("select o from Lista_Compra o where o.idLista = ?1")
+	public List<Lista_Compra> buscarlistaespecifica(int id);
 
 	@Query("select o from Lista_Compra o where o.proveedorLista.nombreProveedor like %:name%")
 	public List<Lista_Compra> buscarProveedor(@Param("name") String nombreProveedor);

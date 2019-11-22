@@ -55,6 +55,16 @@ public class Detalle_List_CompraController {
 	}
 
 	@Secured("ROLE_ADMIN")
+	@GetMapping(value = "/nuevodentro/{id}")
+	public String nuevoDetalleespecifico(@PathVariable(value = "id") Integer id, Model model) {
+		model.addAttribute("detalle", new Detalle_List_Compra());
+		model.addAttribute("listaCompras", lService.buscarespefico(id));
+		model.addAttribute("listaRecursos", rService.listar());
+		model.addAttribute("valorBoton", "Registrar");
+		return "detalle/detalle";
+	}
+
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/guardar")
 	public String guardarDetalle(@Valid @ModelAttribute(value = "detalle") Detalle_List_Compra detalle_List_Compra,
 			BindingResult result, Model model, SessionStatus status, RedirectAttributes redirAttrs) throws Exception {

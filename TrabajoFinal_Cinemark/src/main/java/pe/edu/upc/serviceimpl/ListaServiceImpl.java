@@ -90,4 +90,9 @@ public class ListaServiceImpl implements IListaService {
 		return lR.buscarProveedor(nombreProveedor);
 	}
 
+	@Override
+	public List<Lista_Compra> buscarespefico(int id) {
+		return lR.buscarlistaespecifica(id);
+	}
+
 }

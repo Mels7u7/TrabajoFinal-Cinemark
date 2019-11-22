@@ -59,6 +59,7 @@
 									<th>Precio</th>
 									<th>Estado</th>
 									<th align="left">Operaciones</th>
+									<th align="left">Operaciones</th>
 								</tr>
 							</thead>
 
@@ -80,12 +81,33 @@
 										onclick="ondelete(this);"></a> | <a
 										th:href="@{'/listaCompras/detalle/' + ${lista_Compra.idLista}}"
 										class="fas fa-edit fa-2x button-default"></a></td>
+
+									<td><a class="btn btn-primary btn-xs"
+										th:href="@{/detalles/nuevodentro/} + ${lista_Compra.idLista}"></a>Agregar</td>
 								</tr>
 							</tbody>
 						</table>
 						<div th:if="${mensaje}" class="alert alert-info">
 							<p th:text="${mensaje}"></p>
 						</div>
+						<br>
+						<div>
+							<div style="float: left;">
+								<a th:href="@{/detalles/listar}" type="button"
+									class="btn btn-primary k"> <span
+									class="glyphicon glyphicon-circle-arrow-left"></span> Listar
+									todos los recursos solicitados
+								</a>
+							</div>
+							<div style="float: right;">
+								<a th:href="@{/empleadoxLCs/listar}" type="button"
+									class="btn btn-primary k"> <span
+									class="glyphicon glyphicon-circle-arrow-left"></span> Empleado
+									por Lista de Compra
+								</a>
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</div>
