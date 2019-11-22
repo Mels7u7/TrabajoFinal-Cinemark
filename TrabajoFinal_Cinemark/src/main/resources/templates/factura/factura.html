@@ -37,6 +37,8 @@
 				<div class="form-group row">
 					<label for="listaFactura" class="col-sm-2 col-form-label">Lista
 						de compra:</label>
+						
+						
 					<div class="col-sm-6">
 						<select class="form-control" th:field="*{listaFactura.idLista}">
 							<option th:each="l: ${listaLista_Compras}"
@@ -49,13 +51,16 @@
 
 				<div class="form-group row">
 					<label for="analisisFactura" class="col-sm-2 col-form-label">Análisis</label>
+					
 					<div class="col-sm-6">
-						<input type="text" th:field="*{analisisFactura}"
-							class="form-control" th:errorclass="'form-control alert-info'" maxlength="60"/>
+						<textarea  th:field="*{analisisFactura}"
+							class="form-control" th:errorclass="'form-control alert-info'" maxlength="60"></textarea>
 						<small th:if="${#fields.hasErrors('analisisFactura')}"
 							th:errors="*{analisisFactura}"></small>
 					</div>
 				</div>
+				
+				
 
 				<div class="form-group row">
 					<label for="fechaFactura" class="col-sm-6 col-form-label">Fecha

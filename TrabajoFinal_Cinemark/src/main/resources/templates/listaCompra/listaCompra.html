@@ -26,9 +26,11 @@
 				<div class="form-group row">
 					<label for="notaLista" class="col-sm-2 col-form-label">Observación
 						adjunta de la Lista de compra: </label>
+						
+						
 					<div class="col-sm-6">
-						<input type="text" th:field="*{notaLista}" class="form-control"
-							th:errorclass="'form-control alert-info'" /> <small
+						<textarea th:field="*{notaLista}" class="form-control"
+							th:errorclass="'form-control alert-info'" ></textarea> <small
 							th:if="${#fields.hasErrors('notaLista')}"
 							th:errors="*{notaLista}"></small>
 					</div>
