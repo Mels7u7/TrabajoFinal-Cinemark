@@ -60,7 +60,7 @@ public class ProveedorController {
 				rpta = pService.insertar(proveedor);
 				redirAttrs.addFlashAttribute("mensaje", "Se registr\u00f3 correctamente");
 				if (rpta > 0) {
-					redirAttrs.addFlashAttribute("mensaje", "Ya existe un proveedor con el mismo RUC");
+					model.addAttribute("mensaje", "Ya existe un proveedor con el mismo RUC");
 					model.addAttribute("valorBoton", "Registrar");
 					status.setComplete();
 					return "/proveedor/proveedor";
