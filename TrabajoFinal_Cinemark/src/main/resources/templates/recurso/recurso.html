@@ -50,8 +50,8 @@
 					<label for="precioRecurso" class="col-sm-2 col-form-label">Precio
 						del recurso</label>
 					<div class="col-sm-6">
-						<input type="text" th:field="*{precioRecurso}"
-							class="form-control" th:errorclass="'form-control alert-info'" maxlength="3"/>
+						<input type="number" th:field="*{precioRecurso}"
+							class="form-control" min="1" max="1000" required/>
 						<small th:if="${#fields.hasErrors('precioRecurso')}"
 							th:errors="*{precioRecurso}"></small>
 					</div>
